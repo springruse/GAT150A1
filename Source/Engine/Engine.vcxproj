@@ -102,7 +102,8 @@
       <AdditionalDependencies>sdl3.lib</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>sdl3.lib;fmod_vc.lib</AdditionalDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)Source\ThirdParty\fmod\core\lib\$(PlatformTarget);$(SolutionDir)Source\ThirdParty\SDL3\lib\$(PlatformTarget)</AdditionalLibraryDirectories>
@@ -128,7 +129,8 @@
       <AdditionalDependencies>sdl3.lib</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>sdl3.lib;fmod_vc.lib</AdditionalDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)Source\ThirdParty\fmod\core\lib\$(PlatformTarget);$(SolutionDir)Source\ThirdParty\SDL3\lib\$(PlatformTarget)</AdditionalLibraryDirectories>
@@ -150,7 +152,8 @@
       <AdditionalDependencies>sdl3.lib</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>sdl3.lib;fmod_vc.lib</AdditionalDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)Source\ThirdParty\fmod\core\lib\$(PlatformTarget);$(SolutionDir)Source\ThirdParty\SDL3\lib\$(PlatformTarget)</AdditionalLibraryDirectories>
@@ -176,7 +179,8 @@
       <AdditionalDependencies>sdl3.lib</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>sdl3.lib;fmod_vc.lib</AdditionalDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)Source\ThirdParty\fmod\core\lib\$(PlatformTarget);$(SolutionDir)Source\ThirdParty\SDL3\lib\$(PlatformTarget)</AdditionalLibraryDirectories>
