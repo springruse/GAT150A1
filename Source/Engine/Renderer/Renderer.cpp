@@ -65,6 +65,19 @@ void piMath::Renderer::DrawPoint(float x, float y)
     SDL_RenderPoint(m_renderer, x, y);
 }
 
+void piMath::Renderer::DrawTexture(Texture* texture, float x, float y, float angle)
+{
+    vec2 size = texture->GetSize();
+
+        SDL_FRect destRect;
+    destRect.x = x;
+    destRect.y = y;
+    destRect.w = size.x;
+    destRect.h = size.y;
+
+    SDL_RenderTexture(m_renderer, texture->m_texture, NULL, &destRect);
+}
+
 void piMath::Renderer::Clear()
 {
     SDL_RenderClear(m_renderer);

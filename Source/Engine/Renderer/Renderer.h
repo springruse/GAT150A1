@@ -2,6 +2,9 @@
 #include <SDL3/SDL.h>
 #include <iostream>
 #include <SDL3_ttf/SDL_ttf.h>
+#include <SDL3_image/SDL_image.h>
+#include "Texture.h"
+
 namespace piMath {
 
 	class Renderer
@@ -18,6 +21,7 @@ namespace piMath {
 
 		void DrawLine(float x1, float y1, float x2, float y2);
 		void DrawPoint(float x, float y);
+		void DrawTexture(class Texture* texture, float x, float y, float angle = 0.0f);
 
 		void Clear();
 		void Present();
@@ -31,6 +35,7 @@ namespace piMath {
 		SDL_Window* m_window = nullptr;
 		SDL_Renderer* m_renderer = nullptr;
 		friend class Text;
+		friend class Texture;
 	};
 
 }

@@ -17,6 +17,7 @@
 #include "Renderer/Text.h"
 #include "Core/File.h"
 #include "Renderer/ParticleSystem.h"
+#include "Renderer/Texture.h"
 
 #include <memory>
 #include <random>
@@ -108,6 +109,10 @@ int main(int argc, char* argv[]) {
 	piMath::GetEngine().Initialize();
 	game->Initialize();
 
+    // create texture, using shared_ptr so texture can be shared
+    std::shared_ptr<piMath::Texture> texture = std::make_shared<piMath::Texture>();
+    texture->Load("tristonface.jpg", piMath::GetEngine().GetRenderer());
+
     SDL_Event e;
     bool quit = false;
 
@@ -119,8 +124,9 @@ int main(int argc, char* argv[]) {
     piMath::GetEngine().GetAudio().addSound("clap.wav", "clap");
     piMath::GetEngine().GetAudio().addSound("close-hat.wav", "close-hat");
     piMath::GetEngine().GetAudio().addSound("open-hat.wav", "open-hat");
-    
+   
     piMath::GetEngine().GetAudio().playSound("Wisteria");
+
 
     //MAIN LOOP
     while (!quit) {
@@ -141,6 +147,7 @@ int main(int argc, char* argv[]) {
         piMath::GetEngine().GetRenderer().SetColor(0.0f, 0.0f, 0.0f); // Set background color to black
         piMath::GetEngine().GetRenderer().Clear();
         
+        piMath::GetEngine().GetRenderer().DrawTexture(texture.get(), 30.0f, 30.0f);
         game->Update(piMath::GetEngine().GetTime().GetDeltaTime());
 		game->Draw(piMath::GetEngine().GetRenderer());        
        
