@@ -5,8 +5,8 @@
 class Enemy : public piMath::Actor {
 public:
 	Enemy() = default;
-	Enemy(const piMath::Transform& transform, std::shared_ptr<class piMath::Model> model) :
-		piMath::Actor{ transform, model }
+	Enemy(const piMath::Transform& transform, piMath::res_t<piMath::Texture> texture) :
+		piMath::Actor{ transform, texture }
 	{}
 
 	void Update(float deltaTime) override;

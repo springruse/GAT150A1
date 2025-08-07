@@ -1,12 +1,13 @@
 #include "Texture.h"
+#include "Math/Vector2.h"
 namespace piMath {
 
-	piMath::Texture::~Texture()
+	Texture::~Texture()
 	{
 		if (!m_texture) SDL_DestroyTexture(m_texture);
 	}
 
-	bool piMath::Texture::Load(const std::string& filename, Renderer& renderer)
+	bool Texture::Load(const std::string& filename, Renderer& renderer)
 	{
 		SDL_Surface* surface = IMG_Load(filename.c_str());
 
@@ -28,7 +29,7 @@ namespace piMath {
 		return true;
 	}
 
-	vec2 piMath::Texture::GetSize()
+	vec2 Texture::GetSize()
 	{
 		float w,h;
 		SDL_GetTextureSize(m_texture, &w, &h);

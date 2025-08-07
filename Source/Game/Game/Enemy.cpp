@@ -27,7 +27,7 @@ void Enemy::Update(float deltaTime)
 			piMath::vec2 forward = piMath::vec2{ 1, 0 }.Rotate(piMath::Math::degToRad(m_transform.rotation));
 
 			float angle = piMath::Math::radToDeg(piMath::vec2::AngleBetween(forward, direction));
-			playerSeen = angle <= 30;
+			playerSeen = angle <= 45; // angle threshold for player detection
 
 			if (playerSeen) {
 				float angle = piMath::vec2::SignedAngleBetween(forward, direction);
@@ -48,7 +48,7 @@ void Enemy::Update(float deltaTime)
 	if (firetimer <= 0 && playerSeen)
 	{
 		firetimer = fireTime;
-		std::shared_ptr<piMath::Model> rocketModel = std::make_shared<piMath::Model>(GameData::rocketPoints, piMath::vec3{ 1,1,1 });
+		auto rocketModel = piMath::Resources().Get<piMath::Texture>("texture/redShip.png", piMath::GetEngine().GetRenderer());
 		piMath::Transform rocketTransform{ this->m_transform.position, this->m_transform.rotation, 1.0f };
 		auto rocket = std::make_unique<Rocket>(rocketTransform, rocketModel);
 		rocket->speed = 30.0f;

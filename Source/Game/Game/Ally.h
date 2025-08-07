@@ -3,11 +3,12 @@
 #include "EngineGame/Actor.h"
 #include "EngineGame/Scene.h"
 
+
 class Ally : public piMath::Actor {
 public:
 	Ally() = default;
-	Ally(const piMath::Transform& transform, std::shared_ptr<class piMath::Model> model) :
-		piMath::Actor{ transform, model }
+	Ally(const piMath::Transform& transform, piMath::res_t<piMath::Texture> texture) :
+		piMath::Actor{ transform, texture }
 	{}
 
 	void Update(float deltaTime) override;

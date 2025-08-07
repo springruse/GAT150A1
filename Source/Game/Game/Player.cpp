@@ -53,9 +53,9 @@ void Player::Update(float dt)
 	{
 		fireTimer = fireTime; // Reset fire timer
 		piMath::GetEngine().GetAudio().playSound("blaster");
-		std::shared_ptr<piMath::Model> rocketModel = std::make_shared<piMath::Model>(GameData::rocketPoints, piMath::vec3{ 1,1,1 });
+	//	std::shared_ptr<piMath::Model> rocketModel = std::make_shared<piMath::Model>(GameData::rocketPoints, piMath::vec3{ 1,1,1 });
 		piMath::Transform rocketTransform{ this->m_transform.position, this->m_transform.rotation, 1.0f };
-		auto rocket = std::make_unique<Rocket>(rocketTransform, rocketModel);
+		auto rocket = std::make_unique<Rocket>(rocketTransform, piMath::Resources().Get<piMath::Texture>("texture/blue_01.png", piMath::GetEngine().GetRenderer()));
 		rocket->speed = 60.0f;
 		rocket->lifeSpan = 1.5f;
 		rocket->name = "rocket";

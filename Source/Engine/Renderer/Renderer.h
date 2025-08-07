@@ -21,7 +21,8 @@ namespace piMath {
 
 		void DrawLine(float x1, float y1, float x2, float y2);
 		void DrawPoint(float x, float y);
-		void DrawTexture(class Texture* texture, float x, float y, float angle = 0.0f);
+		void DrawTexture(class Texture* texture, float x, float y);
+		void DrawTexture(class Texture* texture, float x, float y, float scale,float angle = 0.0f);
 
 		void Clear();
 		void Present();

@@ -9,10 +9,10 @@ namespace piMath {
 	struct Particle {
 		bool active = false;
 
-		vec2 previousPosition;
-		vec2 position;
-		vec2 velocity;
-		vec3 color;
+		vec2 previousPosition = { 0,0 };
+		vec2 position = { 0,0 };
+		vec2 velocity = { 0,0 };
+		vec3 color = { 1,1,1 };
 
 		float lifeSpan = 1.0f;
 	};

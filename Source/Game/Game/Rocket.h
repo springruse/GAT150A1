@@ -9,8 +9,8 @@
 class Rocket : public piMath::Actor {
 public:
 	Rocket() = default;
-	Rocket(const piMath::Transform& transform, std::shared_ptr<class piMath::Model> model) :
-		piMath::Actor{ transform, model }
+	Rocket(const piMath::Transform& transform, piMath::res_t<piMath::Texture> texture) :
+		piMath::Actor{ transform, texture }
 	{}
 
 	void Update(float deltaTime) override;

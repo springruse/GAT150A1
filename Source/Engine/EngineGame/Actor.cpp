@@ -1,7 +1,9 @@
 #include "Actor.h"
 #include "../Renderer/Renderer.h"
 #include "../Renderer/Model.h"
+#include "Renderer/Texture.h"
 #include "Scene.h"
+#include "../Core/Logger.h"
 namespace piMath {
 
 	void piMath::Actor::Update(float deltaTime)
@@ -19,11 +21,11 @@ namespace piMath {
 	void piMath::Actor::Draw(Renderer& renderer)
 	{
 		if (destroyed) return;
-		m_model->Draw(renderer, m_transform);
+		renderer.DrawTexture(m_texture.get(), m_transform.position.x, m_transform.position.y);
 	}
 	float Actor::getRadius()
 	{
-		return (m_model) ? m_model->getRadius() * m_transform.scale * 0.9f : 0.0f;
+		return (m_texture) ? m_texture->GetSize().Length() * 0.5f * m_transform.scale * 0.9f : 0.0f;
 	}
 	inline void piMath::Scene::AddActor(std::shared_ptr<class Actor> actor) {
 		m_actors.push_back(actor);

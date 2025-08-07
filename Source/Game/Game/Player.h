@@ -12,9 +12,9 @@ class Player : public piMath::Actor {
 
 public:
 	Player() = default;
-	Player(const piMath::Transform& transform, std::shared_ptr<piMath::Model> model) :
+	Player(const piMath::Transform& transform, piMath::res_t<piMath::Texture> texture) :
 	
-		Actor{transform, model}
+		Actor{transform, texture}
 
 	{} 
 

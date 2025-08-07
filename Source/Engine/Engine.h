@@ -4,6 +4,8 @@
 #include "Audio/AudioSystem.h"
 #include "Input/InputSystem.h"
 #include "Renderer/ParticleSystem.h"
+#include "Resources/ResourceManager.h"
+#include "Core/Singleton.h"
 #include <memory>
 
 namespace piMath {
@@ -13,11 +15,9 @@ namespace piMath {
 	class Time;
 	class ParticleSystem;
 
-	class Engine {
+	class Engine : public Singleton<Engine>{
 	public:
-		Engine() = default;
 		bool Initialize();
-
 		void Shutdown();
 		void Update();
 		void Draw();
@@ -34,7 +34,12 @@ namespace piMath {
 		std::unique_ptr<AudioSystem> m_audio;
 		std::unique_ptr<InputSystem> m_input;
 		std::unique_ptr<ParticleSystem> m_particleSystem;
+
+	private: 
+		Engine() = default;
+		friend class Singleton<Engine>;
 	};
 
-	Engine& GetEngine();
+
+	inline Engine& GetEngine() { return Engine::Instance(); }
 }

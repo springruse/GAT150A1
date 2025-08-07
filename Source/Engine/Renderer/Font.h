@@ -8,7 +8,7 @@ struct TTF_font;
 namespace piMath {
 	
 
-	class Font {
+	class Font : public Resource{
 	public:
 		Font() = default;
 		~Font();

@@ -3,11 +3,12 @@
 #include <cstring>
 #include "Renderer.h"
 #include "../Math/Vector2.h"
+#include "Resources/Resource.h"
 
 
 namespace piMath {
 
-	class Texture
+	class Texture : public Resource 
 	{
 	public:
 		Texture() = default;

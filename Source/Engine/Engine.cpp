@@ -8,11 +8,6 @@
 
 namespace piMath {
 
-	Engine& GetEngine()
-	{
-		static Engine engine;
-		return engine;
-	}
 
 	void piMath::Engine::Update()
 	{
@@ -20,6 +15,11 @@ namespace piMath {
 		m_input->Update();
 		m_audio->Update();
 		m_particleSystem->Update(m_time.GetDeltaTime());
+	}
+
+	void Engine::Draw()
+	{
+
 	}
 
 	bool piMath::Engine::Initialize()

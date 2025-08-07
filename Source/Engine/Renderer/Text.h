@@ -3,13 +3,14 @@
 #include "Renderer.h"
 #include "../Math/Math.h"
 #include "../Math/Vector3.h"
+#include "Resources/Resource.h"
 #include <memory>
 #include <string>
 
 struct SDL_Texture;
 namespace piMath {
 
-	class Text {
+	class Text : public Resource{
 	public:
 		Text() = default;
 		Text(std::shared_ptr<Font> font) : m_font{ font } {}

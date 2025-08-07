@@ -38,10 +38,13 @@ class SpaceGame : public piMath::Game {
 
 		std::shared_ptr <class piMath::Font>  m_titleFont;
 		std::shared_ptr <class piMath::Font>  m_uiFont;
+
 		std::shared_ptr <class piMath::Text>  m_titleText;
+		std::shared_ptr <class piMath::Text>  m_gameOverText;
 		std::shared_ptr <class piMath::Text>  m_scoreText;
 		std::shared_ptr <class piMath::Text>  m_livesText;
 	private:
 	void SpawnEnemy();
 	void SpawnAlly();
+	void SpawnPlayer();
 };

@@ -21,7 +21,7 @@ void Ally::Update(float deltaTime)
 			piMath::vec2 forward = piMath::vec2{ 1, 0 }.Rotate(piMath::Math::degToRad(m_transform.rotation));
 
 			float angle = piMath::Math::radToDeg(piMath::vec2::AngleBetween(forward, direction));
-			enemySeen = angle <= 30;
+			enemySeen = angle <= 45; // angle threshold for enemy detection
 
 			if (enemySeen) {
 				float angle = piMath::vec2::SignedAngleBetween(forward, direction);
@@ -29,8 +29,6 @@ void Ally::Update(float deltaTime)
 				m_transform.rotation += piMath::Math::radToDeg(angle * 5 * deltaTime);
 			}
 		}
-
-	
 	}
 
 

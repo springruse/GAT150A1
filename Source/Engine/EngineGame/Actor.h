@@ -1,6 +1,7 @@
 #pragma once
-#include "../Math/Transform.h"
-#include "../Renderer/Model.h"
+#include "Math/Transform.h"
+#include "Renderer/Model.h"
+#include "Renderer/Texture.h"
 #include <string>
 #include <memory>
 
@@ -9,9 +10,9 @@ namespace piMath {
 	class Actor {
 	public:
 		Actor() = default;
-		Actor(const Transform& transform, std::shared_ptr<class Model> model) :
+		Actor(const Transform& transform, res_t<Texture> texture) :
 			m_transform{ transform },
-			m_model{ model }
+			m_texture{ texture }
 			
 		{};
 
@@ -38,9 +39,10 @@ namespace piMath {
 		float lifeSpan = 0.0f;
 
 		class Scene* m_scene = nullptr;
+
 	protected:
-		
-		std::shared_ptr<Model> m_model;
+		res_t<Texture> m_texture;
+		//std::shared_ptr<Model> m_texture;
 		
 		float damping = 0.98f; // Damping factor to reduce velocity over time
 	};

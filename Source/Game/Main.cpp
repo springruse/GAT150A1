@@ -18,6 +18,7 @@
 #include "Core/File.h"
 #include "Renderer/ParticleSystem.h"
 #include "Renderer/Texture.h"
+#include "Resources/ResourceManager.h"
 
 #include <memory>
 #include <random>
@@ -70,36 +71,6 @@ int main(int argc, char* argv[]) {
     }
 
     std::cout << "Integer Functions:\n";
-    std::cout << "getInt(): " << piMath::Random::getInt() << "\n";
-    std::cout << "getInt(): " << piMath::Random::getInt() << "\n";
-    std::cout << "getInt(10): " << piMath::Random::getInt(10) << "\n";
-    std::cout << "getInt(10): " << piMath::Random::getInt(10) << "\n";
-    std::cout << "getInt(5, 15): " << piMath::Random::getInt(5, 15) << "\n";
-    std::cout << "getInt(5, 15): " << piMath::Random::getInt(5, 15) << "\n";
-    std::cout << "getInt(-10, 10): " << piMath::Random::getInt(-10, 10) << "\n\n";
-
-    // Test getReal() variants with float
-    std::cout << "Float Functions:\n";
-    std::cout << std::fixed << std::setprecision(6);
-    std::cout << "getReal<float>(): " << piMath::Random::getReal<float>() << "\n";
-    std::cout << "getReal<float>(): " << piMath::Random::getReal<float>() << "\n";
-    std::cout << "getReal<float>(5.0f): " << piMath::Random::getReal<float>(5.0f) << "\n";
-    std::cout << "getReal<float>(2.5f, 7.5f): " << piMath::Random::getReal<float>(2.5f, 7.5f) << "\n";
-    std::cout << "getReal<float>(-1.0f, 1.0f): " << piMath::Random::getReal<float>(-1.0f, 1.0f) << "\n\n";
-
-    // Test getReal() variants with double
-    std::cout << "Double Functions:\n";
-    std::cout << std::setprecision(10);
-    std::cout << "getReal<double>(): " << piMath::Random::getReal<double>() << "\n";
-    std::cout << "getReal<double>(100.0): " << piMath::Random::getReal<double>(100.0) << "\n";
-    std::cout << "getReal<double>(0.0, 2.0): " << piMath::Random::getReal<double>(0.0, 2.0) << "\n\n";
-
-    // Test getBool()
-    std::cout << "Boolean Functions:\n";
-    for (int i = 0; i < 10; ++i) {
-        std::cout << "getBool(): " << std::boolalpha << piMath::Random::getBool() << "\n";
-    }
-    std::cout << "\n";
 
     //make pointers here
     std::unique_ptr<SpaceGame> game = std::make_unique<SpaceGame>();
@@ -115,6 +86,7 @@ int main(int argc, char* argv[]) {
 
     SDL_Event e;
     bool quit = false;
+    float rotate = 0;
 
     // add sounds before the loop begins
 
@@ -126,7 +98,9 @@ int main(int argc, char* argv[]) {
     piMath::GetEngine().GetAudio().addSound("open-hat.wav", "open-hat");
    
     piMath::GetEngine().GetAudio().playSound("Wisteria");
-
+    
+    auto texture1 = piMath::Resources().Get<piMath::Texture>("tristonface.jpg", piMath::GetEngine().GetRenderer());
+    auto texture2 = piMath::Resources().Get<piMath::Texture>("texture/blue_01.png", piMath::GetEngine().GetRenderer());
 
     //MAIN LOOP
     while (!quit) {
@@ -147,7 +121,8 @@ int main(int argc, char* argv[]) {
         piMath::GetEngine().GetRenderer().SetColor(0.0f, 0.0f, 0.0f); // Set background color to black
         piMath::GetEngine().GetRenderer().Clear();
         
-        piMath::GetEngine().GetRenderer().DrawTexture(texture.get(), 30.0f, 30.0f);
+ 
+        piMath::GetEngine().GetRenderer().DrawTexture(texture2.get(), 30.0f, 30.0f, rotate, 45.0f );
         game->Update(piMath::GetEngine().GetTime().GetDeltaTime());
 		game->Draw(piMath::GetEngine().GetRenderer());        
        

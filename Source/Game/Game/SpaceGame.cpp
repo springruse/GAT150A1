@@ -19,6 +19,7 @@
 #include "Engine.h"
 #include "Player.h"
 #include "Audio/AudioSystem.h"
+#include "Resources/ResourceManager.h"
 
 
 
@@ -27,24 +28,13 @@ bool SpaceGame::Initialize()
 {
     m_scene = std::make_unique<piMath::Scene>(this);
 
-    m_titleFont = std::make_shared<piMath::Font>();
-    m_titleFont->Load("airstrike.ttf", 24);
-
-    m_uiFont = std::make_shared<piMath::Font>();
-    m_uiFont->Load("airstrike.ttf", 24);
-
-    m_titleText = std::make_shared<piMath::Text>(m_titleFont);
-    m_scoreText = std::make_shared<piMath::Text>(m_uiFont);
-    m_livesText = std::make_shared<piMath::Text>(m_uiFont);
+    m_titleText = std::make_shared<piMath::Text>(piMath::Resources().GetWithID<piMath::Font>("title", "airstrike.ttf", 98.0f));
+    m_gameOverText = std::make_shared<piMath::Text>(piMath::Resources().GetWithID<piMath::Font>("gameOver", "airstrike.ttf", 98.0f));
+    m_scoreText = std::make_shared<piMath::Text>(piMath::Resources().GetWithID<piMath::Font>("score","airstrike.ttf", 24.0f));
+    m_livesText = std::make_shared<piMath::Text>(piMath::Resources().GetWithID<piMath::Font>("lives", "airstrike.ttf", 24.0f));
     piMath::GetEngine().GetAudio().addSound("wisteria.mp3", "wisteria");
     piMath::GetEngine().GetAudio().addSound("deathSound.wav", "death");
     piMath::GetEngine().GetAudio().addSound("shipBlast1.wav", "blaster");
-
-    std::shared_ptr<piMath::Model> newModel = std::make_shared<piMath::Model>(GameData::squarePoint, piMath::vec3{ 0, 0, 1 });
-    
-    std::shared_ptr<piMath::Model> EnemyModel = std::make_shared<piMath::Model>(GameData::enemyShipPoints, piMath::vec3{ 1, 0, 0 });
-
-    
 
     return true;
 }
@@ -75,28 +65,8 @@ void SpaceGame::Update(float dt)
         m_score = 0;
         m_lives = 3;
         m_enemySpawnTimer = 0;
+        SpawnPlayer();
 
-        std::shared_ptr<piMath::Model> playerModel = std::make_shared<piMath::Model>(GameData::playerShipPoints, piMath::vec3{ 0, 1, 0 });
-        piMath::Transform transform{
-            piMath::vec2{
-                piMath::GetEngine().GetRenderer().getWidth() * 0.25f,
-                piMath::GetEngine().GetRenderer().getHeight() * 0.25f
-            },
-            0.0f,
-            5.0f // change player ship size
-        };
-
-        auto player = std::make_unique<Player>(transform, playerModel);
-        player->speed = 3.0f;
-        player->rotationSpeed = 180.0f;
-        player->damping = 0.95f;
-        player->fireTime = 50.0f;
-        player->fireTimer = 0.01f;
-        player->SetTransform(transform);
-        player->name = "player";
-        player->tag = "player";
-
-        m_scene->AddActor(std::move(player));
         m_gameState = SpaceGame::GameState::Game;
         break;
     }
@@ -112,20 +82,22 @@ void SpaceGame::Update(float dt)
         
 
     case SpaceGame::GameState::StartRound:
-        SpaceGame::GameState::StartGame;
+        SpawnPlayer();
+        m_gameState = SpaceGame::GameState::Game;
         break;
 
     case SpaceGame::GameState::PlayerDead:
         m_stateTimer -= dt;
 
-        if (m_stateTimer <= 0) {
+        if (m_stateTimer <= 0.0f) {
             m_lives--;
-            if (m_lives == 0) {
+            if (m_lives == 0.0f) {
                 m_gameState = GameState::GameOver;
-                m_stateTimer = 3;
+				m_stateTimer = 3.0f;
             }
             else {
                 m_gameState = GameState::StartRound;
+                m_stateTimer = 3.0f;
             }
         }
 
@@ -142,10 +114,8 @@ void SpaceGame::Update(float dt)
     default:
         break;
     }
-   
 
-
-    if (piMath::GetEngine().GetInput().getKeyDown(SDL_SCANCODE_X)) {
+    if (piMath::GetEngine().GetInput().getKeyDown(SDL_SCANCODE_X)) { // slow motion
         piMath::GetEngine().GetTime().setTimeScale(0.5);
     }
 
@@ -155,13 +125,13 @@ void SpaceGame::Update(float dt)
 void SpaceGame::Draw(piMath::Renderer& renderer)
 {
     if (m_gameState == GameState::Title) {
-        m_titleText->Create(renderer, "piMath", piMath::vec3{ 0, 0.25f, 0.25f });
-        m_scene->Draw(renderer);
+        m_titleText->Create(renderer, "phighting the game", piMath::vec3{ 1.0f, 1.0f, 1.0f });
+        m_titleText->Draw(renderer, 100.0f, 300.0f);
     }
 
     if (m_gameState == GameState::GameOver) {
-        m_titleText->Create(renderer, "Game Over!", piMath::vec3{ 0, 0.25f, 0.25f });
-        m_scene->Draw(renderer);
+        m_gameOverText->Create(renderer, "Game Over!", piMath::vec3{ 1.0f, 1.0f, 1.0f });
+		m_gameOverText->Draw(renderer, 300.0f, 300.0f);
     }
 
     m_scoreText->Create(renderer, "SCORE - " + std::to_string(m_score), { 1, 1, 1 });
@@ -185,10 +155,10 @@ void SpaceGame::SpawnEnemy()
     Player* player = m_scene->GetActorByName<Player>("player");
 
     if (player) {
-        std::shared_ptr<piMath::Model> EnemyModel = std::make_shared<piMath::Model>(GameData::enemyShipPoints, piMath::vec3{ 1, 0, 0 });
+        auto EnemyModel = piMath::Resources().Get<piMath::Texture>("texture/redShip.png", piMath::GetEngine().GetRenderer());
         
         piMath::vec2 enemyPosition = player->m_transform.position + piMath::Random::onUnitCircle() * piMath::Random::getReal(300.0f, 500.0f); // points where enemy is allowed to spawn from player
-        piMath::Transform transform{ enemyPosition, piMath::Random::getReal(0.0f, 360.0f), 10.0f }; // 10.0f is the enemy size
+        piMath::Transform transform{ enemyPosition, piMath::Random::getReal(0.0f, 360.0f), 1.0f }; // 10.0f is the enemy size
 
         std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(transform, EnemyModel);
         enemy->damping = 0.98f;
@@ -206,10 +176,10 @@ void SpaceGame::SpawnAlly() {
     Enemy* enemy = m_scene->GetActorByName<Enemy>("enemy");
 
     if (enemy) {
-        std::shared_ptr<piMath::Model> allyModel = std::make_shared<piMath::Model>(GameData::enemyShipPoints, piMath::vec3{ 0, 0.50f, 0 });
+        auto allyModel = piMath::Resources().Get<piMath::Texture>("texture/greenShip.png", piMath::GetEngine().GetRenderer());
 
         piMath::vec2 enemyPosition = enemy->m_transform.position + piMath::Random::onUnitCircle() * piMath::Random::getReal(300.0f, 500.0f); // points where an ally is allowed to spawn near an enemy
-        piMath::Transform transform{ enemyPosition, piMath::Random::getReal(0.0f, 360.0f), 5.0f }; // 10.0f is the enemy size
+        piMath::Transform transform{ enemyPosition, piMath::Random::getReal(0.0f, 360.0f), 1.0f }; // 5.0f is the ally size
 
         std::unique_ptr<Ally> ally = std::make_unique<Ally>(transform, allyModel);
         ally->damping = 0.98f;
@@ -221,4 +191,28 @@ void SpaceGame::SpawnAlly() {
 
         m_scene->AddActor(std::move(ally));
     }
+}
+
+void SpaceGame::SpawnPlayer() {
+
+    piMath::Transform transform{
+        piMath::vec2{
+            piMath::GetEngine().GetRenderer().getWidth() * 0.25f,
+            piMath::GetEngine().GetRenderer().getHeight() * 0.25f
+        },
+        0.0f,
+        5.0f // change player ship size
+    };
+
+    auto player = std::make_unique<Player>(transform, piMath::Resources().Get<piMath::Texture>("texture/blue_01.png", piMath::GetEngine().GetRenderer()));
+    player->speed = 3.0f;
+    player->rotationSpeed = 180.0f;
+    player->damping = 0.95f;
+    player->fireTime = 50.0f;
+    player->fireTimer = 0.01f;
+    player->SetTransform(transform);
+    player->name = "player";
+    player->tag = "player";
+
+    m_scene->AddActor(std::move(player));
 }
