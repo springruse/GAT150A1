@@ -27,8 +27,9 @@ namespace piMath {
 		// create a texture from the surface, only textures can render to the renderer
 		m_texture = SDL_CreateTextureFromSurface(renderer.m_renderer, surface);
 		if (m_texture == nullptr) {
+			Logger::Error("Could not create texture!");
 			SDL_DestroySurface(surface);
-			Logger::Error("Could not create texture: " + std::string(SDL_GetError()));
+			
 			return false;
 		}
 

@@ -13,7 +13,7 @@ namespace piMath {
 
 		if (!surface)
 		{
-			Logger::Warning("Could not load image:" + filename);
+			Logger::Warning("Could not load image:" , filename);
 			return false;
 		}
 
@@ -22,7 +22,7 @@ namespace piMath {
 		SDL_DestroySurface(surface);
 		if (!m_texture)
 		{
-			Logger::Warning("Could not create texture: " + filename);
+			Logger::Warning("Could not create texture: " ); // fix, breaks when looking for texture
 			return false;
 		}
 

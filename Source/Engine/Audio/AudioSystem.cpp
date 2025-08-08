@@ -8,7 +8,7 @@ namespace piMath {
     bool AudioSystem::CheckFMODResult(FMOD_RESULT result)
     {
         if (result != FMOD_OK) {
-            Logger::Error("FMOD Error: " + std::to_string(result));
+            Logger::Error("FMOD Error: " ); // log error result later, breaks on result
             return false;
         }
         return true;
@@ -52,7 +52,7 @@ namespace piMath {
 
 		// check if key exists within sounds map
 		if (m_sounds.find(key) != m_sounds.end()) {
-			Logger::Warning("Sound with name:" + key + " already exists.");
+			Logger::Warning("Sound with name:" , key , " already exists.");
 			return false;
 		}
 
@@ -82,7 +82,7 @@ namespace piMath {
 
 		// check if sound exists in the map
 		if (m_sounds.find(key) == m_sounds.end()) {
-			Logger::Warning("Sound with name:" + key + " does not exist.");
+			Logger::Warning("Sound with name:" , key , " does not exist.");
 			return false;
 		}
 		// play the sound
