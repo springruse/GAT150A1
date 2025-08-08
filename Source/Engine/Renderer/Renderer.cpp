@@ -3,12 +3,12 @@
 bool piMath::Renderer::Initialize()
 {
     if (!SDL_Init(SDL_INIT_VIDEO)) {
-        std::cerr << SDL_GetError() << std::endl;
+		Logger::Error("SDL_Init Error: " + std::string(SDL_GetError()));
         return false;
     }
 
     if (!TTF_Init()) {
-        std::cerr << "TTF_Init Error: " << SDL_GetError() << std::endl;
+		Logger::Error("TTF_Init Error: " + std::string(SDL_GetError()));
         return false;
     }
 
@@ -29,14 +29,14 @@ bool piMath::Renderer::CreateWindow(const std::string& name, int width, int heig
 	m_height = height;
     m_window = SDL_CreateWindow(name.c_str(), width, height, 0);
     if (m_window == nullptr) {
-        std::cerr << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
+		Logger::Error("SDL_CreateWindow Error: " + std::string(SDL_GetError()));
         SDL_Quit();
         return false;
     }
 
     m_renderer = SDL_CreateRenderer(m_window, NULL);
     if (m_renderer == nullptr) {
-        std::cerr << "SDL_CreateRenderer Error: " << SDL_GetError() << std::endl;
+		Logger::Error("SDL_CreateRenderer Error: " + std::string(SDL_GetError()));
         SDL_DestroyWindow(m_window);
         SDL_Quit();
         return false;

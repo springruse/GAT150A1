@@ -7,6 +7,7 @@
 #include "Core/StringHelper.h"
 #include "Core/Singleton.h"
 #include "Resource.h"
+#include "Core/Logger.h"
 
 
 namespace piMath {
@@ -51,7 +52,7 @@ namespace piMath {
 			auto derived = std::dynamic_pointer_cast<T>(base);
 
 			if (derived == nullptr) {
-				std::cerr << "Resource Type Mismatch: " << key << std::endl;
+				Logger::Warning("Resource Type Mismatch: " + key);
 				return res_t<T>();
 			}
 			return derived;
@@ -59,7 +60,7 @@ namespace piMath {
 		// load resource
 		res_t<T> resource = std::make_shared<T>();
 		if (resource->Load(name, std::forward<Args>(args)...) == false) {
-			std::cerr << "Could not load resource: " << name << std::endl;
+			Logger::Warning("Could not load resource: " + name);
 			return res_t<T>();
 		}
 		// add resource to resource manager

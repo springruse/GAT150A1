@@ -4,6 +4,7 @@
 #include "Renderer.h"
 #include "../Math/Vector2.h"
 #include "Resources/Resource.h"
+#include "Core/Logger.h"
 
 
 namespace piMath {

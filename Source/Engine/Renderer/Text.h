@@ -4,6 +4,7 @@
 #include "../Math/Math.h"
 #include "../Math/Vector3.h"
 #include "Resources/Resource.h"
+#include "Core/Logger.h"
 #include <memory>
 #include <string>
 

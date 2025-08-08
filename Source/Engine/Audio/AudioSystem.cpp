@@ -1,17 +1,18 @@
 #include "AudioSystem.h"
 #include <fmod_errors.h>
-#include <../../Core/StringHelper.h>
+#include "../Core/StringHelper.h"
+#include "../Core/Logger.h"
 #include <iostream>
 
 namespace piMath {
-	bool AudioSystem::CheckFMODResult(FMOD_RESULT result)
-	{
-		if (result != FMOD_OK) {
-			std::cerr << "FMOD Error: " << FMOD_ErrorString(result) << std::endl;
-			return false;
-		}
-		return true;
-	}
+    bool AudioSystem::CheckFMODResult(FMOD_RESULT result)
+    {
+        if (result != FMOD_OK) {
+            Logger::Error("FMOD Error: " + std::to_string(result));
+            return false;
+        }
+        return true;
+    }
 	bool AudioSystem::Initialize()
 	{
 		FMOD_RESULT result = FMOD::System_Create(&m_system);
@@ -51,7 +52,7 @@ namespace piMath {
 
 		// check if key exists within sounds map
 		if (m_sounds.find(key) != m_sounds.end()) {
-			std::cerr << "Sound with name '" << key << "' already exists." << std::endl;
+			Logger::Warning("Sound with name:" + key + " already exists.");
 			return false;
 		}
 
@@ -81,7 +82,7 @@ namespace piMath {
 
 		// check if sound exists in the map
 		if (m_sounds.find(key) == m_sounds.end()) {
-			std::cerr << "Sound with name '" << key << "' does not exist." << std::endl;
+			Logger::Warning("Sound with name:" + key + " does not exist.");
 			return false;
 		}
 		// play the sound
