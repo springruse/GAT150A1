@@ -1,7 +1,5 @@
 #include "Scene.h"
 #include "Actor.h"
-#include "Core/StringHelper.h"
-#include "Renderer/Renderer.h"
 
 namespace piMath {
 
@@ -12,7 +10,9 @@ namespace piMath {
 	void Scene::Update(float dt) {
 		// Update each actor in the scene
 		for (auto& actor : m_actors) {
-			actor->Update(dt);
+			if (actor->active) {
+				actor->Update(dt);
+			}
 		}
 		// remove destroyed actors
 		for (auto iterate = m_actors.begin(); iterate != m_actors.end();) {
@@ -43,7 +43,9 @@ namespace piMath {
 	/// <param name="renderer">The renderer used to draw the actors.</param>
 	void Scene::Draw(Renderer& renderer) {
 		for (auto& actor : m_actors) {
-			actor->Draw(renderer);
+			if (actor->active) {
+				actor->Draw(renderer);
+			}
 		}
 	}
 	/// <summary>

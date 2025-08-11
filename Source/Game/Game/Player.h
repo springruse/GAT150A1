@@ -12,15 +12,15 @@ class Player : public piMath::Actor {
 
 public:
 	Player() = default;
-	Player(const piMath::Transform& transform, piMath::res_t<piMath::Texture> texture) :
+	Player(const piMath::Transform& transform) :
 	
-		Actor{transform, texture}
+		Actor{transform}
 
 	{} 
 
 	void Update(float dt) override;
 
-	float speed = 175;
+	float speed = 5;
 	float rotationSpeed = 180.0f;
 	float fireTime = 3.5f;
 	float fireTimer = 3.0f; // Timer for firing rockets

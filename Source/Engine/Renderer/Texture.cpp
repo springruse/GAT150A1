@@ -1,5 +1,5 @@
 #include "Texture.h"
-#include "Math/Vector2.h"
+
 namespace piMath {
 
 	Texture::~Texture()
@@ -22,7 +22,7 @@ namespace piMath {
 		SDL_DestroySurface(surface);
 		if (!m_texture)
 		{
-			Logger::Warning("Could not create texture: " ); // fix, breaks when looking for texture
+			Logger::Warning("Could not create texture: "); // fix, breaks when looking for texture
 			return false;
 		}
 

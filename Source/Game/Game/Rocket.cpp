@@ -1,9 +1,4 @@
 #include "Rocket.h"
-#include "EngineGame/Actor.h"
-#include "Core/Random.h"
-#include "Renderer/ParticleSystem.h"
-#include <vector>
-//unfinished but is similar to enemy.cpp
 
 void Rocket::Update(float deltaTime)
 {

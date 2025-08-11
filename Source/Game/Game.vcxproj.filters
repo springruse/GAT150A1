@@ -34,6 +34,9 @@
     <ClCompile Include="Game\Ally.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
+    <ClCompile Include="GamePCH.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Player.h">
@@ -53,6 +56,9 @@
     </ClInclude>
     <ClInclude Include="Game\Ally.h">
       <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GamePCH.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

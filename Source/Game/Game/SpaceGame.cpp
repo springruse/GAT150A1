@@ -1,25 +1,11 @@
 #pragma once
 
 #include "SpaceGame.h"
-#include <vector>
-#include "EngineGame/Game.h"
-#include "EngineGame/Scene.h"
-#include "Core/Random.h"
-#include "Math/Vector2.h"
-#include "Renderer/Model.h"
-#include "Renderer/Renderer.h"
-#include "EngineGame/Actor.h"
-#include "Input/InputSystem.h"
-#include "Renderer/ParticleSystem.h"
-#include "Renderer/Font.h"
-#include "Renderer/Text.h"
 #include "GameData.h"
 #include "Enemy.h"
 #include "Ally.h"
 #include "Engine.h"
 #include "Player.h"
-#include "Audio/AudioSystem.h"
-#include "Resources/ResourceManager.h"
 
 
 
@@ -158,15 +144,19 @@ void SpaceGame::SpawnEnemy()
         auto EnemyModel = piMath::Resources().Get<piMath::Texture>("texture/redShip.png", piMath::GetEngine().GetRenderer());
         
         piMath::vec2 enemyPosition = player->m_transform.position + piMath::Random::onUnitCircle() * piMath::Random::getReal(300.0f, 500.0f); // points where enemy is allowed to spawn from player
-        piMath::Transform transform{ enemyPosition, piMath::Random::getReal(0.0f, 360.0f), 1.0f }; // 10.0f is the enemy size
+        piMath::Transform transform{ enemyPosition, piMath::Random::getReal(0.0f, 360.0f), 1.25f }; // dictates enemy size
 
-        std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(transform, EnemyModel);
+        std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(transform); //, EnemyModel);
         enemy->damping = 0.98f;
         enemy->speed = piMath::Random::getReal(2.0f, 3.0f);
         enemy->tag = "enemy";
         enemy->name = "enemy";
         enemy->firetimer = 3.0f;
         enemy->fireTime = 5.0f;
+
+        auto spriteRenderer = std::make_unique<piMath::SpriteRenderer>();
+        spriteRenderer->textureName = "texture/redShip.png"; // ship texture
+        enemy->AddComponent(std::move(spriteRenderer));
 
         m_scene->AddActor(std::move(enemy));
     }
@@ -179,15 +169,19 @@ void SpaceGame::SpawnAlly() {
         auto allyModel = piMath::Resources().Get<piMath::Texture>("texture/greenShip.png", piMath::GetEngine().GetRenderer());
 
         piMath::vec2 enemyPosition = enemy->m_transform.position + piMath::Random::onUnitCircle() * piMath::Random::getReal(300.0f, 500.0f); // points where an ally is allowed to spawn near an enemy
-        piMath::Transform transform{ enemyPosition, piMath::Random::getReal(0.0f, 360.0f), 1.0f }; // 5.0f is the ally size
+		piMath::Transform transform{ enemyPosition, piMath::Random::getReal(0.0f, 360.0f), 1.25f }; // dictates ally size
 
-        std::unique_ptr<Ally> ally = std::make_unique<Ally>(transform, allyModel);
+        std::unique_ptr<Ally> ally = std::make_unique<Ally>(transform);//, allyModel);
         ally->damping = 0.98f;
         ally->speed = piMath::Random::getReal(5.0f, 8.0f);
         ally->tag = "player";
         ally->name = "player";
         ally->firetimer = 3.0f;
         ally->fireTime = 5.0f;
+
+        auto spriteRenderer = std::make_unique<piMath::SpriteRenderer>();
+        spriteRenderer->textureName = "texture/greenShip.png"; // ship texture
+        ally->AddComponent(std::move(spriteRenderer));
 
         m_scene->AddActor(std::move(ally));
     }
@@ -201,18 +195,22 @@ void SpaceGame::SpawnPlayer() {
             piMath::GetEngine().GetRenderer().getHeight() * 0.25f
         },
         0.0f,
-        5.0f // change player ship size
+        1.5f // change player ship size
     };
 
-    auto player = std::make_unique<Player>(transform, piMath::Resources().Get<piMath::Texture>("texture/blue_01.png", piMath::GetEngine().GetRenderer()));
+    auto player = std::make_unique<Player>(transform);//, piMath::Resources().Get<piMath::Texture>("texture/blue_01.png", piMath::GetEngine().GetRenderer()));
     player->speed = 3.0f;
     player->rotationSpeed = 180.0f;
-    player->damping = 0.95f;
+    player->damping = 0.0f;
     player->fireTime = 50.0f;
     player->fireTimer = 0.01f;
     player->SetTransform(transform);
     player->name = "player";
     player->tag = "player";
+
+    auto spriteRenderer = std::make_unique<piMath::SpriteRenderer>();
+    spriteRenderer->textureName = "texture/blue_01.png"; // ship texture
+    player->AddComponent(std::move(spriteRenderer));
 
     m_scene->AddActor(std::move(player));
 }

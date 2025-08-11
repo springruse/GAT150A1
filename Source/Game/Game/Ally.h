@@ -7,8 +7,8 @@
 class Ally : public piMath::Actor {
 public:
 	Ally() = default;
-	Ally(const piMath::Transform& transform, piMath::res_t<piMath::Texture> texture) :
-		piMath::Actor{ transform, texture }
+	Ally(const piMath::Transform& transform) :
+		piMath::Actor{ transform }
 	{}
 
 	void Update(float deltaTime) override;

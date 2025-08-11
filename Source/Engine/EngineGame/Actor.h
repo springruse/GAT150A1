@@ -2,18 +2,20 @@
 #include "Math/Transform.h"
 #include "Renderer/Model.h"
 #include "Renderer/Texture.h"
+#include "EngineGame/Object.h"
+#include "Component.h"
+#include "Components/RendererComponent.h"
 #include <string>
 #include <memory>
 
 
 namespace piMath {
-	class Actor {
+	class Actor : public Object{
 	public:
 		Actor() = default;
-		Actor(const Transform& transform, res_t<Texture> texture) :
-			m_transform{ transform },
-			m_texture{ texture }
-			
+		Actor(const Transform& transform) : //res_t<Texture> texture) :
+			m_transform{ transform }
+			//m_texture{ texture }
 		{};
 
 		virtual void Update(float deltaTime);
@@ -40,10 +42,14 @@ namespace piMath {
 
 		class Scene* m_scene = nullptr;
 
+		//components
+
+		void AddComponent(std::unique_ptr<Component> component);
+
+
 	protected:
 		res_t<Texture> m_texture;
-		//std::shared_ptr<Model> m_texture;
-		
-		float damping = 0.98f; // Damping factor to reduce velocity over time
+		std::vector<std::unique_ptr<class Component>> m_components;
+		float damping = 0.98f; // default Damping factor to reduce velocity over time
 	};
 }

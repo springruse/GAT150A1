@@ -1,9 +1,5 @@
 #include "Actor.h"
-#include "../Renderer/Renderer.h"
-#include "../Renderer/Model.h"
-#include "Renderer/Texture.h"
-#include "Scene.h"
-#include "../Core/Logger.h"
+
 namespace piMath {
 
 	void piMath::Actor::Update(float deltaTime)
@@ -14,6 +10,13 @@ namespace piMath {
 			lifeSpan -= deltaTime;
 			destroyed = lifeSpan <= 0.0f;
 		}
+
+		for (auto& component : m_components) {
+			if (component->active) {
+				component->Update(deltaTime);
+			}
+		}
+
 		m_transform.position += velocity * deltaTime;
 		velocity *= (1.0f * (0.992f + damping * deltaTime));
 	}
@@ -21,15 +24,28 @@ namespace piMath {
 	void piMath::Actor::Draw(Renderer& renderer)
 	{
 		if (destroyed) return;
-		renderer.DrawTexture(m_texture.get(), m_transform.position.x, m_transform.position.y);
+
+		for (auto& component : m_components) {
+			if (component->active) {
+				auto rendererComponent = dynamic_cast<RendererComponent*>(component.get());
+				if (rendererComponent) {
+					rendererComponent->Draw(renderer);
+				}	
+			}
+		}
+		// renderer.DrawTexture(m_texture.get(), m_transform.position.x, m_transform.position.y);
 	}
 	float Actor::getRadius()
 	{
-		return (m_texture) ? m_texture->GetSize().Length() * 0.5f * m_transform.scale * 0.9f : 0.0f;
+		return 25.0f;//return (m_texture) ? m_texture->GetSize().Length() * 0.5f * m_transform.scale * 0.9f : 0.0f;
 	}
 	inline void piMath::Scene::AddActor(std::shared_ptr<class Actor> actor) {
 		m_actors.push_back(actor);
 	}
 
+	void Actor::AddComponent(std::unique_ptr<Component> component) {
+		component->owner = this;
+		m_components.push_back(std::move(component));
+	}
 }
 

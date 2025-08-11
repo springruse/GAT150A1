@@ -1,31 +1,4 @@
-
-#include <Core/Random.h>
-#include <Renderer/Renderer.h>
-#include <Math/Math.h>
-#include <Math/Vector2.h>
-#include <Math/Vector3.h>
-#include <Core/Time.h>
-#include <Input/InputSystem.h>
-#include <Audio/AudioSystem.h>
-#include <Renderer/Model.h>
-#include <EngineGame/Actor.h>
-#include "EngineGame/Scene.h"
-#include "Game/Player.h" 
 #include "Game/SpaceGame.h"
-#include "Renderer/Font.h"
-#include "Engine.h"
-#include "Renderer/Text.h"
-#include "Core/File.h"
-#include "Renderer/ParticleSystem.h"
-#include "Renderer/Texture.h"
-#include "Resources/ResourceManager.h"
-
-#include <memory>
-#include <random>
-#include <vector>
-
-#include <iostream>
-
 
 
 int main(int argc, char* argv[]) {
@@ -100,7 +73,7 @@ int main(int argc, char* argv[]) {
     piMath::GetEngine().GetAudio().playSound("Wisteria");
     
     auto texture1 = piMath::Resources().Get<piMath::Texture>("tristonface.jpg", piMath::GetEngine().GetRenderer());
-    auto texture2 = piMath::Resources().Get<piMath::Texture>("texture/blue_01.png", piMath::GetEngine().GetRenderer());
+
 
     //MAIN LOOP
     while (!quit) {
@@ -120,9 +93,6 @@ int main(int argc, char* argv[]) {
         // draw stuff
         piMath::GetEngine().GetRenderer().SetColor(0.0f, 0.0f, 0.0f); // Set background color to black
         piMath::GetEngine().GetRenderer().Clear();
-        
- 
-        piMath::GetEngine().GetRenderer().DrawTexture(texture2.get(), 30.0f, 30.0f, rotate, 45.0f );
         game->Update(piMath::GetEngine().GetTime().GetDeltaTime());
 		game->Draw(piMath::GetEngine().GetRenderer());        
        

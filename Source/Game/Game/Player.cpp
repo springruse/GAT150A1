@@ -2,16 +2,7 @@
 #include "Engine.h"
 #include "GameData.h"
 #include "Rocket.h"
-#include "Renderer/Model.h"
-#include "EngineGame/Scene.h"
-#include "Input/InputSystem.h"
-#include "Renderer/Renderer.h"
 #include "SpaceGame.h"
-#include "Math/Transform.h"
-#include "Renderer/ParticleSystem.h"
-#include "Audio/AudioSystem.h"
-
-#include "Core/Random.h"
 
 void Player::Update(float dt)
 {
@@ -55,12 +46,19 @@ void Player::Update(float dt)
 		piMath::GetEngine().GetAudio().playSound("blaster");
 	//	std::shared_ptr<piMath::Model> rocketModel = std::make_shared<piMath::Model>(GameData::rocketPoints, piMath::vec3{ 1,1,1 });
 		piMath::Transform rocketTransform{ this->m_transform.position, this->m_transform.rotation, 1.0f };
-		auto rocket = std::make_unique<Rocket>(rocketTransform, piMath::Resources().Get<piMath::Texture>("texture/blue_01.png", piMath::GetEngine().GetRenderer()));
+		auto rocket = std::make_unique<Rocket>(rocketTransform); // , piMath::Resources().Get<piMath::Texture>("texture/blue_01.png", piMath::GetEngine().GetRenderer()));
 		rocket->speed = 60.0f;
 		rocket->lifeSpan = 1.5f;
 		rocket->name = "rocket";
 		rocket->tag = "player"; // Set rocket name for identification
+
+		//components
+		auto spriteRenderer = std::make_unique<piMath::SpriteRenderer>();
+		spriteRenderer->textureName = "texture/missle.png"; // rocket texture
+		rocket->AddComponent(std::move(spriteRenderer));
+
 		m_scene->AddActor(std::move(rocket));
+
 	}
 
 	Actor::Update(dt);
