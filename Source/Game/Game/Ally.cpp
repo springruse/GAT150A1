@@ -33,7 +33,12 @@ void Ally::Update(float deltaTime)
 
 
 	piMath::vec2 force = piMath::vec2{ 1,0 }.Rotate(piMath::Math::degToRad(m_transform.rotation)) * speed;
-	velocity += force;
+	//velocity += force;
+
+	auto* rb = GetComponent<piMath::RigidBody>();
+	if (rb) {
+		rb->velocity += force * deltaTime;
+	}
 
 	if (speed > 0) {
 		piMath::Particle particle;

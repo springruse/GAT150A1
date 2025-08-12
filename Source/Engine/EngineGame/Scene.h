@@ -3,6 +3,7 @@
 #include <memory>
 #include <list>
 #include "Actor.h"
+#include "Game.h"
 #include "../Core/StringHelper.h"
 
 

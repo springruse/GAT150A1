@@ -1,5 +1,6 @@
 #include "Scene.h"
 #include "Actor.h"
+#include "Components/ColliderComponent.h"
 
 namespace piMath {
 
@@ -27,12 +28,16 @@ namespace piMath {
 		for (auto& actorA : m_actors) {
 			for (auto& actorB : m_actors) {
 				if (actorA == actorB || (actorA->destroyed) || (actorB->destroyed)) continue;
-				float distance = (actorA->m_transform.position - actorB->m_transform.position).Length();
 
-				if (distance <= actorA->getRadius() + actorB->getRadius()){
+				auto colliderA = actorA->GetComponent<ColliderComponent>();
+				auto colliderB = actorB->GetComponent<ColliderComponent>();
+
+				// checks if both actors have colliders
+				if (!colliderA || !colliderB) continue;
+
+				if (colliderA->CheckCollision(*colliderB)) {
 					actorA->onCollision(actorB.get()); // Notify actorA of collision with actorB
 					actorB->onCollision(actorA.get()); // Notify actorB of collision with actorA
-
 				}
 			}
 		}

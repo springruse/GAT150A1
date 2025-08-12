@@ -26,7 +26,12 @@ void Player::Update(float dt)
 	m_transform.position.y = piMath::Math::Wrap(m_transform.position.y, 0.0f, (float)piMath::GetEngine().GetRenderer().getHeight());
 
 	piMath::vec2 force = direction.Rotate(piMath::Math::degToRad(m_transform.rotation)) * thrust * speed;
-	velocity += force;
+	//velocity += force;
+
+	auto* rb = GetComponent<piMath::RigidBody>();
+	if (rb) {
+		rb->velocity += force * dt;
+	}
 
 	if (force.Length() > 0) {
 		piMath::Particle particle;
@@ -43,8 +48,10 @@ void Player::Update(float dt)
 	if (piMath::GetEngine().GetInput().getKeyDown(SDL_SCANCODE_E))
 	{
 		fireTimer = fireTime; // Reset fire timer
+
+		piMath::GetEngine().GetAudio().playSound(*piMath::Resources().Get<piMath::AudioClip>("blaster", piMath::GetEngine().GetAudio()));
+
 		piMath::GetEngine().GetAudio().playSound("blaster");
-	//	std::shared_ptr<piMath::Model> rocketModel = std::make_shared<piMath::Model>(GameData::rocketPoints, piMath::vec3{ 1,1,1 });
 		piMath::Transform rocketTransform{ this->m_transform.position, this->m_transform.rotation, 1.0f };
 		auto rocket = std::make_unique<Rocket>(rocketTransform); // , piMath::Resources().Get<piMath::Texture>("texture/blue_01.png", piMath::GetEngine().GetRenderer()));
 		rocket->speed = 60.0f;
@@ -56,6 +63,13 @@ void Player::Update(float dt)
 		auto spriteRenderer = std::make_unique<piMath::SpriteRenderer>();
 		spriteRenderer->textureName = "texture/missle.png"; // rocket texture
 		rocket->AddComponent(std::move(spriteRenderer));
+
+		auto rb = std::make_unique<piMath::RigidBody>();
+		rocket->AddComponent(std::move(rb));
+
+		auto collider = std::make_unique<piMath::CircleCollider2D>();
+		collider->radius = 10.0f;
+		rocket->AddComponent(std::move(collider));
 
 		m_scene->AddActor(std::move(rocket));
 

@@ -2,6 +2,7 @@
 #include <fmod_errors.h>
 #include "../Core/StringHelper.h"
 #include "../Core/Logger.h"
+#include "AudioClip.h"
 #include <iostream>
 
 namespace piMath {
@@ -91,5 +92,11 @@ namespace piMath {
 		if (!CheckFMODResult(result)) return false;
 
 		return true; 
+	}
+	bool AudioSystem::playSound(AudioClip& audioClip)
+	{
+		FMOD_RESULT result = m_system->playSound(audioClip.m_sound, 0, false, nullptr);
+		return (!AudioSystem::CheckFMODResult(result));
+
 	}
 }

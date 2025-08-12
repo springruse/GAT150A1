@@ -3,7 +3,11 @@
 void Rocket::Update(float deltaTime)
 {
 	piMath::vec2 force = piMath::vec2{ 1,0 }.Rotate(piMath::Math::degToRad(m_transform.rotation)) * speed;
-	velocity += force;
+	//velocity += force;
+	auto* rb = GetComponent<piMath::RigidBody>();
+	if (rb) {
+		rb->velocity = force;
+	}
 
 	float angle = m_transform.rotation + piMath::Random::getReal(-30.0f, 30.0f);
 	piMath::vec2 velocity = piMath::vec2{ 1,0 }.Rotate(piMath::Math::degToRad(angle));

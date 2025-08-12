@@ -6,19 +6,22 @@ namespace piMath {
 	{
 		if (destroyed) return;
 
-		if (lifeSpan != 0) {
+		if (lifeSpan > 0) {
 			lifeSpan -= deltaTime;
+
+			if (lifeSpan <= 0 ){
+				destroyed = true;
+				return;
+			}
+
 			destroyed = lifeSpan <= 0.0f;
 		}
-
+		// update components
 		for (auto& component : m_components) {
 			if (component->active) {
 				component->Update(deltaTime);
 			}
 		}
-
-		m_transform.position += velocity * deltaTime;
-		velocity *= (1.0f * (0.992f + damping * deltaTime));
 	}
 
 	void piMath::Actor::Draw(Renderer& renderer)

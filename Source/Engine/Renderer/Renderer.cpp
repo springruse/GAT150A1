@@ -65,9 +65,10 @@ void piMath::Renderer::DrawPoint(float x, float y)
     SDL_RenderPoint(m_renderer, x, y);
 }
 
-void piMath::Renderer::DrawTexture(Texture* texture, float x, float y)
+void piMath::Renderer::DrawTexture(Texture& texture, float x, float y)
 {
-    vec2 size = texture->GetSize();
+
+    vec2 size = texture.GetSize();
 
         SDL_FRect destRect;
     destRect.x = x;
@@ -75,13 +76,13 @@ void piMath::Renderer::DrawTexture(Texture* texture, float x, float y)
     destRect.w = size.x;
     destRect.h = size.y;
 
-    SDL_RenderTexture(m_renderer, texture->m_texture, NULL, &destRect);
+    SDL_RenderTexture(m_renderer, texture.m_texture, NULL, &destRect);
 }
 
-void piMath::Renderer::DrawTexture(Texture* texture, float x, float y, float scale, float angle)
+void piMath::Renderer::DrawTexture(Texture& texture, float x, float y, float scale, float angle)
 {
 
-    vec2 size = texture->GetSize();
+    vec2 size = texture.GetSize();
 
     SDL_FRect destRect;
     destRect.w = size.x * scale;
@@ -89,7 +90,7 @@ void piMath::Renderer::DrawTexture(Texture* texture, float x, float y, float sca
     destRect.x = x - destRect.w * 0.5f;
     destRect.y = y - destRect.h * 0.5f;
 
-    SDL_RenderTextureRotated(m_renderer, texture->m_texture, NULL, &destRect, angle, NULL, SDL_FLIP_NONE());
+    SDL_RenderTextureRotated(m_renderer, texture.m_texture, NULL, &destRect, angle, NULL, SDL_FLIP_NONE());
 }
 
 void piMath::Renderer::Clear()

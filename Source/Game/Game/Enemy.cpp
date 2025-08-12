@@ -32,7 +32,11 @@ void Enemy::Update(float deltaTime)
 	}
 
 	piMath::vec2 force = piMath::vec2{ 1,0 }.Rotate(piMath::Math::degToRad(m_transform.rotation)) * speed;
-	velocity += force;
+	//velocity += force; * dt;
+	auto* rb = GetComponent<piMath::RigidBody>();
+	if (rb) {
+		rb->velocity += force * deltaTime;
+	}
 		
 	m_transform.position.x = piMath::Math::Wrap(m_transform.position.x, 0.0f, (float)piMath::GetEngine().GetRenderer().getWidth());
 	m_transform.position.y = piMath::Math::Wrap(m_transform.position.y, 0.0f, (float)piMath::GetEngine().GetRenderer().getHeight());
@@ -54,6 +58,13 @@ void Enemy::Update(float deltaTime)
 		auto spriteRenderer = std::make_unique<piMath::SpriteRenderer>();
 		spriteRenderer->textureName = "texture/redShip.png"; // rocket texture
 		rocket->AddComponent(std::move(spriteRenderer));
+
+		auto rb = std::make_unique<piMath::RigidBody>();
+		rocket->AddComponent(std::move(rb));
+
+		auto collider = std::make_unique<piMath::CircleCollider2D>();
+		collider->radius = 10.0f;
+		rocket->AddComponent(std::move(collider));
 
 		m_scene->AddActor(std::move(rocket));
 	}

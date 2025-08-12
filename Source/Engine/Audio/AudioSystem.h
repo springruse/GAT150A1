@@ -14,11 +14,14 @@ namespace piMath {
 		
 		bool addSound(const std::string& filename, const std::string& name = "");
 		bool playSound(const std::string& name);
+		bool playSound(class AudioClip& audioClip);
 
 	private:
-		bool CheckFMODResult(FMOD_RESULT result);
+		static bool CheckFMODResult(FMOD_RESULT result);
+	
 
 	private:
+		friend class AudioClip;
 		FMOD::System* m_system = nullptr;
 		std::map<std::string, FMOD::Sound*> m_sounds;
 	};

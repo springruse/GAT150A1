@@ -36,7 +36,6 @@ namespace piMath {
 		std::string name;
 		std::string tag;
 		Transform m_transform;
-		vec2 velocity{ 0,0 };
 		bool destroyed{ false };
 		float lifeSpan = 0.0f;
 
@@ -46,10 +45,37 @@ namespace piMath {
 
 		void AddComponent(std::unique_ptr<Component> component);
 
+		template<typename T>
+		T* GetComponent();
+
+		template<typename T>
+		std::vector<T*> GetComponents();
 
 	protected:
-		res_t<Texture> m_texture;
 		std::vector<std::unique_ptr<class Component>> m_components;
-		float damping = 0.98f; // default Damping factor to reduce velocity over time
 	};
+
+	template<typename T>
+	inline T* Actor::GetComponent()
+	{
+		for (auto& component : m_components) {
+			auto result = dynamic_cast<T*>(component.get());
+			if (result) return result;
+		}
+
+		return nullptr;
+	}
+
+	template<typename T>
+	inline std::vector<T*> Actor::GetComponents()
+	{
+		std::vector<T*> results;
+		for (auto& component : m_components) {
+			auto result = dynamic_cast<T*>(component.get());
+			if (result) { 
+				results.push_back(result); 
+			}
+		}
+		return results;
+	}
 }
