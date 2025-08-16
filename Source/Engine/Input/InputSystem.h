@@ -4,7 +4,7 @@
 #include <array>
 
 
-namespace piMath {
+namespace claw {
 
 	class InputSystem {
 
@@ -34,8 +34,8 @@ namespace piMath {
 		std::vector<bool> m_keyboardState;
 		std::vector<bool> m_previousKeyboardState;
 
-		piMath::vec2 m_mousePosition{0,0};
-		piMath::vec2 m_previousMousePosition{0,0};
+		claw::vec2 m_mousePosition{0,0};
+		claw::vec2 m_previousMousePosition{0,0};
 
 		std::array<bool, 3> m_mouseButtonState{ false,false,false };
 		std::array<bool, 3> m_previousMouseButtonState{ false,false,false };

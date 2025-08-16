@@ -4,7 +4,7 @@
 #include <iostream>
 #include <format>
 
-namespace piMath {
+namespace claw {
 
 	enum class LogLevel : uint8_t {
 		None = 0,

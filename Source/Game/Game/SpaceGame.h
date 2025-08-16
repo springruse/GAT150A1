@@ -3,7 +3,7 @@
 #include "Renderer/font.h"
 #include "Renderer/text.h"
 
-class SpaceGame : public piMath::Game {
+class SpaceGame : public claw::Game {
 
 	public:
 		enum class GameState {
@@ -23,11 +23,11 @@ class SpaceGame : public piMath::Game {
 		void Shutdown() override;
 
 		void Update(float dt) override;
-		void Draw(piMath::Renderer& renderer) override;
+		void Draw(claw::Renderer& renderer) override;
 
 		void OnPlayerDeath();
 
-		int m_score = 0; // Player's score
+		
 		int m_lives = 0; // Player's lives
 
 	private:
@@ -36,13 +36,13 @@ class SpaceGame : public piMath::Game {
 
 		float m_stateTimer = 0.0f; // Timer for state transitions
 
-		std::shared_ptr <class piMath::Font>  m_titleFont;
-		std::shared_ptr <class piMath::Font>  m_uiFont;
+		std::shared_ptr <class claw::Font>  m_titleFont;
+		std::shared_ptr <class claw::Font>  m_uiFont;
 
-		std::shared_ptr <class piMath::Text>  m_titleText;
-		std::shared_ptr <class piMath::Text>  m_gameOverText;
-		std::shared_ptr <class piMath::Text>  m_scoreText;
-		std::shared_ptr <class piMath::Text>  m_livesText;
+		std::shared_ptr <class claw::Text>  m_titleText;
+		std::shared_ptr <class claw::Text>  m_gameOverText;
+		std::shared_ptr <class claw::Text>  m_scoreText;
+		std::shared_ptr <class claw::Text>  m_livesText;
 	private:
 	void SpawnEnemy();
 	void SpawnAlly();

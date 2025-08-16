@@ -1,6 +1,6 @@
 #pragma once
 #include <chrono>
-namespace piMath {
+namespace claw {
 
 	class Time {
 	private:

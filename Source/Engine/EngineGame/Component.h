@@ -1,7 +1,7 @@
 #pragma once
 #include "EngineGame/Object.h"
 
-namespace piMath {
+namespace claw {
 	class Component : public Object {
 	public:
 		class Actor* owner = nullptr; // Pointer to the owner actor of this component

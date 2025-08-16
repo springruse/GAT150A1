@@ -6,7 +6,7 @@
 #include "Core/Logger.h"
 struct TTF_font;
 
-namespace piMath {
+namespace claw {
 	
 
 	class Font : public Resource{

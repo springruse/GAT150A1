@@ -1,5 +1,5 @@
 #include "Components/CircleCollider2D.h"
-namespace piMath {
+namespace claw {
 	void CircleCollider2D::Update(float deltaTime) {
 		// Update logic for CircleCollider2D if needed
 	}

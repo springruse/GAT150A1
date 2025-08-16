@@ -2,7 +2,7 @@
 #include <memory>
 #include "../Renderer/Renderer.h"
 
-namespace piMath {
+namespace claw {
 	class Game {
 	public:
 		Game() = default;
@@ -10,9 +10,11 @@ namespace piMath {
 		virtual bool Initialize() = 0;
 		virtual void Shutdown() = 0;
 		virtual void Update(float dt) = 0;
-		virtual void Draw(piMath::Renderer& renderer) = 0;
+		virtual void Draw(claw::Renderer& renderer) = 0;
 
-		void addPoints(int points) { m_score += points; }
+		void addPoints(int points) { 
+			m_score += points; 
+		}
 		int getPoints() const { return m_score; }
 
 

@@ -1,6 +1,6 @@
 #pragma once
 
-namespace piMath {
+namespace claw {
 	class Object {
 	public:
 		std::string name;

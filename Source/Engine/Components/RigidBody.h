@@ -2,7 +2,7 @@
 
 #include "EngineGame/Component.h"
 
-namespace piMath {
+namespace claw {
 	class RigidBody : public Component {
 	public:
 		void Update(float dt);

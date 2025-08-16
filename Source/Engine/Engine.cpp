@@ -2,10 +2,10 @@
 
 #pragma once
 
-namespace piMath {
+namespace claw {
 
 
-	void piMath::Engine::Update()
+	void claw::Engine::Update()
 	{
 		m_time.Tick();
 		m_input->Update();
@@ -18,26 +18,29 @@ namespace piMath {
 
 	}
 
-	bool piMath::Engine::Initialize()
+	bool claw::Engine::Initialize()
 	{
-		m_renderer = std::make_unique<piMath::Renderer>();
+		m_renderer = std::make_unique<claw::Renderer>();
 		m_renderer->Initialize();
-		m_renderer->CreateWindow("Game project", 1280, 1024);
+		m_renderer->CreateWindow("Game project", 1280, 1024, false);
 
-		m_input = std::make_unique<piMath::InputSystem>();
+		m_input = std::make_unique<claw::InputSystem>();
 		m_input->Initialize();
 
-		m_audio = std::make_unique<piMath::AudioSystem>();
+		m_audio = std::make_unique<claw::AudioSystem>();
 		m_audio->Initialize();
 
-		m_particleSystem = std::make_unique<piMath::ParticleSystem>();
+		m_particleSystem = std::make_unique<claw::ParticleSystem>();
 		m_particleSystem->Initialize(5000);
 
 		return true;
 	}
 
-	void piMath::Engine::Shutdown()
+	void claw::Engine::Shutdown()
 	{
+		// release all resources
+		Resources().Clear();
+
 		m_audio->Shutdown();
 		m_particleSystem->Shutdown();
 		m_input->Shutdown();

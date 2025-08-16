@@ -2,7 +2,7 @@
 #include <cassert>
 #include "Math.h"
 
-namespace piMath {
+namespace claw {
 	template<typename T>
 	struct Vector3
 	{
@@ -60,11 +60,51 @@ namespace piMath {
 			return (x * x) + (y * y);
 		}
 		float Length() const{
-			return piMath::Math::sqrtf(LengthSqr());
+			return claw::Math::sqrtf(LengthSqr());
 		}
 
 	};
 
+	template<typename T>
+	std::ostream& operator << (std::ostream& stream, const Vector3<T>& v) {
+		stream << "{" << v.x << ", " << v.y << ", " << v.z << "}";
+		return stream;
+	}
+
+	template<typename T>
+	std::istream& operator >> (std::istream& stream, Vector3<T>& v) {
+		char ch = '\0';
+		if (!(stream >> std::ws >> ch || ch != '{')) {
+			stream.setstate(std::ios::failbit);
+			return stream;
+		} // skip opening brace 
+		if (!(stream >> std::ws >> v.x)) {
+			stream.setstate(std::ios::failbit);
+			return stream;
+		} // read x value
+		if (!(stream >> std::ws >> ch || ch != ',')) {
+			stream.setstate(std::ios::failbit);
+			return stream;
+		} // skip comma
+		if (!(stream >> std::ws >> v.y)) {
+			stream.setstate(std::ios::failbit);
+			return stream;
+		} // read y value
+		if (!(stream >> std::ws >> ch || ch != ',')) {
+			stream.setstate(std::ios::failbit);
+			return stream;
+		} // skip comma
+		if (!(stream >> std::ws >> v.z)) {
+			stream.setstate(std::ios::failbit);
+			return stream;
+		} // read z value
+		if (!(stream >> std::ws >> ch || ch != '}')) {
+			stream.setstate(std::ios::failbit);
+			return stream;
+		} // skip closing brace
+
+		return stream;
+	}
 	using ivec3 = Vector3<int>;
 	using vec3 = Vector3<float>;
 }

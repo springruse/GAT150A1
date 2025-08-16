@@ -93,7 +93,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Source\ThirdParty\fmod\core\inc;$(SolutionDir)Source\Engine;$(SolutionDir)Source\ThirdParty\SDL3\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\ThirdParty\rapidjson\include;$(SolutionDir)Source\ThirdParty\fmod\core\inc;$(SolutionDir)Source\Engine;$(SolutionDir)Source\ThirdParty\SDL3\include</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>GamePCH.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>GamePCH.h</ForcedIncludeFiles>
@@ -104,6 +104,9 @@
       <AdditionalLibraryDirectories>$(SolutionDir)Source\ThirdParty\fmod\core\lib\$(PlatformTarget);$(SolutionDir)Source\ThirdParty\SDL3\lib\$(PlatformTarget);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sdl3.lib;fmod_vc.lib;sdl3_ttf.lib;sdl3_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy /y /i "$(TargetDir)" "$(SolutionDir)Build"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -114,7 +117,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Source\ThirdParty\fmod\core\inc;$(SolutionDir)Source\Engine;$(SolutionDir)Source\ThirdParty\SDL3\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\ThirdParty\rapidjson\include;$(SolutionDir)Source\ThirdParty\fmod\core\inc;$(SolutionDir)Source\Engine;$(SolutionDir)Source\ThirdParty\SDL3\include</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>GamePCH.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>GamePCH.h</ForcedIncludeFiles>
@@ -127,6 +130,9 @@
       <AdditionalLibraryDirectories>$(SolutionDir)Source\ThirdParty\fmod\core\lib\$(PlatformTarget);$(SolutionDir)Source\ThirdParty\SDL3\lib\$(PlatformTarget);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sdl3.lib;fmod_vc.lib;sdl3_ttf.lib;sdl3_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy /y /i "$(TargetDir)" "$(SolutionDir)Build"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -134,7 +140,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Source\ThirdParty\fmod\core\inc;$(SolutionDir)Source\Engine;$(SolutionDir)Source\ThirdParty\SDL3\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\ThirdParty\rapidjson\include;$(SolutionDir)Source\ThirdParty\fmod\core\inc;$(SolutionDir)Source\Engine;$(SolutionDir)Source\ThirdParty\SDL3\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>GamePCH.h</PrecompiledHeaderFile>
@@ -146,6 +152,9 @@
       <AdditionalLibraryDirectories>$(SolutionDir)Source\ThirdParty\fmod\core\lib\$(PlatformTarget);$(SolutionDir)Source\ThirdParty\SDL3\lib\$(PlatformTarget);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sdl3.lib;fmod_vc.lib;sdl3_ttf.lib;sdl3_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy /y /i "$(TargetDir)" "$(SolutionDir)Build"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -155,7 +164,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Source\ThirdParty\fmod\core\inc;$(SolutionDir)Source\Engine;$(SolutionDir)Source\ThirdParty\SDL3\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\ThirdParty\rapidjson\include;$(SolutionDir)Source\ThirdParty\fmod\core\inc;$(SolutionDir)Source\Engine;$(SolutionDir)Source\ThirdParty\SDL3\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>GamePCH.h</PrecompiledHeaderFile>
@@ -169,6 +178,9 @@
       <AdditionalLibraryDirectories>$(SolutionDir)Source\ThirdParty\fmod\core\lib\$(PlatformTarget);$(SolutionDir)Source\ThirdParty\SDL3\lib\$(PlatformTarget);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sdl3.lib;fmod_vc.lib;sdl3_ttf.lib;sdl3_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy /y /i "$(TargetDir)" "$(SolutionDir)Build"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GamePCH.cpp">
@@ -202,6 +214,9 @@
     <ClInclude Include="Game\Player.h" />
     <ClInclude Include="Game\Rocket.h" />
     <ClInclude Include="Game\SpaceGame.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Build\Assets\enemy.msh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

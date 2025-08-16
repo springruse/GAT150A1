@@ -2,7 +2,7 @@
 
 #include "EngineGame/Component.h"
 
-namespace piMath {
+namespace claw {
 	class RendererComponent : public Component {
 	public:
 		virtual void Draw(class Renderer& renderer) = 0;

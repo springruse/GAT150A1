@@ -4,7 +4,7 @@
 #include "Math/Vector2.h"
 #include "Math.h"
 
-namespace piMath {
+namespace claw {
 	namespace Random {
 		/// <summary>
 		/// Returns a reference to a static Mersenne Twister random number generator instance.

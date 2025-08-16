@@ -14,44 +14,44 @@ void Ally::Update(float deltaTime)
 
 		Enemy* enemy = m_scene->GetActorByName<Enemy>("enemy");
 		if (enemy) {
-			piMath::vec2 direction{ 0, 0 };
+			claw::vec2 direction{ 0, 0 };
 			direction = enemy->m_transform.position - m_transform.position;
 
 			direction = direction.Normalize();
-			piMath::vec2 forward = piMath::vec2{ 1, 0 }.Rotate(piMath::Math::degToRad(m_transform.rotation));
+			claw::vec2 forward = claw::vec2{ 1, 0 }.Rotate(claw::Math::degToRad(m_transform.rotation));
 
-			float angle = piMath::Math::radToDeg(piMath::vec2::AngleBetween(forward, direction));
+			float angle = claw::Math::radToDeg(claw::vec2::AngleBetween(forward, direction));
 			enemySeen = angle <= 45; // angle threshold for enemy detection
 
 			if (enemySeen) {
-				float angle = piMath::vec2::SignedAngleBetween(forward, direction);
-				angle = piMath::Math::Sign(angle);
-				m_transform.rotation += piMath::Math::radToDeg(angle * 5 * deltaTime);
+				float angle = claw::vec2::SignedAngleBetween(forward, direction);
+				angle = claw::Math::Sign(angle);
+				m_transform.rotation += claw::Math::radToDeg(angle * 5 * deltaTime);
 			}
 		}
 	}
 
 
-	piMath::vec2 force = piMath::vec2{ 1,0 }.Rotate(piMath::Math::degToRad(m_transform.rotation)) * speed;
+	claw::vec2 force = claw::vec2{ 1,0 }.Rotate(claw::Math::degToRad(m_transform.rotation)) * speed;
 	//velocity += force;
 
-	auto* rb = GetComponent<piMath::RigidBody>();
+	auto* rb = GetComponent<claw::RigidBody>();
 	if (rb) {
-		rb->velocity += force * deltaTime;
+		rb->velocity += force;
 	}
 
 	if (speed > 0) {
-		piMath::Particle particle;
+		claw::Particle particle;
 		particle.position = m_transform.position;
-		particle.color = piMath::vec3{ 0,0.75f,0 };
-		particle.velocity = piMath::vec2{ piMath::Random::onUnitCircle() * piMath::Random::getReal(20.0f, 40.0f) };
-		particle.lifeSpan = piMath::Random::getReal(0.25f, 0.5f);
-		piMath::GetEngine().GetParticleSystem().AddParticle(particle);
+		particle.color = claw::vec3{ 0,0.75f,0 };
+		particle.velocity = claw::vec2{ claw::Random::onUnitCircle() * claw::Random::getReal(20.0f, 40.0f) };
+		particle.lifeSpan = claw::Random::getReal(0.25f, 0.5f);
+		claw::GetEngine().GetParticleSystem().AddParticle(particle);
 
 	}
 
-	m_transform.position.x = piMath::Math::Wrap(m_transform.position.x, 0.0f, (float)piMath::GetEngine().GetRenderer().getWidth());
-	m_transform.position.y = piMath::Math::Wrap(m_transform.position.y, 0.0f, (float)piMath::GetEngine().GetRenderer().getHeight());
+	m_transform.position.x = claw::Math::Wrap(m_transform.position.x, 0.0f, (float)claw::GetEngine().GetRenderer().getWidth());
+	m_transform.position.y = claw::Math::Wrap(m_transform.position.y, 0.0f, (float)claw::GetEngine().GetRenderer().getHeight());
 
 	Actor::Update(deltaTime);
 }
@@ -60,14 +60,14 @@ void Ally::onCollision(Actor* other)
 {
 	if (tag != other->tag) {
 		destroyed = true;
-		piMath::GetEngine().GetAudio().playSound("death");
+		claw::GetEngine().GetAudio().playSound("death");
 		for (int i = 0; i < 100; i++) {
-			piMath::Particle particle;
+			claw::Particle particle;
 			particle.position = m_transform.position;
-			particle.color = piMath::vec3{ 1,1,1 };
-			particle.velocity = piMath::vec2{ piMath::Random::onUnitCircle() * piMath::Random::getReal(10.0f, 200.0f) };
+			particle.color = claw::vec3{ 1,1,1 };
+			particle.velocity = claw::vec2{ claw::Random::onUnitCircle() * claw::Random::getReal(10.0f, 200.0f) };
 			particle.lifeSpan = 2.0f;
-			piMath::GetEngine().GetParticleSystem().AddParticle(particle);
+			claw::GetEngine().GetParticleSystem().AddParticle(particle);
 		}
 	}
 }

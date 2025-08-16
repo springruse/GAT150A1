@@ -1,6 +1,6 @@
 #include "Texture.h"
 
-namespace piMath {
+namespace claw {
 
 	Texture::~Texture()
 	{
@@ -22,7 +22,7 @@ namespace piMath {
 		SDL_DestroySurface(surface);
 		if (!m_texture)
 		{
-			Logger::Warning("Could not create texture: "); // fix, breaks when looking for texture
+			Logger::Warning("Could not create texture: ", filename);
 			return false;
 		}
 

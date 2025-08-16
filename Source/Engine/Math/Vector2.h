@@ -1,8 +1,9 @@
 #pragma once
-#include <cassert>
 #include "Math.h"
+#include <cassert>
+#include <iostream>
 
-namespace piMath {
+namespace claw {
 	template<typename T>
 	struct Vector2
 	{
@@ -59,7 +60,7 @@ namespace piMath {
 			return (x * x) + (y * y);
 		}
 		float Length() const{
-			return piMath::Math::sqrtf(LengthSqr());
+			return claw::Math::sqrtf(LengthSqr());
 		}
 		/// <summary>
 		/// returns a normalized unit length version of the vector
@@ -122,7 +123,37 @@ namespace piMath {
 			return a.x * b.y - a.y * b.x;
 		}
 	};
+	template<typename T>
+	std::ostream& operator << (std::ostream& stream, const Vector2<T>& v) {
+		stream << "{" << v.x << ", " << v.y << "}";
+		return stream;
+	}
+	template<typename T>
+	std::istream& operator >> (std::istream& stream, Vector2<T>& v) {
+		char ch = '\0';
+		if (!(stream >> std::ws >> ch || ch != '{')) {
+			stream.setstate(std::ios::failbit);
+			return stream;
+		} // skip opening brace 
+		if (!(stream >> std::ws >> v.x)) { 
+			stream.setstate(std::ios::failbit);
+			return stream; 
+		} // read x value
+		if (!(stream >> std::ws >> ch || ch != ',')) { 
+			stream.setstate(std::ios::failbit);
+			return stream; 
+		} // skip comma
+		if (!(stream >> std::ws >> v.y)) {
+			stream.setstate(std::ios::failbit);
+			return stream;
+		} // read y value
+		if (!(stream >> std::ws >> ch || ch != '}')) {
+			stream.setstate(std::ios::failbit);
+			return stream;
+		} // skip closing brace
 
+		return stream;
+	}
 	using ivec2 = Vector2<int>;
 	using vec2 = Vector2<float>;
 }

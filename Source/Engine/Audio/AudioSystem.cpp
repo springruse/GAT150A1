@@ -5,7 +5,7 @@
 #include "AudioClip.h"
 #include <iostream>
 
-namespace piMath {
+namespace claw {
     bool AudioSystem::CheckFMODResult(FMOD_RESULT result)
     {
         if (result != FMOD_OK) {
@@ -72,6 +72,7 @@ namespace piMath {
 
 		return true;
 	}
+	// play sound using name
 	bool AudioSystem::playSound(const std::string& name)
 	{
 		std::string key = name;
@@ -93,6 +94,7 @@ namespace piMath {
 
 		return true; 
 	}
+	// play sound using AudioClip
 	bool AudioSystem::playSound(AudioClip& audioClip)
 	{
 		FMOD_RESULT result = m_system->playSound(audioClip.m_sound, 0, false, nullptr);

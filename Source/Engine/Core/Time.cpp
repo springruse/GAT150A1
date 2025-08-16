@@ -1,7 +1,7 @@
 #include "Time.h"
-namespace piMath {
+namespace claw {
 
-	void piMath::Time::Tick()
+	void claw::Time::Tick()
 	{
 		clock::time_point now = clock::now();
 		m_time = std::chrono::duration<float>(now - m_startTime).count();

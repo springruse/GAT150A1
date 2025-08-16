@@ -1,6 +1,6 @@
 #include "SpriteRenderer.h"
 #include "Renderer/Renderer.h"
-namespace piMath {
+namespace claw {
 	void SpriteRenderer::Update(float deltatime)
 	{
 		//

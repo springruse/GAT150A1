@@ -1,7 +1,7 @@
 #include "InputSystem.h"
 #include <SDL3/SDL.h>
 
-namespace piMath {
+namespace claw {
 	bool InputSystem::Initialize()
 	{
 		int numKeys;

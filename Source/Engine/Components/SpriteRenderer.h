@@ -2,7 +2,7 @@
 #include "EngineGame/Component.h"
 #include "Components/RendererComponent.h"
 
-namespace piMath {
+namespace claw {
 		class SpriteRenderer : public RendererComponent {
 		public:
 			std::string textureName;

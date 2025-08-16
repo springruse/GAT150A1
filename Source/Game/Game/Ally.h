@@ -4,17 +4,17 @@
 #include "EngineGame/Scene.h"
 
 
-class Ally : public piMath::Actor {
+class Ally : public claw::Actor {
 public:
 	Ally() = default;
-	Ally(const piMath::Transform& transform) :
-		piMath::Actor{ transform }
+	Ally(const claw::Transform& transform) :
+		claw::Actor{ transform }
 	{}
 
 	void Update(float deltaTime) override;
 	float damping = 0.98f;
 	float speed = 100;
-	piMath::vec2 direction = { 0,0 };
+	claw::vec2 direction = { 0,0 };
 	float firetimer = 0.0f; // Timer for firing rockets
 	float fireTime = 3.0f; // Time between shots in seconds
 

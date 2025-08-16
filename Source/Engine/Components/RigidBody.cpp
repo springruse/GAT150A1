@@ -1,8 +1,8 @@
 #include "RigidBody.h"
 
-namespace piMath {
+namespace claw {
 	void RigidBody::Update(float deltaTime) {
 		owner->m_transform.position += velocity * deltaTime;
-		velocity += (1.0f / (1.0f + damping * deltaTime)); // ( <1) = slower, ( >1) = faster
+		velocity *= damping; // ( <1) = slower, ( >1) = faster
 	}
 }

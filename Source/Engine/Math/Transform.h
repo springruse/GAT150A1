@@ -2,7 +2,7 @@
 #include "Vector2.h"
 #include "Vector3.h"
 
-namespace piMath{
+namespace claw{
 	struct Transform {
 		vec2 position = {0,0};
 		float rotation = 0;

@@ -7,12 +7,12 @@
 
 #include <memory>
 
-class Player : public piMath::Actor {
+class Player : public claw::Actor {
 	enum class PowerUpType;
 
 public:
 	Player() = default;
-	Player(const piMath::Transform& transform) :
+	Player(const claw::Transform& transform) :
 	
 		Actor{transform}
 

@@ -5,7 +5,7 @@
 #include <vector>
 
 
-namespace piMath {
+namespace claw {
 	struct Particle {
 		bool active = false;
 

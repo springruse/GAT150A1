@@ -3,7 +3,7 @@
 #include <string>
 #include <map>
  
-namespace piMath {
+namespace claw {
 	class AudioSystem {
 	public:
 		AudioSystem() = default;

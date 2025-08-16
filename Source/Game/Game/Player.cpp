@@ -7,67 +7,68 @@
 void Player::Update(float dt)
 {
 
-	piMath::vec2 direction{ 1,0 };
+	claw::vec2 direction{ 1,0 };
 
     float rotate = 0;
 	
 	// rotation speed
-    if (piMath::GetEngine().GetInput().getKeyDown(SDL_SCANCODE_A))  rotate =  -1; 
-    if(piMath::GetEngine().GetInput().getKeyDown(SDL_SCANCODE_D))  rotate = +1; 
+    if (claw::GetEngine().GetInput().getKeyDown(SDL_SCANCODE_A))  rotate =  -1; 
+    if(claw::GetEngine().GetInput().getKeyDown(SDL_SCANCODE_D))  rotate = +1; 
 
 	m_transform.rotation += (rotate * rotationSpeed) * dt;
 
 	//thrust speed
     float thrust = 0;
-	if (piMath::GetEngine().GetInput().getKeyDown(SDL_SCANCODE_W))  thrust = +1;
-	if (piMath::GetEngine().GetInput().getKeyDown(SDL_SCANCODE_S))  thrust = -1;
+	if (claw::GetEngine().GetInput().getKeyDown(SDL_SCANCODE_W))  thrust = +1;
+	if (claw::GetEngine().GetInput().getKeyDown(SDL_SCANCODE_S))  thrust = -1;
 	// player bounds
-	m_transform.position.x = piMath::Math::Wrap(m_transform.position.x, 0.0f, (float)piMath::GetEngine().GetRenderer().getWidth());
-	m_transform.position.y = piMath::Math::Wrap(m_transform.position.y, 0.0f, (float)piMath::GetEngine().GetRenderer().getHeight());
+	m_transform.position.x = claw::Math::Wrap(m_transform.position.x, 0.0f, (float)claw::GetEngine().GetRenderer().getWidth());
+	m_transform.position.y = claw::Math::Wrap(m_transform.position.y, 0.0f, (float)claw::GetEngine().GetRenderer().getHeight());
 
-	piMath::vec2 force = direction.Rotate(piMath::Math::degToRad(m_transform.rotation)) * thrust * speed;
+	claw::vec2 force = direction.Rotate(claw::Math::degToRad(m_transform.rotation)) * thrust * speed;
 	//velocity += force;
 
-	auto* rb = GetComponent<piMath::RigidBody>();
+	auto* rb = GetComponent<claw::RigidBody>();
 	if (rb) {
-		rb->velocity += force * dt;
+		rb->velocity += force;
 	}
 
 	if (force.Length() > 0) {
-		piMath::Particle particle;
+		claw::Particle particle;
 		particle.position = m_transform.position;
-		particle.color = piMath::vec3{ 1,1,1 };
-		particle.velocity = piMath::vec2{ piMath::Random::onUnitCircle() * piMath::Random::getReal(50.0f, 80.0f) };
+		particle.color = claw::vec3{ 1,1,1 };
+		particle.velocity = claw::vec2{ claw::Random::onUnitCircle() * claw::Random::getReal(50.0f, 80.0f) };
 		particle.lifeSpan = 1.0f;
-		piMath::GetEngine().GetParticleSystem().AddParticle(particle);
+		claw::GetEngine().GetParticleSystem().AddParticle(particle);
 
 	}
 	
 	// check if player fires
 	fireTimer -= dt;
-	if (piMath::GetEngine().GetInput().getKeyDown(SDL_SCANCODE_E))
+	if (claw::GetEngine().GetInput().getKeyPressed(SDL_SCANCODE_E))
 	{
 		fireTimer = fireTime; // Reset fire timer
 
-		piMath::GetEngine().GetAudio().playSound(*piMath::Resources().Get<piMath::AudioClip>("blaster", piMath::GetEngine().GetAudio()));
-
-		piMath::GetEngine().GetAudio().playSound("blaster");
-		piMath::Transform rocketTransform{ this->m_transform.position, this->m_transform.rotation, 1.0f };
+		auto sound = claw::GetEngine().GetAudio().playSound(*claw::Resources().Get<claw::AudioClip>("shipBlast1.wav", claw::GetEngine().GetAudio()).get());
+		/*if (sound) {
+			piMath::GetEngine().GetAudio().playSound(&sound);
+		};*/
+		claw::Transform rocketTransform{ this->m_transform.position, this->m_transform.rotation, 1.0f };
 		auto rocket = std::make_unique<Rocket>(rocketTransform); // , piMath::Resources().Get<piMath::Texture>("texture/blue_01.png", piMath::GetEngine().GetRenderer()));
-		rocket->speed = 60.0f;
+		rocket->speed = 600.0f;
 		rocket->lifeSpan = 1.5f;
 		rocket->name = "rocket";
 		rocket->tag = "player"; // Set rocket name for identification
 
 		//components
-		auto spriteRenderer = std::make_unique<piMath::SpriteRenderer>();
+		auto spriteRenderer = std::make_unique<claw::SpriteRenderer>();
 		spriteRenderer->textureName = "texture/missle.png"; // rocket texture
 		rocket->AddComponent(std::move(spriteRenderer));
 
-		auto rb = std::make_unique<piMath::RigidBody>();
+		auto rb = std::make_unique<claw::RigidBody>();
 		rocket->AddComponent(std::move(rb));
 
-		auto collider = std::make_unique<piMath::CircleCollider2D>();
+		auto collider = std::make_unique<claw::CircleCollider2D>();
 		collider->radius = 10.0f;
 		rocket->AddComponent(std::move(collider));
 
@@ -86,9 +87,9 @@ void Player::onCollision(Actor* other)
 	
 	if (tag != other->tag) {
 		destroyed = true;
-		piMath::GetEngine().GetAudio().playSound("death");
+		claw::GetEngine().GetAudio().playSound("death");
 		dynamic_cast<SpaceGame*>(m_scene->GetGame())->OnPlayerDeath(); // Notify the game of player death
 	}
-	std::cout << other->tag << std::endl;
+	//std::cout << other->tag << std::endl;
 	
 }

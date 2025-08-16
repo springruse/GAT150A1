@@ -2,7 +2,7 @@
 #include "Actor.h"
 #include "Components/ColliderComponent.h"
 
-namespace piMath {
+namespace claw {
 
 	/// <summary>
 	/// Updates all actors in the scene by advancing their state based on the elapsed time.

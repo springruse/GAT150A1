@@ -1,7 +1,7 @@
 #include "ParticleSystem.h"
 
 
-namespace piMath {
+namespace claw {
 
 	bool ParticleSystem::Initialize(int poolSize)
 	{

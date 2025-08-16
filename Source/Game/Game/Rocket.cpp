@@ -2,23 +2,23 @@
 
 void Rocket::Update(float deltaTime)
 {
-	piMath::vec2 force = piMath::vec2{ 1,0 }.Rotate(piMath::Math::degToRad(m_transform.rotation)) * speed;
+	claw::vec2 force = claw::vec2{ 1,0 }.Rotate(claw::Math::degToRad(m_transform.rotation)) * speed;
 	//velocity += force;
-	auto* rb = GetComponent<piMath::RigidBody>();
+	auto* rb = GetComponent<claw::RigidBody>();
 	if (rb) {
 		rb->velocity = force;
 	}
 
-	float angle = m_transform.rotation + piMath::Random::getReal(-30.0f, 30.0f);
-	piMath::vec2 velocity = piMath::vec2{ 1,0 }.Rotate(piMath::Math::degToRad(angle));
-	velocity += piMath::Random::getReal(100.0f, 200.0f);
+	float angle = m_transform.rotation + claw::Random::getReal(-30.0f, 30.0f);
+	claw::vec2 velocity = claw::vec2{ 1,0 }.Rotate(claw::Math::degToRad(angle));
+	velocity += claw::Random::getReal(100.0f, 200.0f);
 	
-	piMath::Particle particle;
+	claw::Particle particle;
 	particle.position = m_transform.position;
-	particle.color = (tag == "enemy") ? piMath::vec3{ 1,0,0 } : piMath::vec3{ 1,1,1 };
-	particle.velocity = piMath::vec2{ piMath::Random::onUnitCircle() * piMath::Random::getReal(50.0f, 80.0f) };
-	particle.lifeSpan = piMath::Random::getReal(0.15f,0.5f);
-	piMath::GetEngine().GetParticleSystem().AddParticle(particle);
+	particle.color = (tag == "enemy") ? claw::vec3{ 1,0,0 } : claw::vec3{ 1,1,1 };
+	particle.velocity = claw::vec2{ claw::Random::onUnitCircle() * claw::Random::getReal(50.0f, 80.0f) };
+	particle.lifeSpan = claw::Random::getReal(0.15f,0.5f);
+	claw::GetEngine().GetParticleSystem().AddParticle(particle);
 
 	Actor::Update(deltaTime);
 }

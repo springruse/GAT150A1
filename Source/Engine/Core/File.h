@@ -5,7 +5,7 @@
 #include <fstream>
 #include <sstream>
 
-namespace piMath::file {
+namespace claw::file {
 
 
     std::string GetCurrentDirectory();

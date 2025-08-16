@@ -1,8 +1,8 @@
 #include "Actor.h"
 
-namespace piMath {
+namespace claw {
 
-	void piMath::Actor::Update(float deltaTime)
+	void claw::Actor::Update(float deltaTime)
 	{
 		if (destroyed) return;
 
@@ -24,7 +24,7 @@ namespace piMath {
 		}
 	}
 
-	void piMath::Actor::Draw(Renderer& renderer)
+	void claw::Actor::Draw(Renderer& renderer)
 	{
 		if (destroyed) return;
 
@@ -42,7 +42,7 @@ namespace piMath {
 	{
 		return 25.0f;//return (m_texture) ? m_texture->GetSize().Length() * 0.5f * m_transform.scale * 0.9f : 0.0f;
 	}
-	inline void piMath::Scene::AddActor(std::shared_ptr<class Actor> actor) {
+	inline void claw::Scene::AddActor(std::shared_ptr<class Actor> actor) {
 		m_actors.push_back(actor);
 	}
 

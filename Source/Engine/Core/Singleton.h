@@ -1,6 +1,6 @@
 #pragma once
 
-namespace piMath {
+namespace claw {
 	template<typename T>
 	class Singleton {
 		

@@ -8,7 +8,7 @@
 #include "Core/Singleton.h"
 #include <memory>
 
-namespace piMath {
+namespace claw {
 	class Renderer;
 	class AudioSystem;
 	class InputSystem;

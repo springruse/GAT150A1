@@ -9,7 +9,7 @@
 #include <string>
 
 struct SDL_Texture;
-namespace piMath {
+namespace claw {
 
 	class Text : public Resource{
 	public:

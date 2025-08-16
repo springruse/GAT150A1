@@ -1,7 +1,7 @@
 #include "Text.h"
 #include "Font.h"
 
-namespace piMath {
+namespace claw {
 
 	Text::~Text() {
 		if (m_texture != nullptr) {

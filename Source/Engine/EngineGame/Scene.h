@@ -7,7 +7,7 @@
 #include "../Core/StringHelper.h"
 
 
-namespace piMath {
+namespace claw {
 	
 	class Actor;
 	class Game;
@@ -50,7 +50,7 @@ namespace piMath {
 	{
 
 		for (auto& Actor : m_actors) {
-			if (piMath::toLower(Actor->name) == piMath::toLower(name)) {
+			if (claw::toLower(Actor->name) == claw::toLower(name)) {
 				T* object = dynamic_cast<T*>(Actor.get());
 				if (object) {
 					return object;

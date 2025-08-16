@@ -6,17 +6,17 @@
 #include "Math/Vector2.h"
 //unfinished but is similar to enemy.h
 
-class Rocket : public piMath::Actor {
+class Rocket : public claw::Actor {
 public:
 	Rocket() = default;
-	Rocket(const piMath::Transform& transform) :
-		piMath::Actor{ transform }
+	Rocket(const claw::Transform& transform) :
+		claw::Actor{ transform }
 	{}
 
 	void Update(float deltaTime) override;
 	float damping = 1.0f;
 	float speed = 100;
-	piMath::vec2 direction = { 0,0 };
+	claw::vec2 direction = { 0,0 };
 
 	// Inherited via Actor
 	void onCollision(Actor* other) override;

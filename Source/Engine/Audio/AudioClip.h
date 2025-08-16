@@ -1,6 +1,6 @@
 #pragma once
 #include "Resources/Resource.h"
-namespace piMath {
+namespace claw {
 	class AudioClip : public Resource{
 	public:
 		AudioClip() = default;

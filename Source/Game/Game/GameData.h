@@ -3,8 +3,8 @@
 #include <vector>
 
 namespace GameData {
-	extern std::vector<piMath::vec2> playerShipPoints;
-	extern std::vector<piMath::vec2> enemyShipPoints;
-	extern std::vector<piMath::vec2> squarePoint;
-	extern std::vector<piMath::vec2> rocketPoints;
+	extern std::vector<claw::vec2> playerShipPoints;
+	extern std::vector<claw::vec2> enemyShipPoints;
+	extern std::vector<claw::vec2> squarePoint;
+	extern std::vector<claw::vec2> rocketPoints;
 }

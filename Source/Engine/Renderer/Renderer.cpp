@@ -1,6 +1,6 @@
 #include "Renderer.h"
 
-bool piMath::Renderer::Initialize()
+bool claw::Renderer::Initialize()
 {
     if (!SDL_Init(SDL_INIT_VIDEO)) {
 		Logger::Error("SDL_Init Error: " , std::string(SDL_GetError()));
@@ -15,7 +15,7 @@ bool piMath::Renderer::Initialize()
     return true;
 }
 
-void piMath::Renderer::Shutdown()
+void claw::Renderer::Shutdown()
 {
     TTF_Quit();
     SDL_DestroyRenderer(m_renderer);
@@ -23,11 +23,11 @@ void piMath::Renderer::Shutdown()
     SDL_Quit();
 }
 
-bool piMath::Renderer::CreateWindow(const std::string& name, int width, int height)
+bool claw::Renderer::CreateWindow(const std::string& name, int width, int height, bool fullscreen)
 {
 	m_width = width;
 	m_height = height;
-    m_window = SDL_CreateWindow(name.c_str(), width, height, 0);
+    m_window = SDL_CreateWindow(name.c_str(), width, height, fullscreen ? SDL_WINDOW_FULLSCREEN : 0);
     if (m_window == nullptr) {
 		Logger::Error("SDL_CreateWindow Error: " );
         SDL_Quit();
@@ -41,31 +41,32 @@ bool piMath::Renderer::CreateWindow(const std::string& name, int width, int heig
         SDL_Quit();
         return false;
     }
+	SDL_SetRenderLogicalPresentation(m_renderer, width, height, SDL_LOGICAL_PRESENTATION_LETTERBOX);
 
     return true;
 }
 
-void piMath::Renderer::SetColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
+void claw::Renderer::SetColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
     SDL_SetRenderDrawColor(m_renderer, r, g, b, a);
 }
 
-void piMath::Renderer::SetColor(float r, float g, float b, float a)
+void claw::Renderer::SetColor(float r, float g, float b, float a)
 {
     SDL_SetRenderDrawColorFloat(m_renderer, r, g, b, a);
 }
 
-void piMath::Renderer::DrawLine(float x1, float y1, float x2, float y2)
+void claw::Renderer::DrawLine(float x1, float y1, float x2, float y2)
 {
     SDL_RenderLine(m_renderer, x1, y1, x2, y2);
 }
 
-void piMath::Renderer::DrawPoint(float x, float y)
+void claw::Renderer::DrawPoint(float x, float y)
 {
     SDL_RenderPoint(m_renderer, x, y);
 }
 
-void piMath::Renderer::DrawTexture(Texture& texture, float x, float y)
+void claw::Renderer::DrawTexture(Texture& texture, float x, float y)
 {
 
     vec2 size = texture.GetSize();
@@ -79,7 +80,7 @@ void piMath::Renderer::DrawTexture(Texture& texture, float x, float y)
     SDL_RenderTexture(m_renderer, texture.m_texture, NULL, &destRect);
 }
 
-void piMath::Renderer::DrawTexture(Texture& texture, float x, float y, float scale, float angle)
+void claw::Renderer::DrawTexture(Texture& texture, float x, float y, float scale, float angle)
 {
 
     vec2 size = texture.GetSize();
@@ -90,15 +91,15 @@ void piMath::Renderer::DrawTexture(Texture& texture, float x, float y, float sca
     destRect.x = x - destRect.w * 0.5f;
     destRect.y = y - destRect.h * 0.5f;
 
-    SDL_RenderTextureRotated(m_renderer, texture.m_texture, NULL, &destRect, angle, NULL, SDL_FLIP_NONE());
+    SDL_RenderTextureRotated(m_renderer, texture.m_texture, NULL, &destRect, angle, NULL, SDL_FLIP_NONE);
 }
 
-void piMath::Renderer::Clear()
+void claw::Renderer::Clear()
 {
     SDL_RenderClear(m_renderer);
 }
 
-void piMath::Renderer::Present()
+void claw::Renderer::Present()
 {
     SDL_RenderPresent(m_renderer);
 }

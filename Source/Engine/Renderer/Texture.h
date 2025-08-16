@@ -7,7 +7,7 @@
 #include "Core/Logger.h"
 
 
-namespace piMath {
+namespace claw {
 
 	class Texture : public Resource 
 	{

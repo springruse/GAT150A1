@@ -1,6 +1,6 @@
 #pragma once
 #include "Math/Transform.h"
-#include "Renderer/Model.h"
+#include "Renderer/Mesh.h"
 #include "Renderer/Texture.h"
 #include "EngineGame/Object.h"
 #include "Component.h"
@@ -9,7 +9,7 @@
 #include <memory>
 
 
-namespace piMath {
+namespace claw {
 	class Actor : public Object{
 	public:
 		Actor() = default;

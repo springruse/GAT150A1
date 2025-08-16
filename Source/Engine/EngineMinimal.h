@@ -7,6 +7,7 @@
 #include "Core/File.h"
 #include "Core/Singleton.h"
 #include "Core/Time.h"
+#include "Core/Json.h"
 
 // framework
 #include "EngineGame/Actor.h"
@@ -33,6 +34,7 @@
 
 // standard library
 #include <string>
+#include <iomanip>
 #include <iostream>
 #include <fstream>
 #include <sstream>

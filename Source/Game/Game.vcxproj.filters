@@ -11,6 +11,9 @@
     <Filter Include="Source Files\Game">
       <UniqueIdentifier>{8b23e40a-a6ea-45dd-883f-d3da138ebbee}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{52398fa5-4127-477d-8ad5-1d3b0e171b7a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -60,5 +63,10 @@
     <ClInclude Include="GamePCH.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Build\Assets\enemy.msh">
+      <Filter>Assets</Filter>
+    </None>
   </ItemGroup>
 </Project>
