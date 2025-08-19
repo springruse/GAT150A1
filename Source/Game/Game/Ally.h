@@ -4,12 +4,12 @@
 #include "EngineGame/Scene.h"
 
 
-class Ally : public claw::Actor {
+class Ally : public claw::Component {
 public:
 	Ally() = default;
-	Ally(const claw::Transform& transform) :
-		claw::Actor{ transform }
-	{}
+	//Ally(const claw::Transform& transform) :
+	//	claw::Actor{ transform }
+	//{}
 
 	void Update(float deltaTime) override;
 	float damping = 0.98f;
@@ -19,6 +19,6 @@ public:
 	float fireTime = 3.0f; // Time between shots in seconds
 
 	// Inherited via Actor
-	void onCollision(Actor* other) override;
+	void onCollision(class claw::Actor* other);
 
 };

@@ -2,12 +2,12 @@
 #include "EngineGame/Actor.h"
 #include "EngineGame/Scene.h"
 
-class Enemy : public claw::Actor {
+class Enemy : public claw::Component {
 public:
 	Enemy() = default;
-	Enemy(const claw::Transform& transform ) :
-		claw::Actor{ transform }
-	{}
+	//Enemy(const claw::Transform& transform ) :
+	//	claw::Component{ transform }
+	//{}
 
 	void Update(float deltaTime) override;
 	float damping = 0.98f;
@@ -16,7 +16,7 @@ public:
 	float firetimer = 0.0f; // Timer for firing rockets
 	float fireTime = 3.0f; // Time between shots in seconds
 
-	// Inherited via Actor
-	void onCollision(Actor* other) override;
+	// Inherited via Component
+	void onCollision(class claw::Actor* other);
 
 };

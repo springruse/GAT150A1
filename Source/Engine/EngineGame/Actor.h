@@ -10,7 +10,7 @@
 
 
 namespace claw {
-	class Actor : public Object{
+	class Actor : public Object {
 	public:
 		Actor() = default;
 		Actor(const Transform& transform) : //res_t<Texture> texture) :
@@ -20,7 +20,7 @@ namespace claw {
 
 		virtual void Update(float deltaTime);
 		virtual void Draw(class Renderer& renderer);
-		virtual void onCollision(Actor* other) = 0;
+		virtual void onCollision(Actor* other) {}
 
 		Transform GetTransform(){
 			return m_transform;
@@ -51,8 +51,13 @@ namespace claw {
 		template<typename T>
 		std::vector<T*> GetComponents();
 
+		// Inherited via Serializable
+		void Read(const json::value_t& value) override;
+
 	protected:
 		std::vector<std::unique_ptr<class Component>> m_components;
+
+		
 	};
 
 	template<typename T>

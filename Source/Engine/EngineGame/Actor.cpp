@@ -1,7 +1,7 @@
 #include "Actor.h"
 
 namespace claw {
-
+	FACTORY_REGISTER(Actor)
 	void claw::Actor::Update(float deltaTime)
 	{
 		if (destroyed) return;
@@ -49,6 +49,14 @@ namespace claw {
 	void Actor::AddComponent(std::unique_ptr<Component> component) {
 		component->owner = this;
 		m_components.push_back(std::move(component));
+	}
+	void Actor::Read(const json::value_t& value)
+	{
+		Object::Read(value);
+		JSON_READ(value, tag);
+		JSON_READ(value, lifeSpan);
+
+		if (JSON_HAS(value, transform)) m_transform.Read(JSON_GET(value, transform));
 	}
 }
 

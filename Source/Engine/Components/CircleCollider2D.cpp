@@ -1,5 +1,8 @@
 #include "Components/CircleCollider2D.h"
 namespace claw {
+
+	FACTORY_REGISTER(CircleCollider2D)
+
 	void CircleCollider2D::Update(float deltaTime) {
 		// Update logic for CircleCollider2D if needed
 	}

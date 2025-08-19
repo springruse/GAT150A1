@@ -1,9 +1,10 @@
 #pragma once
 #include "Vector2.h"
 #include "Vector3.h"
+#include "Core/Serializable.h"
 
 namespace claw{
-	struct Transform {
+	struct Transform : public Serializable{
 		vec2 position = {0,0};
 		float rotation = 0;
 		float scale = 1;
@@ -15,5 +16,8 @@ namespace claw{
 			scale{ scale }
 		{
 		}
+
+		// Implement the pure virtual function from Serializable
+		void Read(const json::value_t& value) override;
 	};
 }

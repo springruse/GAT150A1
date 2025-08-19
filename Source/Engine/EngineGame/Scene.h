@@ -5,18 +5,18 @@
 #include "Actor.h"
 #include "Game.h"
 #include "../Core/StringHelper.h"
-
+#include "Core/Serializable.h"
 
 namespace claw {
 	
 	class Actor;
 	class Game;
 
-	class Scene {
+	class Scene : public Serializable {
 	public:
-		
-
 		Scene(Game* game) : m_game{ game } {}
+
+		void Read(const json::value_t& value) override;
 		
 		void Update(float dt);
 		void Draw(class Renderer& renderer);
@@ -37,7 +37,8 @@ namespace claw {
 
 	private:
 		std::list<std::shared_ptr<class Actor>> m_actors;
-		class Game* m_game = nullptr; // Pointer to the game instance, if needed
+		class Game* m_game = nullptr;
+		// Pointer to the game instance, if needed
 	};
 	/// <summary>
 	/// Retrieves a pointer to an actor of the specified type with the given name from the scene.

@@ -1,7 +1,72 @@
 #include "Game/SpaceGame.h"
 
+class Animal {
+public: 
+    virtual void speak() = 0;
+};
+
+class Cat : public Animal {
+public:
+    void speak() override {
+        std::cout << "Meow!" << std::endl;
+    }
+};
+class Dog : public Animal {
+public:
+    void speak() override {
+        std::cout << "Woof!" << std::endl;
+    }
+
+    void fetch() {
+        std::cout << "Fetching the ball!" << std::endl;
+	}
+};
+class Penguin : public Animal {
+public:
+    void speak() override {
+        std::cout << "Squawk!" << std::endl;
+    }
+};
+
+enum class AnimalType {
+    CAT,
+    DOG,
+    PENGUIN
+};
+
+Animal* createAnimal(AnimalType id) {
+	Animal* animal = nullptr;
+    switch (id) {
+    case AnimalType::CAT:
+        animal = new Cat{};
+        break;
+    case AnimalType::DOG:
+		animal = new Dog{};
+        break;
+    case AnimalType::PENGUIN:
+		animal = new Penguin{};
+        break;
+    default:
+        break;
+    }
+    return animal;
+}
+
+
 
 int main(int argc, char* argv[]) {
+
+    auto animal = createAnimal(AnimalType::CAT);
+	if(animal) { animal->speak(); }
+	auto dog = dynamic_cast<Dog*>(animal);
+	if (dog) {
+		dog->fetch();
+	}
+    claw::Factory::Instance().Register<claw::SpriteRenderer>("SpriteRenderer");
+	auto spriteRenderer = claw::Factory::Instance().Create<claw::SpriteRenderer>("SpriteRenderer");
+    spriteRenderer->name = "steve";
+
+    return 0; // remove this line 
 
     // Get current directory path
     std::cout << "Directory Operations:\n";

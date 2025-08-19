@@ -219,6 +219,7 @@
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="EngineGame\Actor.cpp" />
     <ClCompile Include="EngineGame\Game.cpp" />
+    <ClCompile Include="EngineGame\Object.cpp" />
     <ClCompile Include="EngineGame\Scene.cpp" />
     <ClCompile Include="EnginePCH.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -227,6 +228,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Input\InputSystem.cpp" />
+    <ClCompile Include="Math\Transform.cpp" />
     <ClCompile Include="Renderer\Font.cpp" />
     <ClCompile Include="Renderer\Mesh.cpp" />
     <ClCompile Include="Renderer\ParticleSystem.cpp" />
@@ -243,9 +245,11 @@
     <ClInclude Include="Components\RendererComponent.h" />
     <ClInclude Include="Components\RigidBody.h" />
     <ClInclude Include="Components\SpriteRenderer.h" />
+    <ClInclude Include="Core\Factory.h" />
     <ClInclude Include="Core\File.h" />
     <ClInclude Include="Core\Json.h" />
     <ClInclude Include="Core\Logger.h" />
+    <ClInclude Include="Core\Serializable.h" />
     <ClInclude Include="Core\Singleton.h" />
     <ClInclude Include="Core\StringHelper.h" />
     <ClInclude Include="Core\Time.h" />

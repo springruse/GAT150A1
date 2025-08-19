@@ -1,6 +1,12 @@
 #include "SpriteRenderer.h"
 #include "Renderer/Renderer.h"
+
+
+
 namespace claw {
+
+	FACTORY_REGISTER(SpriteRenderer)
+
 	void SpriteRenderer::Update(float deltatime)
 	{
 		//
@@ -18,5 +24,12 @@ namespace claw {
 				owner->m_transform.rotation);
 		}
 	}
+
+	void SpriteRenderer::Read(const json::value_t& value)
+	{
+		Object::Read(value);
+		JSON_READ(value, textureName);
+	}
+
 }
 

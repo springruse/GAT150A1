@@ -8,6 +8,7 @@
 #include "Core/Singleton.h"
 #include "Core/Time.h"
 #include "Core/Json.h"
+#include "Core/Factory.h"
 
 // framework
 #include "EngineGame/Actor.h"

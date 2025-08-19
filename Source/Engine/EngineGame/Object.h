@@ -1,7 +1,9 @@
 #pragma once
+#include <string>
+#include "Core/Serializable.h"
 
 namespace claw {
-	class Object {
+	class Object : public Serializable {
 	public:
 		std::string name;
 		bool active = true;
@@ -10,7 +12,9 @@ namespace claw {
 		Object() = default;
 		virtual ~Object() = default;
 
-	private:
+
+		// Inherited via Serializable
+		void Read(const json::value_t& value) override;
 
 	};
 

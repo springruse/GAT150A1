@@ -7,16 +7,16 @@
 
 #include <memory>
 
-class Player : public claw::Actor {
+class Player : public claw::Component {
 	enum class PowerUpType;
 
 public:
 	Player() = default;
-	Player(const claw::Transform& transform) :
-	
-		Actor{transform}
+	//Player(const claw::Transform& transform) :
+	//
+	//	Actor{transform}
 
-	{} 
+	//{} 
 
 	void Update(float dt) override;
 
@@ -27,5 +27,5 @@ public:
 	float damping = 0.98f; // Damping factor to reduce velocity over time
 
 	// Inherited via Actor
-	void onCollision(Actor* other) override;
-};
+	void onCollision(class claw::Actor* other);
+};	
