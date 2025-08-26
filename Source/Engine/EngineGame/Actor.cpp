@@ -95,8 +95,8 @@ namespace claw {
 		if (JSON_HAS(value, transform)) m_transform.Read(JSON_GET(value, transform));
 
 		//components
-		if (JSON_HAS(value, m_components)) {
-			for (auto& componentValue : JSON_GET(value, m_components).GetArray()) {
+		if (JSON_HAS(value, components)) {
+			for (auto& componentValue : JSON_GET(value, components).GetArray()) {
 				std::string type;
 				JSON_READ(componentValue, type);
 

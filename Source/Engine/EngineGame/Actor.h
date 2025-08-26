@@ -46,6 +46,7 @@ namespace claw {
 		Transform m_transform;
 		bool destroyed{ false };
 		bool persistent{ false }; 
+		
 		float lifeSpan = 0.0f;
 
 		class Scene* m_scene = nullptr;

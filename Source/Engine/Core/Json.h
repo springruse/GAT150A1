@@ -5,7 +5,7 @@
 #include "Math/Vector2.h"
 #include "Math/Vector3.h"
 #define JSON_READ(value, data)            claw::json::Read(value, #data, data)
-#define JSON_READ_NAME(value, name, data) claw::json::Read(value, #data, data)
+#define JSON_READ_NAME(value, name, data) claw::json::Read(value, name, data)
 
 #define JSON_HAS(value, data)             value.HasMember(#data)
 #define JSON_GET(value, data)             value[#data]

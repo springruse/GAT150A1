@@ -15,8 +15,7 @@ namespace claw {
 
 	void SpriteRenderer::Draw(Renderer& renderer)
 	{
-		auto texture = Resources().Get<Texture>(textureName, renderer);
-
+		//auto texture = Resources().Get<Texture>(textureName, renderer);
 		if (texture) {
 				renderer.DrawTexture(*texture, 
 				owner->m_transform.position.x, 

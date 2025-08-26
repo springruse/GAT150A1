@@ -24,6 +24,7 @@
 
 // physics
 #include "Physics/Collidable.h"
+#include "Physics/Physics.h"
 
 // events
 #include "Event/Event.h"
@@ -40,6 +41,7 @@
 #include <SDL3_image/SDL_image.h>
 #include <SDL3_ttf/SDL_ttf.h>
 #include <SDL3/SDL_error.h>
+#include <box2d/box2d.h>
 
 // standard library
 #include <string>

@@ -57,7 +57,6 @@ void Ally::Update(float deltaTime)
 	owner->m_transform.position.x = claw::Math::Wrap(owner->m_transform.position.x, 0.0f, (float)claw::GetEngine().GetRenderer().getWidth());
 	owner->m_transform.position.y = claw::Math::Wrap(owner->m_transform.position.y, 0.0f, (float)claw::GetEngine().GetRenderer().getHeight());
 
-	owner->Actor::Update(deltaTime);
 }
 
 void Ally::OnCollision(claw::Actor* other)

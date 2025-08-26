@@ -160,11 +160,11 @@ void SpaceGame::OnPlayerDeath()
 // enemy
 void SpaceGame::SpawnEnemy()
 {
-	claw::Actor* player = m_scene->GetActorByName("player");
+	claw::Actor* player = m_scene->GetActorByName("playerA");
     if (player) {
         claw::vec2 enemyPosition = player->m_transform.position + claw::Random::onUnitCircle() * claw::Random::getReal(300.0f, 500.0f); // points where enemy is allowed to spawn from player
         claw::Transform transform{ enemyPosition, claw::Random::getReal(0.0f, 360.0f), 1.25f }; // dictates enemy size
-        auto enemy = claw::Instantiate("enemy", claw::vec2{ 20,30 }, 0, 1.5);
+        auto enemy = claw::Instantiate("enemy", enemyPosition, 0, 1.5);
         m_scene->AddActor(std::move(enemy));
     }
 }
@@ -175,7 +175,7 @@ void SpaceGame::SpawnAlly() {
 }
 // player
 void SpaceGame::SpawnPlayer() {
-    auto player = claw::Instantiate("player", claw::vec2{ 60,30 }, 0, 1.35f );
+    auto player = claw::Instantiate("playerA", claw::vec2{ 60,30 }, 0, 1.35f );
     m_scene->AddActor(std::move(player));
 }
 

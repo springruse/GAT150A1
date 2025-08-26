@@ -17,71 +17,54 @@ void Enemy::Start()
 
 void Enemy::Update(float deltaTime)
 {
-	//bool playerSeen = false;
-	//claw::Actor* player = owner->m_scene->GetActorByName("player");
+	bool playerSeen = false;
+	claw::Actor* player = owner->m_scene->GetActorByName("player");
 
-	//if (player) {
-	//	bool playerSeen = false;
+	if (player) {
+		bool playerSeen = false;
 
-	//	Player* player = owner->m_scene->GetActorByName<Player>("player");
-	//	if (player) {
-	//		claw::vec2 direction{ 0, 0 };
-	//		direction = player->owner->m_transform.position - owner->m_transform.position;
+		Player* player = owner->m_scene->GetActorByName<Player>("player");
+		if (player) {
+			claw::vec2 direction{ 0, 0 };
+			direction = player->owner->m_transform.position - owner->m_transform.position;
 
-	//		direction = direction.Normalize();
-	//		claw::vec2 forward = claw::vec2{ 1, 0 }.Rotate(claw::Math::degToRad(owner->m_transform.rotation));
+			direction = direction.Normalize();
+			claw::vec2 forward = claw::vec2{ 1, 0 }.Rotate(claw::Math::degToRad(owner->m_transform.rotation));
 
-	//		float angle = claw::Math::radToDeg(claw::vec2::AngleBetween(forward, direction));
-	//		playerSeen = angle <= 45; // angle threshold for player detection
+			float angle = claw::Math::radToDeg(claw::vec2::AngleBetween(forward, direction));
+			playerSeen = angle <= 45; // angle threshold for player detection
 
-	//		if (playerSeen) {
-	//			float angle = claw::vec2::SignedAngleBetween(forward, direction);
-	//			angle = claw::Math::Sign(angle);
-	//			owner->m_transform.rotation += claw::Math::radToDeg(angle * 5 * owner->deltaTime);
-	//		}
-	//	}
-	//}
+			if (playerSeen) {
+				float angle = claw::vec2::SignedAngleBetween(forward, direction);
+				angle = claw::Math::Sign(angle);
+				owner->m_transform.rotation += claw::Math::radToDeg(angle * 5 * deltaTime);
+			}
+		}
+	}
 
-	//claw::vec2 force = claw::vec2{ 1,0 }.Rotate(claw::Math::degToRad(owner->m_transform.rotation)) * owner->speed;
-	////velocity += force; * dt;
-	//auto* rb = owner->GetComponent<claw::RigidBody>();
-	//if (rb) {
-	//	rb->velocity += force;
-	//}
+	claw::vec2 force = claw::vec2{ 1,0 }.Rotate(claw::Math::degToRad(owner->m_transform.rotation)) * speed;
+	//velocity += force; * dt;
+	auto* rb = owner->GetComponent<claw::RigidBody>();
+	if (rb) {
+		rb->velocity += force;
+	}
 
-	//owner->m_transform.position.x = claw::Math::Wrap(owner->m_transform.position.x, 0.0f, (float)claw::GetEngine().GetRenderer().getWidth());
-	//owner->m_transform.position.y = claw::Math::Wrap(owner->m_transform.position.y, 0.0f, (float)claw::GetEngine().GetRenderer().getHeight());
+	owner->m_transform.position.x = claw::Math::Wrap(owner->m_transform.position.x, 0.0f, (float)claw::GetEngine().GetRenderer().getWidth());
+	owner->m_transform.position.y = claw::Math::Wrap(owner->m_transform.position.y, 0.0f, (float)claw::GetEngine().GetRenderer().getHeight());
 
-	//owner->firetimer = owner->deltaTime;
+	fireTimer = deltaTime;
 
-	//if (owner->firetimer <= 0 && playerSeen)
-	//{
-	//	owner->firetimer = fireTime;
-	//	auto rocketModel = claw::Resources().Get<claw::Texture>("texture/redShip.png", claw::GetEngine().GetRenderer());
-	//	claw::Transform rocketTransform{ this->m_transform.position, this->m_transform.rotation, 1.0f };
-	//	auto rocket = std::make_unique<Rocket>(rocketTransform); // , rocketModel);
-	//	rocket->speed = 30.0f;
-	//	rocket->lifeSpan = 1.5f;
-	//	rocket->name = "rocket";
-	//	rocket->tag = "enemy"; 
+	if (fireTimer <= 0 && playerSeen)
+	{
+		fireTimer = fireTime;
+		auto rocketModel = claw::Resources().Get<claw::Texture>("texture/redShip.png", claw::GetEngine().GetRenderer());
+		auto rocket = claw::Instantiate("rocket", owner->m_transform.position, owner->m_transform.rotation, 1.0f);
 
-	//	//components
-	//	auto spriteRenderer = std::make_unique<claw::SpriteRenderer>();
-	//	spriteRenderer->textureName = "texture/redShip.png"; // rocket texture
-	//	rocket->AddComponent(std::move(spriteRenderer));
-
-	//	auto rb = std::make_unique<claw::RigidBody>();
-	//	rocket->AddComponent(std::move(rb));
-
-	//	auto collider = std::make_unique<claw::CircleCollider2D>();
-	//	collider->radius = 10.0f;
-	//	rocket->AddComponent(std::move(collider));
-
-	//	owner->m_scene->AddActor(std::move(rocket));
-	//}
-
-	//owner->Actor::Update(deltaTime);
-
+		rocket->lifeSpan = 1.5f;
+		rocket->name = "rocket";
+		rocket->tag = "enemy"; 
+		owner->m_scene->AddActor(std::move(rocket));
+	}
 }
 
 void Enemy::OnCollision(claw::Actor* other)

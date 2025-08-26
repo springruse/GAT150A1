@@ -33,7 +33,7 @@ namespace claw::json
     bool Read(const value_t& value, const std::string& name, int& data, bool required) {
         // check if the value has the "<name>" and the correct data type
         if (!value.HasMember(name.c_str()) || !value[name.c_str()].IsInt()) {
-            Logger::Error("Could not read Json value (int): {}.", name);
+            if (required) Logger::Error("Could not read Json value (int): {}.", name);
             return false;
         }
 
@@ -45,7 +45,7 @@ namespace claw::json
     bool Read(const value_t& value, const std::string& name, float& data, bool required) {
         // check if the value has the "<name>" and the correct data type
         if (!value.HasMember(name.c_str()) || !value[name.c_str()].IsNumber()) {
-            Logger::Error("Could not read Json value (float): {}.", name);
+            if (required) Logger::Error("Could not read Json value (float): {}.", name);
             return false;
         }
 
@@ -69,7 +69,7 @@ namespace claw::json
     bool Read(const value_t& value, const std::string& name, std::string& data, bool required)
     {
         if (!value.HasMember(name.c_str()) || !value[name.c_str()].IsString()) {
-            Logger::Error("Could not read Json value (string): {}.", name);
+            if (required) Logger::Error("Could not read Json value (string): {}.", name);
             return false;
         }
 
@@ -81,7 +81,7 @@ namespace claw::json
     bool Read(const value_t& value, const std::string& name, vec2& data, bool required)
     {
         if (!value.HasMember(name.c_str()) || !value[name.c_str()].IsArray() || value[name.c_str()].Size() != 2) {
-            Logger::Error("Could not read Json value (vec2): {}.", name);
+            if (required) Logger::Error("Could not read Json value (vec2): {}.", name);
             return false;
         }
 
@@ -102,7 +102,7 @@ namespace claw::json
     bool Read(const value_t& value, const std::string& name, vec3& data, bool required)
     {
         if (!value.HasMember(name.c_str()) || !value[name.c_str()].IsArray() || value[name.c_str()].Size() != 3) {
-            Logger::Error("Could not read Json value (vec3): {}.", name);
+            if (required) Logger::Error("Could not read Json value (vec3): {}.", name);
             return false;
         }
 
