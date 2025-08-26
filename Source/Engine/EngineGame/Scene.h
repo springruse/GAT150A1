@@ -12,18 +12,21 @@ namespace claw {
 	class Actor;
 	class Game;
 
-	class Scene : public Serializable {
+	class Scene : public ISerializable {
 	public:
 		Scene(Game* game) : m_game{ game } {}
+
+		bool Load(const std::string sceneName);
 
 		void Read(const json::value_t& value) override;
 		
 		void Update(float dt);
+
 		void Draw(class Renderer& renderer);
 
-		void AddActor(std::shared_ptr<class Actor> actor);
+		void AddActor(std::shared_ptr<class Actor> actor, bool start = true);
 
-		void RemoveAllActors();
+		void RemoveAllActors(bool force = false);
 
 		template <typename T = Actor>
 		T* GetActorByName(const std::string& name);

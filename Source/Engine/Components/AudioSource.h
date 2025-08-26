@@ -9,6 +9,8 @@ namespace claw {
 
 		
 	public:
+		CLASS_PROTOTYPE(AudioSource)
+
 		void Update(float deltatime) override;
 
 		void Play();

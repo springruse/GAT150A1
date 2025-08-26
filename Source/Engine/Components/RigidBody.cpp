@@ -8,4 +8,10 @@ namespace claw {
 		owner->m_transform.position += velocity * deltaTime;
 		velocity *= damping; // ( <1) = slower, ( >1) = faster
 	}
+	void RigidBody::Read(const json::value_t& value)
+	{
+		Object::Read(value);
+		JSON_READ(value, damping);
+		JSON_READ(value, velocity);
+	}
 }

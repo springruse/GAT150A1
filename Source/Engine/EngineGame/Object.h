@@ -1,9 +1,12 @@
 #pragma once
-#include <string>
 #include "Core/Serializable.h"
+#include <string>
+
+
+#define CLASS_PROTOTYPE(classname) virtual std::unique_ptr<Object> Clone() { return std::make_unique<classname>(*this); }
 
 namespace claw {
-	class Object : public Serializable {
+	class Object : public ISerializable {
 	public:
 		std::string name;
 		bool active = true;
@@ -11,9 +14,8 @@ namespace claw {
 	public:
 		Object() = default;
 		virtual ~Object() = default;
+		virtual std::unique_ptr<Object> Clone() = 0;
 
-
-		// Inherited via Serializable
 		void Read(const json::value_t& value) override;
 
 	};

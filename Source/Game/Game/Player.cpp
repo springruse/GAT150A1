@@ -5,7 +5,7 @@
 #include "Rocket.h"
 #include "SpaceGame.h"
 
-FACTORY_REGISTER(Rocket)
+FACTORY_REGISTER(Player)
 
 void Player::Update(float dt)
 {
@@ -85,14 +85,24 @@ void Player::Update(float dt)
 //}
 
 
-void Player::onCollision(claw::Actor* other)
+void Player::OnCollision(claw::Actor* other)
 {
 
 		if (owner->tag != other->tag) {
-		owner->destroyed = true;
-		claw::GetEngine().GetAudio().playSound("death");
-		dynamic_cast<SpaceGame*>(owner->m_scene->GetGame())->OnPlayerDeath(); // Notify the game of player death
+			owner->destroyed = true;
+			EVENT_NOTIFY("playerDead");
+			claw::EventManager::Instance().Notify(claw::Event{ "playerDead", true });
+			claw::GetEngine().GetAudio().playSound("death");
+			dynamic_cast<SpaceGame*>(owner->m_scene->GetGame())->OnPlayerDeath(); // Notify the game of player death
 	}
-	//std::cout << other->tag << std::endl;
-	
+}
+
+void Player::Read(const claw::json::value_t& value)
+{
+	Object::Read(value);
+	JSON_READ(value, speed);
+	JSON_READ(value, damping);
+	JSON_READ(value, rotationSpeed);
+	JSON_READ(value, fireTime);
+
 }

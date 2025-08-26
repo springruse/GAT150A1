@@ -19,4 +19,14 @@ namespace claw {
 		}
 		return result;
 	}
+
+	inline bool equalsIgnoreCase(const std::string& str1, const std::string& str2) {
+		if (str1.length() != str2.length()) {
+			return false;
+		}
+
+		return std::equal(str1.begin(), str1.end(), str2.begin(), str2.end(), [](char a, char b) {
+			return (std::tolower(a) == std::tolower(b));
+		});
+	}
 }

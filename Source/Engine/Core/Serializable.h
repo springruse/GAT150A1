@@ -1,9 +1,9 @@
 #pragma once
 #include <core/Json.h>
 namespace claw {
-    class Serializable {
+    class ISerializable {
     public:
-        virtual ~Serializable() = default;
+        virtual ~ISerializable() = default;
 
         virtual void Read(const json::value_t& value) = 0;
     };

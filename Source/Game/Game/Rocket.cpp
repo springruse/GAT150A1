@@ -29,7 +29,7 @@ void Rocket::Update(float deltaTime)
 //	Actor::Update(deltaTime);
 }
 
-void Rocket::onCollision(claw::Actor* other)
+void Rocket::OnCollision(claw::Actor* other)
 {
 	if (owner->tag != other->tag) {
 		owner->destroyed = true; // Destroy the rocket on collision with any other actor

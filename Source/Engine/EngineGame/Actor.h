@@ -5,22 +5,30 @@
 #include "EngineGame/Object.h"
 #include "Component.h"
 #include "Components/RendererComponent.h"
+
 #include <string>
 #include <memory>
 
 
 namespace claw {
 	class Actor : public Object {
+		
 	public:
 		Actor() = default;
-		Actor(const Transform& transform) : //res_t<Texture> texture) :
+
+		Actor(const Transform& transform) :
 			m_transform{ transform }
-			//m_texture{ texture }
-		{};
+		{}
+
+		Actor(const Actor& other);
+
+		CLASS_PROTOTYPE(Actor)
 
 		virtual void Update(float deltaTime);
 		virtual void Draw(class Renderer& renderer);
-		virtual void onCollision(Actor* other) {}
+		virtual void OnCollision(Actor* other);
+		virtual void Start();
+		virtual void Destroyed();
 
 		Transform GetTransform(){
 			return m_transform;
@@ -31,15 +39,17 @@ namespace claw {
 
 		float getRadius();
 
-	public:
+		void Read(const json::value_t& value) override;
 
-		std::string name;
+	public:
 		std::string tag;
 		Transform m_transform;
 		bool destroyed{ false };
+		bool persistent{ false }; 
 		float lifeSpan = 0.0f;
 
 		class Scene* m_scene = nullptr;
+		
 
 		//components
 
@@ -51,13 +61,8 @@ namespace claw {
 		template<typename T>
 		std::vector<T*> GetComponents();
 
-		// Inherited via Serializable
-		void Read(const json::value_t& value) override;
-
 	protected:
 		std::vector<std::unique_ptr<class Component>> m_components;
-
-		
 	};
 
 	template<typename T>

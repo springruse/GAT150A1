@@ -14,7 +14,7 @@ namespace claw::json
             Logger::Error("Could not read file: {}.", filename);
             return false;
         }
-
+		Logger::Info("JSON: {}", buffer);
         // convert the string into a json stream
         std::stringstream stream(buffer);
         rapidjson::IStreamWrapper istream(stream);
@@ -30,7 +30,7 @@ namespace claw::json
         return true;
     }
 
-    bool Read(const value_t& value, const std::string& name, int& data) {
+    bool Read(const value_t& value, const std::string& name, int& data, bool required) {
         // check if the value has the "<name>" and the correct data type
         if (!value.HasMember(name.c_str()) || !value[name.c_str()].IsInt()) {
             Logger::Error("Could not read Json value (int): {}.", name);
@@ -42,10 +42,9 @@ namespace claw::json
 
         return true;
     }
-    bool Read(const value_t& value, const std::string& name, float& data)
-    {
+    bool Read(const value_t& value, const std::string& name, float& data, bool required) {
         // check if the value has the "<name>" and the correct data type
-        if (!value.HasMember(name.c_str()) || !value[name.c_str()].IsFloat()) {
+        if (!value.HasMember(name.c_str()) || !value[name.c_str()].IsNumber()) {
             Logger::Error("Could not read Json value (float): {}.", name);
             return false;
         }
@@ -55,10 +54,10 @@ namespace claw::json
 
         return true;
     }
-    bool Read(const value_t& value, const std::string& name, bool& data) {
+    bool Read(const value_t& value, const std::string& name, bool& data, bool required) {
         // check if the value has the "<name>" and the correct data type
         if (!value.HasMember(name.c_str()) || !value[name.c_str()].IsBool()) {
-            Logger::Error("Could not read Json value (bool): {}.", name);
+            if (required) Logger::Error("Could not read Json value (bool): {}.", name);
             return false;
         }
 
@@ -67,7 +66,7 @@ namespace claw::json
 
         return true;
     }
-    bool Read(const value_t& value, const std::string& name, std::string& data)
+    bool Read(const value_t& value, const std::string& name, std::string& data, bool required)
     {
         if (!value.HasMember(name.c_str()) || !value[name.c_str()].IsString()) {
             Logger::Error("Could not read Json value (string): {}.", name);
@@ -79,7 +78,7 @@ namespace claw::json
 
         return true;
     }
-    bool Read(const value_t& value, const std::string& name, vec2& data)
+    bool Read(const value_t& value, const std::string& name, vec2& data, bool required)
     {
         if (!value.HasMember(name.c_str()) || !value[name.c_str()].IsArray() || value[name.c_str()].Size() != 2) {
             Logger::Error("Could not read Json value (vec2): {}.", name);
@@ -100,7 +99,7 @@ namespace claw::json
         }
         return true;
     }
-    bool Read(const value_t& value, const std::string& name, vec3& data)
+    bool Read(const value_t& value, const std::string& name, vec3& data, bool required)
     {
         if (!value.HasMember(name.c_str()) || !value[name.c_str()].IsArray() || value[name.c_str()].Size() != 3) {
             Logger::Error("Could not read Json value (vec3): {}.", name);

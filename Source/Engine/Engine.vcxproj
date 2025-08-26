@@ -211,6 +211,7 @@
     <ClCompile Include="Audio\AudioSystem.cpp" />
     <ClCompile Include="Components\AudioSource.cpp" />
     <ClCompile Include="Components\CircleCollider2D.cpp" />
+    <ClCompile Include="Components\MeshRenderer.cpp" />
     <ClCompile Include="Components\RigidBody.cpp" />
     <ClCompile Include="Components\SpriteRenderer.cpp" />
     <ClCompile Include="Core\File.cpp" />
@@ -227,6 +228,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Event\EventManager.cpp" />
+    <ClCompile Include="Event\Observer.cpp" />
     <ClCompile Include="Input\InputSystem.cpp" />
     <ClCompile Include="Math\Transform.cpp" />
     <ClCompile Include="Renderer\Font.cpp" />
@@ -242,6 +245,7 @@
     <ClInclude Include="Components\AudioSource.h" />
     <ClInclude Include="Components\CircleCollider2D.h" />
     <ClInclude Include="Components\ColliderComponent.h" />
+    <ClInclude Include="Components\MeshRenderer.h" />
     <ClInclude Include="Components\RendererComponent.h" />
     <ClInclude Include="Components\RigidBody.h" />
     <ClInclude Include="Components\SpriteRenderer.h" />
@@ -261,12 +265,16 @@
     <ClInclude Include="EngineGame\Scene.h" />
     <ClInclude Include="EngineMinimal.h" />
     <ClInclude Include="EnginePCH.h" />
+    <ClInclude Include="Event\Event.h" />
+    <ClInclude Include="Event\EventManager.h" />
+    <ClInclude Include="Event\Observer.h" />
     <ClInclude Include="Input\InputSystem.h" />
     <ClInclude Include="Math\Math.h" />
     <ClInclude Include="Core\Random.h" />
     <ClInclude Include="Math\Transform.h" />
     <ClInclude Include="Math\Vector2.h" />
     <ClInclude Include="Math\Vector3.h" />
+    <ClInclude Include="Physics\Collidable.h" />
     <ClInclude Include="Renderer\Font.h" />
     <ClInclude Include="Renderer\Mesh.h" />
     <ClInclude Include="Renderer\ParticleSystem.h" />

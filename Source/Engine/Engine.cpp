@@ -40,10 +40,14 @@ namespace claw {
 	{
 		// release all resources
 		Resources().Clear();
+		Factory::Instance().RemoveAll();
+		EventManager::Instance().RemoveAll();
+		
 
 		m_audio->Shutdown();
 		m_particleSystem->Shutdown();
 		m_input->Shutdown();
 		m_renderer->Shutdown();
+		
 	}
 }

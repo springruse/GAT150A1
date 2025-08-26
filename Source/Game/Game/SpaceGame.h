@@ -3,7 +3,8 @@
 #include "Renderer/font.h"
 #include "Renderer/text.h"
 
-class SpaceGame : public claw::Game {
+
+class SpaceGame : public claw::Game, public claw::IObserver {
 
 	public:
 		enum class GameState {
@@ -26,8 +27,8 @@ class SpaceGame : public claw::Game {
 		void Draw(claw::Renderer& renderer) override;
 
 		void OnPlayerDeath();
+		void OnNotify(const claw::Event& event) override;
 
-		
 		int m_lives = 0; // Player's lives
 
 	private:
@@ -43,8 +44,11 @@ class SpaceGame : public claw::Game {
 		std::shared_ptr <class claw::Text>  m_gameOverText;
 		std::shared_ptr <class claw::Text>  m_scoreText;
 		std::shared_ptr <class claw::Text>  m_livesText;
+
 	private:
 	void SpawnEnemy();
 	void SpawnAlly();
 	void SpawnPlayer();
+
+	
 };

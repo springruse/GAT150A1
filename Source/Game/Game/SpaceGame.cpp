@@ -6,6 +6,7 @@
 #include "Ally.h"
 #include "Engine.h"
 #include "Player.h"
+#include <EngineMinimal.h>
 
 
 
@@ -13,11 +14,12 @@
 bool SpaceGame::Initialize()
 
 {
-    m_scene = std::make_unique<claw::Scene>(this);
+    OBSERVER_ADD("playerDead");
+	OBSERVER_ADD("addScore");
 
-    claw::json::document_t document;
-    claw::json::Load("scene.json", document);
-	m_scene->Read(document);
+    m_scene = std::make_unique<claw::Scene>(this);
+	m_scene->Load("scene.json");
+   
 
     m_titleText = std::make_shared<claw::Text>(claw::Resources().GetWithID<claw::Font>("title", "airstrike.ttf", 98.0f));
     m_gameOverText = std::make_shared<claw::Text>(claw::Resources().GetWithID<claw::Font>("gameOver", "airstrike.ttf", 98.0f));
@@ -73,6 +75,7 @@ void SpaceGame::Update(float dt)
         
 
     case SpaceGame::GameState::StartRound:
+        m_scene->RemoveAllActors(false);
         SpawnPlayer();
         m_gameState = SpaceGame::GameState::Game;
         break;
@@ -115,6 +118,8 @@ void SpaceGame::Update(float dt)
 
 void SpaceGame::Draw(claw::Renderer& renderer)
 {
+    m_scene->Draw(renderer);
+
     if (m_gameState == GameState::Title) {
         m_titleText->Create(renderer, "phighting the game", claw::vec3{ 1.0f, 1.0f, 1.0f });
         m_titleText->Draw(renderer, 100.0f, 300.0f);
@@ -131,120 +136,46 @@ void SpaceGame::Draw(claw::Renderer& renderer)
     m_livesText->Create(renderer, "LIVES - " + std::to_string(m_lives), { 1, 1, 1 });
     m_livesText->Draw(renderer, (float)(renderer.getWidth() - 200), 20.0f);
 
-    m_scene->Draw(renderer);
     claw::GetEngine().GetParticleSystem().Draw(renderer);
 }
+
+
+void SpaceGame::OnNotify(const claw::Event& event)
+{
+    if (claw::equalsIgnoreCase(event.id, "playerDead")) {
+        OnPlayerDeath();
+    }
+    else if ( claw::equalsIgnoreCase(event.id, "addScore")) {
+		addPoints(std::get<int>(event.data));
+	}
+    /*std::cout << event.id << std::endl;*/
+}
+
 
 void SpaceGame::OnPlayerDeath()
 {
     m_gameState = GameState::PlayerDead;
     m_stateTimer = 2.0f;
 }
-
-
-
+// enemy
 void SpaceGame::SpawnEnemy()
 {
-//    Player* player = m_scene->GetActorByName<Player>("player");
-//
-//    if (player) {
-//        auto EnemyModel = claw::Resources().Get<claw::Texture>("texture/redShip.png", claw::GetEngine().GetRenderer());
-//        
-//        claw::vec2 enemyPosition = player->m_transform.position + claw::Random::onUnitCircle() * claw::Random::getReal(300.0f, 500.0f); // points where enemy is allowed to spawn from player
-//        claw::Transform transform{ enemyPosition, claw::Random::getReal(0.0f, 360.0f), 1.25f }; // dictates enemy size
-//
-//        std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(transform); //, EnemyModel);
-//        //enemy->damping = 0.98f;
-//        enemy->speed = claw::Random::getReal(5.0f, 8.0f);
-//        enemy->tag = "enemy";
-//        enemy->name = "enemy";
-//        enemy->firetimer = 3.0f;
-//        enemy->fireTime = 5.0f;
-//
-//        auto spriteRenderer = std::make_unique<claw::SpriteRenderer>();
-//        spriteRenderer->textureName = "texture/redShip.png"; // ship texture
-//        enemy->AddComponent(std::move(spriteRenderer));
-//
-//        auto rb = std::make_unique<claw::RigidBody>();
-//        rb->damping = 0.98f; // Damping factor to reduce velocity over time
-//        enemy->AddComponent(std::move(rb));
-//
-//        auto collider = std::make_unique<claw::CircleCollider2D>();
-//        collider->radius = 50.0f;
-//        enemy->AddComponent(std::move(collider));
-//
-//        m_scene->AddActor(std::move(enemy));
-//    }
+	claw::Actor* player = m_scene->GetActorByName("player");
+    if (player) {
+        claw::vec2 enemyPosition = player->m_transform.position + claw::Random::onUnitCircle() * claw::Random::getReal(300.0f, 500.0f); // points where enemy is allowed to spawn from player
+        claw::Transform transform{ enemyPosition, claw::Random::getReal(0.0f, 360.0f), 1.25f }; // dictates enemy size
+        auto enemy = claw::Instantiate("enemy", claw::vec2{ 20,30 }, 0, 1.5);
+        m_scene->AddActor(std::move(enemy));
+    }
 }
-//
+// ally
 void SpaceGame::SpawnAlly() {
-//    Enemy* enemy = m_scene->GetActorByName<Enemy>("enemy");
-//
-//    if (enemy) {
-//        auto allyModel = claw::Resources().Get<claw::Texture>("texture/greenShip.png", claw::GetEngine().GetRenderer());
-//
-//        claw::vec2 enemyPosition = enemy->m_transform.position + claw::Random::onUnitCircle() * claw::Random::getReal(300.0f, 500.0f); // points where an ally is allowed to spawn near an enemy
-//		claw::Transform transform{ enemyPosition, claw::Random::getReal(0.0f, 360.0f), 1.25f }; // dictates ally size
-//
-//        std::unique_ptr<Ally> ally = std::make_unique<Ally>(transform);//, allyModel);
-//        //ally->damping = 0.98f;
-//        ally->speed = claw::Random::getReal(8.0f, 10.0f);
-//        ally->tag = "player";
-//        ally->name = "player";
-//        ally->firetimer = 3.0f;
-//        ally->fireTime = 5.0f;
-//
-//        auto spriteRenderer = std::make_unique<claw::SpriteRenderer>();
-//        spriteRenderer->textureName = "texture/greenShip.png"; // ship texture
-//        ally->AddComponent(std::move(spriteRenderer));
-//
-//        auto rb = std::make_unique<claw::RigidBody>();
-//        rb->damping = 0.98f; // Damping factor to reduce velocity over time
-//        ally->AddComponent(std::move(rb));
-//
-//        auto collider = std::make_unique<claw::CircleCollider2D>();
-//        collider->radius = 25.0f;
-//        ally->AddComponent(std::move(collider));
-//
-//        m_scene->AddActor(std::move(ally));
-//    }
+    auto ally = claw::Instantiate("ally", claw::vec2{ 40,30 }, 0, 1.25 );
+    m_scene->AddActor(std::move(ally));
 }
-//
+// player
 void SpaceGame::SpawnPlayer() {
-//
-//    claw::Transform transform{
-//        claw::vec2{
-//            claw::GetEngine().GetRenderer().getWidth() * 0.25f,
-//            claw::GetEngine().GetRenderer().getHeight() * 0.25f
-//        },
-//        0.0f,
-//        1.5f // change player ship size
-//    };
-//
-//    auto player = std::make_unique<Player>(transform);//, piMath::Resources().Get<piMath::Texture>("texture/blue_01.png", piMath::GetEngine().GetRenderer()));
-//    player->speed = 6.0f;
-//    player->rotationSpeed = 180.0f;
-//    //player->damping = 0.0f;
-//    player->fireTime = 50.0f;
-//    player->fireTimer = 0.01f;
-//    player->SetTransform(transform);
-//    player->name = "player";
-//    player->tag = "player";
-//
-//    //components
-//    auto spriteRenderer = std::make_unique<claw::SpriteRenderer>();
-//    spriteRenderer->textureName = "texture/blue_01.png"; // ship texture
-//    player->AddComponent(std::move(spriteRenderer));
-//
-//    auto rb = std::make_unique<claw::RigidBody>();
-//	rb->damping = .99f; // Damping factor to reduce velocity over time
-//	player->AddComponent(std::move(rb));
-//
-//	auto collider = std::make_unique<claw::CircleCollider2D>();
-//    collider->radius = 25.0f;
-//	player->AddComponent(std::move(collider));
-//
-//
-//
-//    m_scene->AddActor(std::move(player));
+    auto player = claw::Instantiate("player", claw::vec2{ 60,30 }, 0, 1.35f );
+    m_scene->AddActor(std::move(player));
 }
+

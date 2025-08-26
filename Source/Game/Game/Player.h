@@ -4,21 +4,14 @@
 #include "Math/Math.h"
 #include "Math/Vector2.h"
 
-
 #include <memory>
 
 class Player : public claw::Component {
-	enum class PowerUpType;
 
 public:
 	Player() = default;
-	//Player(const claw::Transform& transform) :
-	//
-	//	Actor{transform}
-
-	//{} 
-
 	void Update(float dt) override;
+	CLASS_PROTOTYPE(Player)
 
 	float speed = 5;
 	float rotationSpeed = 180.0f;
@@ -27,5 +20,7 @@ public:
 	float damping = 0.98f; // Damping factor to reduce velocity over time
 
 	// Inherited via Actor
-	void onCollision(class claw::Actor* other);
+	void OnCollision(class claw::Actor* other);
+
+	void Read(const claw::json::value_t& value) override;
 };	
