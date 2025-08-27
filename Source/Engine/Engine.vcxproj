@@ -232,6 +232,7 @@
     <ClCompile Include="Event\Observer.cpp" />
     <ClCompile Include="Input\InputSystem.cpp" />
     <ClCompile Include="Math\Transform.cpp" />
+    <ClCompile Include="Physics\Physics.cpp" />
     <ClCompile Include="Renderer\Font.cpp" />
     <ClCompile Include="Renderer\Mesh.cpp" />
     <ClCompile Include="Renderer\ParticleSystem.cpp" />

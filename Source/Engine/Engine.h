@@ -1,5 +1,6 @@
 #pragma once
 #include "Core/Time.h"
+#include "Physics/Physics.h"
 #include "Renderer/Renderer.h"
 #include "Audio/AudioSystem.h"
 #include "Input/InputSystem.h"
@@ -34,6 +35,7 @@ namespace claw {
 		std::unique_ptr<AudioSystem> m_audio;
 		std::unique_ptr<InputSystem> m_input;
 		std::unique_ptr<ParticleSystem> m_particleSystem;
+		std::unique_ptr<Physics> m_physics;
 
 	private: 
 		Engine() = default;

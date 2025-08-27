@@ -11,6 +11,7 @@ namespace claw {
 		m_input->Update();
 		m_audio->Update();
 		m_particleSystem->Update(m_time.GetDeltaTime());
+		m_physics->Update(m_time.GetDeltaTime());
 	}
 
 	void Engine::Draw()
@@ -33,6 +34,9 @@ namespace claw {
 		m_particleSystem = std::make_unique<claw::ParticleSystem>();
 		m_particleSystem->Initialize(5000);
 
+		m_physics = std::make_unique<Physics>();
+		m_physics->Initialize();
+
 		return true;
 	}
 
@@ -43,7 +47,7 @@ namespace claw {
 		Factory::Instance().RemoveAll();
 		EventManager::Instance().RemoveAll();
 		
-
+		m_physics->Shutdown();
 		m_audio->Shutdown();
 		m_particleSystem->Shutdown();
 		m_input->Shutdown();

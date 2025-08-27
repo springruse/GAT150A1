@@ -52,9 +52,9 @@ void Player::Update(float dt)
 		fireTimer = fireTime; // Reset fire timer
 
 		auto sound = claw::GetEngine().GetAudio().playSound(*claw::Resources().Get<claw::AudioClip>("shipBlast1.wav", claw::GetEngine().GetAudio()).get());
-		/*if (sound) {
-			claw::GetEngine().GetAudio().playSound(&sound);
-		}*/
+		if (sound) {
+			claw::GetEngine().GetAudio().playSound("shipBlast1.wav");
+		}
 		auto rocket = claw::Instantiate("rocket", owner->m_transform.position, owner->m_transform.rotation, 1.0f);
 		rocket->lifeSpan = 1.5f;
 		rocket->name = "rocket";

@@ -14,7 +14,7 @@
       "components": [
         {
           "type": "Player",
-          "speed": 15,
+          "speed": 5,
           "rotationSpeed": 180,
           "fireTime": 2.0
         },
