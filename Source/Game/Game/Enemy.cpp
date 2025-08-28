@@ -34,16 +34,19 @@ void Enemy::Update(float deltaTime)
 			float angle = claw::Math::radToDeg(claw::vec2::AngleBetween(forward, direction));
 			playerSeen = angle <= 45; // angle threshold for player detection
 
+			// rotate towards player
 			if (playerSeen) {
 				float angle = claw::vec2::SignedAngleBetween(forward, direction);
 				angle = claw::Math::Sign(angle);
-				owner->m_transform.rotation += claw::Math::radToDeg(angle * 5 * deltaTime);
+				m_rigidBody->ApplyTorque(angle * 5);
 			}
 		}
 	}
 
+	// force
+
 	claw::vec2 force = claw::vec2{ 1,0 }.Rotate(claw::Math::degToRad(owner->m_transform.rotation)) * speed;
-	//velocity += force; * dt;
+
 	auto* rb = owner->GetComponent<claw::RigidBody>();
 	if (rb) {
 		rb->velocity += force;
@@ -88,7 +91,7 @@ void Enemy::OnCollision(claw::Actor* other)
 void Enemy::OnNotify(const claw::Event& event)
 {
 	EVENT_NOTIFY_DATA(add_points, 100);
-	if (claw::equalsIgnoreCase(event.id, "playerDead")) {
+	if (claw::EqualsIgnoreCase(event.id, "playerDead")) {
 		owner->destroyed = true; // Destroy enemy when player dies
 	}
 }

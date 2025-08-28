@@ -1,5 +1,5 @@
 #include "Game/SpaceGame.h"
-
+#include "Platformer/PlatformerGame.h"
 int main(int argc, char* argv[]) {
 
     // Get current directory path
@@ -8,15 +8,11 @@ int main(int argc, char* argv[]) {
 
     // Set current directory path (current path + "Assets")
     std::cout << "Setting directory to 'Assets'...\n";
-    claw::file::SetCurrentDirectory("Assets");
+    claw::file::SetCurrentDirectory("Assets/Platformer");
     std::cout << "New directory: " << claw::file::GetCurrentDirectory() << "\n\n";
 
-    //claw::Factory::Instance().Register<claw::SpriteRenderer>("SpriteRenderer");
-	//auto spriteRenderer = claw::Factory::Instance().Create("MeshRenderer");
-
-
     //make pointers here
-    std::unique_ptr<SpaceGame> game = std::make_unique<SpaceGame>();
+    std::unique_ptr<PlatformerGame> game = std::make_unique<PlatformerGame>();
 
     //initialize stuff here
 

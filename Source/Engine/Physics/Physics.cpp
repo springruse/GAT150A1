@@ -1,6 +1,9 @@
 #include "Physics.h"
 
 namespace claw {
+
+	float Physics::ms_pixelsPerUnit = 48.0f;
+
 	bool Physics::Initialize() {
 		b2WorldDef worldDef = b2DefaultWorldDef();
 		worldDef.gravity = b2Vec2{ 0.0f, -10.0f };
@@ -16,4 +19,7 @@ namespace claw {
 	void Physics::Update(float dt) {
 		b2World_Step(m_worldId, 1.0f / 60.0f, 4);
 	}
+
+
+
 }

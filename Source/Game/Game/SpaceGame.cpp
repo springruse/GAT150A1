@@ -142,10 +142,10 @@ void SpaceGame::Draw(claw::Renderer& renderer)
 
 void SpaceGame::OnNotify(const claw::Event& event)
 {
-    if (claw::equalsIgnoreCase(event.id, "playerDead")) {
+    if (claw::EqualsIgnoreCase(event.id, "playerDead")) {
         OnPlayerDeath();
     }
-    else if ( claw::equalsIgnoreCase(event.id, "addScore")) {
+    else if ( claw::EqualsIgnoreCase(event.id, "addScore")) {
 		addPoints(std::get<int>(event.data));
 	}
     /*std::cout << event.id << std::endl;*/

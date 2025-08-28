@@ -12,13 +12,12 @@ void Player::Update(float dt)
 
 	claw::vec2 direction{ 1,0 };
 
-	float rotate = 0;
-
 	// rotation speed
+	float rotate = 0;
 	if (claw::GetEngine().GetInput().getKeyDown(SDL_SCANCODE_A))  rotate = -1;
 	if (claw::GetEngine().GetInput().getKeyDown(SDL_SCANCODE_D))  rotate = +1;
 
-	owner->m_transform.rotation += (rotate * rotationSpeed) * dt;
+	m_rigidBody->ApplyTorque(rotate * rotationSpeed);
 
 	//thrust speed
 	float thrust = 0;
@@ -29,11 +28,12 @@ void Player::Update(float dt)
 	owner->m_transform.position.y = claw::Math::Wrap(owner->m_transform.position.y, 0.0f, (float)claw::GetEngine().GetRenderer().getHeight());
 
 	claw::vec2 force = direction.Rotate(claw::Math::degToRad(owner->m_transform.rotation)) * thrust * speed;
-	//velocity += force;
+	
+
 
 	auto* rb = owner->GetComponent<claw::RigidBody>();
 	if (rb) {
-		rb->velocity += force;
+		rb->ApplyForce(force);
 	}
 
 	if (force.Length() > 0) {
@@ -60,6 +60,11 @@ void Player::Update(float dt)
 		rocket->name = "rocket";
 		rocket->tag = "player"; // Set rocket name for identification
 	}
+}
+
+void Player::Start()
+{
+	m_rigidBody = owner->GetComponent<claw::RigidBody>();
 }
 
 void Player::Read(const claw::json::value_t& value)

@@ -6,22 +6,26 @@
 
 #include <memory>
 
-class Player : public claw::Component {
+class PlayerController : public claw::Component {
 
 public:
-	Player() = default;
+	PlayerController() = default;
 	void Update(float dt) override;
-	CLASS_PROTOTYPE(Player)
+	CLASS_PROTOTYPE(PlayerController)
 
-	claw::RigidBody* m_rigidBody = nullptr;
+		claw::RigidBody* m_rigidBody = nullptr;
 
-	float speed = 5;
-	float rotationSpeed = 180.0f;
+	// load values from json
+	float speed = 0.0;
+	float maxSpeed = 0.0;
+	float jump = 0.0f;
 	float fireTime = 3.5f;
 	float fireTimer = 3.0f; // Timer for firing rockets
-	float damping = 0.98f; // Damping factor to reduce velocity over time
+
 
 	void Start() override;
 	void OnCollision(class claw::Actor* other);
 	void Read(const claw::json::value_t& value) override;
-};	
+
+
+};

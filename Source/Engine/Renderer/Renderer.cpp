@@ -41,6 +41,7 @@ bool claw::Renderer::CreateWindow(const std::string& name, int width, int height
         SDL_Quit();
         return false;
     }
+    SDL_SetRenderVSync(m_renderer, 1);
 	SDL_SetRenderLogicalPresentation(m_renderer, width, height, SDL_LOGICAL_PRESENTATION_LETTERBOX);
 
     return true;

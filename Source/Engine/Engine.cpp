@@ -46,10 +46,10 @@ namespace claw {
 		Resources().Clear();
 		Factory::Instance().RemoveAll();
 		EventManager::Instance().RemoveAll();
-		
+
+		m_particleSystem->Shutdown();
 		m_physics->Shutdown();
 		m_audio->Shutdown();
-		m_particleSystem->Shutdown();
 		m_input->Shutdown();
 		m_renderer->Shutdown();
 		

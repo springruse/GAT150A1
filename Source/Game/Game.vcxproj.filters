@@ -14,6 +14,15 @@
     <Filter Include="Assets">
       <UniqueIdentifier>{52398fa5-4127-477d-8ad5-1d3b0e171b7a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\Space">
+      <UniqueIdentifier>{483818ee-05ad-4f95-a187-045f1f0b5ad7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Platformer">
+      <UniqueIdentifier>{a9f4d93a-1b47-4255-8163-fb54945b6a93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Platformer">
+      <UniqueIdentifier>{c9c52edf-0f2a-4a66-8c45-b967b4292555}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -40,6 +49,15 @@
     <ClCompile Include="GamePCH.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Platformer\PlatformerGame.cpp">
+      <Filter>Source Files\Platformer</Filter>
+    </ClCompile>
+    <ClCompile Include="Platformer\PlayerController.cpp">
+      <Filter>Source Files\Platformer</Filter>
+    </ClCompile>
+    <ClCompile Include="Platformer\EnemyController.cpp">
+      <Filter>Source Files\Platformer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Player.h">
@@ -63,6 +81,15 @@
     <ClInclude Include="GamePCH.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Platformer\PlatformerGame.h">
+      <Filter>Source Files\Platformer</Filter>
+    </ClInclude>
+    <ClInclude Include="Platformer\PlayerController.h">
+      <Filter>Source Files\Platformer</Filter>
+    </ClInclude>
+    <ClInclude Include="Platformer\EnemyController.h">
+      <Filter>Source Files\Platformer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Build\Assets\enemy.msh">
@@ -70,6 +97,12 @@
     </None>
     <None Include="..\..\Build\Assets\scene.json">
       <Filter>Assets</Filter>
+    </None>
+    <None Include="..\..\Build\Assets\Platformer\Scenes\level.json">
+      <Filter>Assets\Space</Filter>
+    </None>
+    <None Include="..\..\Build\Assets\Platformer\Scenes\prototypes.json">
+      <Filter>Assets\Space</Filter>
     </None>
   </ItemGroup>
 </Project>

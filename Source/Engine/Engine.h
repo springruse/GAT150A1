@@ -28,6 +28,7 @@ namespace claw {
 		InputSystem& GetInput() { return *m_input; }
 		ParticleSystem& GetParticleSystem() { return *m_particleSystem; }
 		Time& GetTime() { return m_time; }
+		Physics& GetPhysics() { return *m_physics; }
 		
 	private:
 		Time m_time;	

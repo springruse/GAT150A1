@@ -24,11 +24,8 @@
         },
         {
           "type": "Rigidbody",
-          "damping": 0.998,
-          "velocity": [
-            0,
-            0
-          ]
+          "gravityScale": 0,
+          "angularDamping": 0.5
         },
         {
           "type": "CircleCollider2D",
@@ -60,11 +57,7 @@
         },
         {
           "type": "Rigidbody",
-          "damping": 0.995,
-          "velocity": [
-            0,
-            0
-          ]
+          "gravityScale": 0
         },
         {
           "type": "CircleCollider2D",
@@ -96,11 +89,7 @@
         },
         {
           "type": "Rigidbody",
-          "damping": 1.0,
-          "velocity": [
-            0,
-            0
-          ]
+          "gravityScale": 0
         },
         {
           "type": "CircleCollider2D",
@@ -132,6 +121,10 @@
         {
           "type": "CircleCollider2D",
           "radius": 32
+        },
+        {
+          "type": "Rigidbody",
+          "gravityScale": 0.0
         }
       ]
     }
