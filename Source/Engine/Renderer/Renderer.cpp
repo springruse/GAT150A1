@@ -81,7 +81,7 @@ void claw::Renderer::DrawTexture(Texture& texture, float x, float y)
     SDL_RenderTexture(m_renderer, texture.m_texture, NULL, &destRect);
 }
 
-void claw::Renderer::DrawTexture(Texture& texture, float x, float y, float scale, float angle, bool flipH)
+void claw::Renderer::DrawTexture(Texture& texture, float x, float y, float angle, float scale, bool flipH)
 {
 
     vec2 size = texture.GetSize();

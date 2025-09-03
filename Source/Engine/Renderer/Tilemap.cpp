@@ -20,7 +20,7 @@ namespace claw {
 
 				JSON_READ_NAME(layerValue, "height", layer.height);
 				JSON_READ_NAME(layerValue, "width", layer.width);
-				JSON_READ_NAME(layerValue, "layer", layer.data);
+				JSON_READ_NAME(layerValue, "data", layer.data);
 
 				// load texture from properties
 				if (JSON_HAS(layerValue, properties)) {

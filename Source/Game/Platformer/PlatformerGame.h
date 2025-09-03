@@ -49,6 +49,7 @@ private:
 	void SpawnEnemy();
 	void SpawnAlly();
 	void SpawnPlayer();
+	void SpawnBat();
 
 
 };

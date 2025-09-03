@@ -13,7 +13,7 @@ namespace claw {
 		// cache off sprite renderer component, using sprite renderer to draw
 		m_spriteRenderer = owner->GetComponent<SpriteRenderer>();
 		if (!m_spriteRenderer) {
-			Logger::Error("Animator misshing sprite renderer.");
+			Logger::Error("Animator missing sprite renderer.");
 		}
 		// get texture animations from texture animation names
 		for (auto& animation : m_animations) {
@@ -33,36 +33,37 @@ namespace claw {
 	}
 	void Animator::Update(float dt)
 	{
-		// cache off sprite renderer component, using sprite renderer to draw
-		m_spriteRenderer = owner->GetComponent<SpriteRenderer>();
-		if (!m_spriteRenderer) {
-			Logger::Error("Animator misshing sprite renderer.");
-		}
-		// get texture animations from texture animation names
-		for (auto& animation : m_animations) {
-			animation.second.textureAnimation = Resources().Get<TextureAnimation>(animation.second.textureAnimationName, GetEngine().GetRenderer());
-			if (!animation.second.textureAnimation) {
-				Logger::Warning("Could not load Animator texture animation {}", animation.second.textureAnimationName)
-					;
+		if (m_paused || !m_currentAnimation.textureAnimation) return;
+		// update frame timer
+		m_frameTimer -= dt * speedMultiplier;
+		if (m_frameTimer <= 0) {
+			m_frameTimer = 1.0f / m_currentAnimation.textureAnimation->GetFPS();
+			frame++;
+			// check if animation is complete, loop or stop on last frame
+			if (frame >= m_currentAnimation.textureAnimation->GetTotalFrames()) {
+				if (m_currentAnimation.textureAnimation->IsLooping()) {
+					frame = 0;
+				}
+				else {
+					frame = m_currentAnimation.textureAnimation -> GetTotalFrames() - 1;
+				}
 			}
-			else {
-				Logger::Info("Animator animation {}, texture {} loaded", animation.first, animation.second.textureAnimationName);
+			// set texture rect from animation
+			if (m_spriteRenderer) {
+				m_spriteRenderer->textureRect = m_currentAnimation.textureAnimation -> GetFrameRect(frame);
 			}
 		}
-		// set initial animation, use first map entry
-		auto it = m_animations.begin();
-		std::string name = it->first;
-		Play(name);
 	}
-	void Animator::Play(const std::string& name, bool resetFrame){
+	void Animator::Play(const std::string& name, bool resetFrame) {
 		// don't start animation if already current
 		if (EqualsIgnoreCase(name, m_currentAnimationName)) return;
-	// check animation exists
-	auto it = m_animations.find(toLower(name));
-	if (it == m_animations.end()) {
-		Logger::Error("Animation does not exist in animation {}", name);
-		return;
-	}
+		// check animation exists
+		auto it = m_animations.find(toLower(name));
+		if (it == m_animations.end()) {
+			Logger::Error("Animation does not exist in animation {}", name);
+			return;
+		}
+
 	// set the current animation
 		m_currentAnimationName = name;
 		m_currentAnimation = it->second;

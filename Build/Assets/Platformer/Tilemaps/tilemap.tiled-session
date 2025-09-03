@@ -33,6 +33,7 @@
         "tilemap.tsx"
     ],
     "project": "tilemap.tiled-project",
+    "property.type": "bool",
     "recentFiles": [
         "tilemap.tsx",
         "tilemap.tmx"

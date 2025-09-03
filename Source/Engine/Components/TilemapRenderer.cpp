@@ -64,7 +64,7 @@ namespace claw {
 				auto physicsBody = std::make_unique<PhysicsBody>(transform, size, bodyDef, GetEngine().GetPhysics());
 				m_physicsBodies.push_back(std::move(physicsBody));
 
-				// renderer.DrawTexture(*layer.texture, source, position.x, position.y, owner->m_transform.rotation, owner->m_transform.scale);
+				renderer.DrawTexture(*layer.texture, source, position.x, position.y, owner->m_transform.rotation, owner->m_transform.scale);
 			}
 		}
 	}

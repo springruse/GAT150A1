@@ -38,6 +38,7 @@ void PlatformerGame::Update(float dt)
 	case PlatformerGame::GameState::StartRound:
 		SpawnPlayer();
 		SpawnEnemy();
+		SpawnBat();
 		m_gameState = GameState::Game;
 		break;
 	default:
@@ -63,6 +64,11 @@ void PlatformerGame::OnNotify(const claw::Event& event)
 
 void PlatformerGame::SpawnPlayer() {
 	auto player = claw::Instantiate("platformPlayer");
+	m_scene->AddActor(std::move(player));
+}
+
+void PlatformerGame::SpawnBat() {
+	auto player = claw::Instantiate("bat");
 	m_scene->AddActor(std::move(player));
 }
 
