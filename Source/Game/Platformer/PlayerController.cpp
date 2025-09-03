@@ -15,7 +15,7 @@ void PlayerController::Update(float dt)
 	}
 
 	if (claw::GetEngine().GetInput().getKeyPressed(SDL_SCANCODE_SPACE)) {
-		m_rigidBody->ApplyForce(claw::vec2{ 0,-1 } * speed);
+		m_rigidBody->ApplyForce(claw::vec2{ 0,-1 } * jump);
 	}
 }
 
@@ -24,8 +24,9 @@ void PlayerController::Start()
 	m_rigidBody = owner->GetComponent<claw::RigidBody>();
 }
 
-void PlayerController::OnCollision(class claw::Actor* other) 
+void PlayerController::OnCollision(class claw::Actor* other)
 {
+	std::cout << other->name << std::endl;
 }
 
 void PlayerController::Read(const claw::json::value_t& value)

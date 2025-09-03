@@ -32,6 +32,8 @@ namespace claw {
 			ms_pixelsPerUnit = ppu;
 		}
 
+		void ProcessCollisionEvents();
+
 		static float ms_pixelsPerUnit;
 	private:
 		friend class PhysicsBody;

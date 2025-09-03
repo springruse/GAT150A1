@@ -19,7 +19,7 @@ namespace claw {
 	void RigidBody::Start()
 	{
 		bodyDef.actor = owner;
-		if (size.x = 0 && size.y == 0) {
+		if (size.x == 0 && size.y == 0) {
 			auto spriteRenderer = owner->GetComponent<SpriteRenderer>();
 			if (spriteRenderer) {
 				size = spriteRenderer->texture->GetSize();

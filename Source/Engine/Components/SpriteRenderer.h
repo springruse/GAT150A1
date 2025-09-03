@@ -8,6 +8,7 @@ namespace claw {
 		public:
 			CLASS_PROTOTYPE(SpriteRenderer)
 			std::string textureName;
+			rect textureRect;
 			res_t<Texture> texture;
 			
 

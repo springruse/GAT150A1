@@ -15,19 +15,32 @@ namespace claw {
 
 	void SpriteRenderer::Draw(Renderer& renderer)
 	{
-		//auto texture = Resources().Get<Texture>(textureName, renderer);
+
 		if (texture) {
-				renderer.DrawTexture(*texture, 
-				owner->m_transform.position.x, 
-				owner->m_transform.position.y, 
-				owner->m_transform.scale, 
-				owner->m_transform.rotation);
+			if (textureRect.w > 0 and textureRect.h > 0) {
+				renderer.DrawTexture(*texture,
+					textureRect,
+					owner->m_transform.position.x,
+					owner->m_transform.position.y,
+					owner->m_transform.rotation,
+					owner->m_transform.scale);
+			}
+			else {
+				renderer.DrawTexture(*texture,
+					owner->m_transform.position.x,
+					owner->m_transform.position.y,
+					owner->m_transform.rotation,
+					owner->m_transform.scale);
+			}
 		}
 	}
 
 	void SpriteRenderer::Start()
 	{
-		texture = Resources().Get<Texture>(textureName, GetEngine().GetRenderer());
+		// get texture resource if texture doesn't exist and there's a texture name
+		if (!texture && !textureName.empty()) {
+			texture = Resources().Get<Texture>(textureName, GetEngine().GetRenderer());
+		}
 	}
 
 	void SpriteRenderer::Read(const json::value_t& value)

@@ -26,16 +26,9 @@ int main(int argc, char* argv[]) {
 
     // add sounds before the loop begins
 
-
-    claw::GetEngine().GetAudio().addSound("bass.wav", "bass");
-    claw::GetEngine().GetAudio().addSound("snare.wav", "snare");
-    claw::GetEngine().GetAudio().addSound("clap.wav", "clap");
-    claw::GetEngine().GetAudio().addSound("close-hat.wav", "close-hat");
-    claw::GetEngine().GetAudio().addSound("open-hat.wav", "open-hat");
-   
-    claw::GetEngine().GetAudio().playSound("Wisteria");
+    // claw::GetEngine().GetAudio().playSound("Wisteria");
     
-    auto texture1 = claw::Resources().Get<claw::Texture>("tristonface.jpg", claw::GetEngine().GetRenderer());
+    //auto texture1 = claw::Resources().Get<claw::Texture>("tristonface.jpg", claw::GetEngine().GetRenderer());
 
 
     //MAIN LOOP

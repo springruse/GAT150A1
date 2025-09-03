@@ -25,7 +25,7 @@ namespace claw {
 			return false;
 		}
 
-		return std::equal(str1.begin(), str1.end(), str2.begin(), str2.end(), [](char a, char b) {
+		return std::equal(str1.begin(), str1.end(), str2.begin(), [](char a, char b) {
 			return (std::tolower(a) == std::tolower(b));
 		});
 	}

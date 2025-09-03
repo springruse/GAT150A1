@@ -12,7 +12,7 @@ namespace claw {
 
 		struct PhysicsBodyDef {
 			// body
-			float gravityScale = 0;
+			float gravityScale = 1.5f;
 			float linearDamping = 0.2f;
 			float angularDamping = 0.2f;
 			bool  constrainAngle = false;

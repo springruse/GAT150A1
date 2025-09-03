@@ -1,0 +1,45 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "tilemap.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "tilemap.tmx": {
+            "scale": 4,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 175.625,
+                "y": 252.875
+            }
+        },
+        "tilemap.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 2,
+            "scaleInEditor": 3
+        }
+    },
+    "last.exportedFilePath": "C:/Users/athao/source/repos/GAT150A1/Build/Assets/Platformer/Tilemaps",
+    "last.imagePath": "C:/Users/athao/Downloads/GAT150/Tiles/Assets",
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "openFiles": [
+        "tilemap.tmx",
+        "tilemap.tsx"
+    ],
+    "project": "tilemap.tiled-project",
+    "recentFiles": [
+        "tilemap.tsx",
+        "tilemap.tmx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}

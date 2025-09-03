@@ -14,9 +14,9 @@
       "components": [
         {
           "type": "PlayerController",
-          "speed": 5,
-          "maxSpeed": 180,
-          "jump": 300,
+          "speed": 2000,
+          "maxSpeed": 3000,
+          "jump": 60000,
           "fireTime": 2.0
         },
         {
@@ -24,11 +24,10 @@
           "texture_name": "Textures/box.png"
         },
         {
-          "type": "Rigidbody",
+          "type": "RigidBody",
           "gravityScale": 1.0,
-          "ConstrainAngle": true,
-          "shape": "capsule",
-          "scale": [ 1, 1 ]
+          "constrainAngle": true,
+          "shape": "capsule"
         }
       ]
     },
@@ -46,8 +45,8 @@
       "components": [
         {
           "type": "EnemyController",
-          "speed": 5,
-          "maxSpeed": 180,
+          "speed": 2000,
+          "maxSpeed": 2500,
           "jump": 300,
           "fireTime": 2.0
         },
@@ -56,38 +55,13 @@
           "texture_name": "Textures/enemy.png"
         },
         {
-          "type": "Rigidbody",
+          "type": "RigidBody",
           "gravityScale": 1.0,
           "ConstrainAngle": true,
           "shape": "capsule",
           "scale": [ 1, 1 ]
         }
       ]
-    }
-  ],
-  "actors": [
-    {
-      "name": "sprite",
-      "tag": "background",
-      "persistent": true,
-      "lifespan": 4,
-      "transform": {
-        "position": [
-          640,
-          512
-        ],
-        "rotation": 30,
-        "scale": 1.75
-      },
-      "components": [
-        {
-          "type": "SpriteRenderer",
-          "texture_name": "Texture/space-background.jpg"
-        }
-      ]
-    },
-    {
-
     }
   ]
 }

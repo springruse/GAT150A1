@@ -14,10 +14,6 @@ void EnemyController::Update(float dt)
 		else dir = 1;
 	}
 
-	if (claw::GetEngine().GetInput().getKeyDown(SDL_SCANCODE_A))  dir = -1;
-	if (claw::GetEngine().GetInput().getKeyDown(SDL_SCANCODE_D))  dir = +1;
-
-
 	if (dir != 0) {
 		m_rigidBody->ApplyForce(claw::vec2{ 1,0 } *dir * speed);
 	}

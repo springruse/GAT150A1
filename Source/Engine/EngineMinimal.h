@@ -21,6 +21,7 @@
 #include "Math/Vector3.h"
 #include "Math/Math.h"
 #include "Math/Transform.h"
+#include "Math/Rect.h"
 
 // physics
 #include "Physics/Collidable.h"

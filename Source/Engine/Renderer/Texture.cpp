@@ -13,7 +13,7 @@ namespace claw {
 
 		if (!surface)
 		{
-			Logger::Warning("Could not load image:" , filename);
+			Logger::Warning("Could not load image: {}", filename);
 			return false;
 		}
 
@@ -22,7 +22,7 @@ namespace claw {
 		SDL_DestroySurface(surface);
 		if (!m_texture)
 		{
-			Logger::Warning("Could not create texture: ", filename);
+			Logger::Warning("Could not create texture: {}", filename);
 			return false;
 		}
 

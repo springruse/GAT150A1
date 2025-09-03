@@ -5,6 +5,7 @@
 #include <SDL3_image/SDL_image.h>
 #include "Core/Logger.h"
 #include "Texture.h"
+#include "Math/Rect.h"
 
 namespace claw {
 
@@ -25,6 +26,7 @@ namespace claw {
 		void DrawPoint(float x, float y);
 		void DrawTexture(class Texture& texture, float x, float y);
 		void DrawTexture(class Texture& texture, float x, float y, float scale,float angle = 0.0f);
+		void DrawTexture(class Texture& texture, const rect& sourceRect, float x, float y, float angle, float scale);
 
 		void Clear();
 		void Present();

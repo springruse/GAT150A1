@@ -104,5 +104,11 @@
     <None Include="..\..\Build\Assets\Platformer\Scenes\prototypes.json">
       <Filter>Assets\Space</Filter>
     </None>
+    <None Include="..\..\Build\Assets\Platformer\Tilemaps\tilemap.json">
+      <Filter>Assets\Space</Filter>
+    </None>
+    <None Include="..\..\Build\Assets\Platformer\Animations\bat_idle.json">
+      <Filter>Assets\Platformer</Filter>
+    </None>
   </ItemGroup>
 </Project>

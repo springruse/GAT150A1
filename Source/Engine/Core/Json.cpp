@@ -120,4 +120,25 @@ namespace claw::json
         }
         return true;
     }
+    bool Read(const value_t& value, const std::string& name, std::vector<int>& data, bool required)
+    {
+        if (!value.HasMember(name.c_str()) || !value[name.c_str()].IsArray()) {
+            if (required) Logger::Error("Could not read Json value (vector<int>): {}.", name);
+            return false;
+        }
+
+        // get json array object
+        auto& array = value[name.c_str()];
+        // get array values
+        for (rapidjson::SizeType i = 0; i < array.Size(); i++) {
+            if (!array[i].IsNumber()) {
+                Logger::Error("Could not read Json value: {}.", name);
+                return false;
+            }
+
+            // get the data
+            data.push_back(array[i].GetInt());
+        }
+        return true;
+    }
 }

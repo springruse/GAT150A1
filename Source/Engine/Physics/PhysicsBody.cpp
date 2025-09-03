@@ -82,4 +82,5 @@ namespace claw {
 	{
 		b2Body_SetLinearVelocity(m_bodyId, to_b2(Physics::PixelToWorld(velocity)));
 	}
+
 }

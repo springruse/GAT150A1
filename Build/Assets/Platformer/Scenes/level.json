@@ -10,13 +10,33 @@
           640,
           512
         ],
-        "rotation": 30,
+        "rotation": 0,
         "scale": 5
       },
       "components": [
         {
           "type": "SpriteRenderer",
-          "texture_name": "Platformer/Textures/sky.png"
+          "texture_name": "Textures/sky.png"
+        }
+      ]
+    },
+    {
+      "name": "sprite",
+      "tag": "background",
+      "persistent": true,
+      "lifespan": 4,
+      "transform": {
+        "position": [
+          0,
+          0
+        ],
+        "rotation": 0,
+        "scale": 4
+      },
+      "components": [
+        {
+          "type": "TilemapRenderer",
+          "tilemap_name": "Tilemaps/tilemap.json"
         }
       ]
     },
@@ -26,7 +46,7 @@
       "transform": {
         "position": [
           640,
-          900
+          800
         ],
         "rotation": 0,
         "scale": 0.2
@@ -34,14 +54,14 @@
       "components": [
         {
           "type": "SpriteRenderer",
-          "texture_name": "textures/platform.png"
+          "texture_name": "Textures/platform.png"
         },
         {
           "type": "RigidBody",
           "isDynamic": false,
           "scale": [
             0.8,
-            0.5
+            0.8
           ]
         }
       ]
@@ -53,16 +73,16 @@
       "lifespan": 4,
       "transform": {
         "position": [
-          640,
-          512
+          480,
+          520
         ],
-        "rotation": 30,
-        "scale": 5
+        "rotation": 0,
+        "scale": 0.2
       },
       "components": [
         {
           "type": "SpriteRenderer",
-          "texture_name": "Platformer/Textures/tree01.png"
+          "texture_name": "Textures/tree01.png"
         }
       ]
     },
@@ -80,10 +100,11 @@
       "components": [
         {
           "type": "SpriteRenderer",
-          "texture_name": "Platformer/Textures/crate02.png"
+          "texture_name": "Textures/crate02.png"
         },
         {
-          "type": "RigidBody"
+          "type": "RigidBody",
+          "gravityScale": 1.0
         }
       ]
     },
@@ -101,10 +122,11 @@
       "components": [
         {
           "type": "SpriteRenderer",
-          "texture_name": "Platformer/Textures/crate01.png"
+          "texture_name": "Textures/crate02.png"
         },
         {
           "type": "RigidBody",
+          "gravityScale": 1.0,
           "restitution": 0.8
         }
       ]
