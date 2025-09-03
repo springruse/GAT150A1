@@ -17,6 +17,13 @@ void PlayerController::Update(float dt)
 	if (claw::GetEngine().GetInput().getKeyPressed(SDL_SCANCODE_SPACE)) {
 		m_rigidBody->ApplyForce(claw::vec2{ 0,-1 } * jump);
 	}
+
+	auto spriteRenderer = owner->GetComponent<claw::SpriteRenderer>();
+	if (spriteRenderer) {
+		if (claw::Math::fabs(m_rigidBody->velocity.x) > 0.1f) {
+		spriteRenderer->flipH = (m_rigidBody->velocity.x < 0);
+		}
+	}
 }
 
 void PlayerController::Start()

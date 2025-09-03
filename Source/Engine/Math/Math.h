@@ -70,6 +70,7 @@ namespace claw::Math {
 	using std::atan2;
 	using std::atan2f;
 	using std::abs;
+	using std::fabs;
 
 	// namespace Math above
 }

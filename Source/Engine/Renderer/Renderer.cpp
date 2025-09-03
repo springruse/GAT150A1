@@ -81,7 +81,7 @@ void claw::Renderer::DrawTexture(Texture& texture, float x, float y)
     SDL_RenderTexture(m_renderer, texture.m_texture, NULL, &destRect);
 }
 
-void claw::Renderer::DrawTexture(Texture& texture, float x, float y, float scale, float angle)
+void claw::Renderer::DrawTexture(Texture& texture, float x, float y, float scale, float angle, bool flipH)
 {
 
     vec2 size = texture.GetSize();
@@ -92,10 +92,10 @@ void claw::Renderer::DrawTexture(Texture& texture, float x, float y, float scale
     destRect.x = x - destRect.w * 0.5f;
     destRect.y = y - destRect.h * 0.5f;
 
-    SDL_RenderTextureRotated(m_renderer, texture.m_texture, NULL, &destRect, angle, NULL, SDL_FLIP_NONE);
+    SDL_RenderTextureRotated(m_renderer, texture.m_texture, NULL, &destRect, angle, NULL, (flipH ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE));
 }
 
-void claw::Renderer::DrawTexture(class Texture& texture, const rect& sourceRect, float x, float y, float angle, float scale)
+void claw::Renderer::DrawTexture(class Texture& texture, const rect& sourceRect, float x, float y, float angle, float scale, bool flipH)
 {
     SDL_FRect srcRect;
     srcRect.x = sourceRect.x;
@@ -109,7 +109,7 @@ void claw::Renderer::DrawTexture(class Texture& texture, const rect& sourceRect,
     destRect.x = x - destRect.w * 0.5f;
     destRect.y = y - destRect.h * 0.5f;
 
-    SDL_RenderTextureRotated(m_renderer, texture.m_texture, &srcRect, &destRect, angle, NULL, SDL_FLIP_NONE);
+    SDL_RenderTextureRotated(m_renderer, texture.m_texture, &srcRect, &destRect, angle, NULL, (flipH ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE));
 }
 
 

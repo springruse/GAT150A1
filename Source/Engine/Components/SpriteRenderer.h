@@ -10,6 +10,7 @@ namespace claw {
 			std::string textureName;
 			rect textureRect;
 			res_t<Texture> texture;
+			bool flipH = false;
 			
 
 		public:

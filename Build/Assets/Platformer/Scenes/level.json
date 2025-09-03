@@ -1,7 +1,7 @@
 {
   "actors": [
     {
-      "name": "sprite",
+      "name": "sky",
       "tag": "background",
       "persistent": true,
       "lifespan": 4,
@@ -21,8 +21,8 @@
       ]
     },
     {
-      "name": "sprite",
-      "tag": "background",
+      "name": "map",
+      "tag": "tilemap",
       "persistent": true,
       "lifespan": 4,
       "transform": {

@@ -31,6 +31,9 @@ namespace claw {
 	void claw::RigidBody::Update(float deltaTime) {
 		owner->m_transform.position = m_physicsBody->GetPosition();
 		owner->m_transform.rotation = Math::radToDeg(m_physicsBody->GetAngle());
+
+		velocity = m_physicsBody->GetVelocity();
+
 		//owner->m_transform.position += velocity * deltaTime;
 		//velocity *= damping; // ( <1) = slower, ( >1) = faster
 	}

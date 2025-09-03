@@ -39,6 +39,7 @@ namespace claw {
 		void ApplyTorque(float radians);
 
 		void SetVelocity(const vec2& velocity);
+		vec2 GetVelocity();
 
 	private:
 		friend class Physics;
