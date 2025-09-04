@@ -6,7 +6,7 @@
 
 #include <memory>
 
-class PlayerController : public claw::Component {
+class PlayerController : public claw::Component, public claw::ICollidable {
 
 public:
 	PlayerController() = default;
@@ -22,6 +22,7 @@ public:
 	float fireTime = 3.5f;
 	float fireTimer = 3.0f; // Timer for firing rockets
 
+	int m_lives = 0;
 
 	void Start() override;
 	void OnCollision(class claw::Actor* other);

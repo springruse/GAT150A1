@@ -21,23 +21,23 @@ namespace claw {
 			return (actor->destroyed);
 			});
 
-		// Check for collisions between actors
-		for (auto& actorA : m_actors) {
-			for (auto& actorB : m_actors) {
-				if (actorA == actorB || (actorA->destroyed) || (actorB->destroyed)) continue;
+		//// Check for collisions between actors
+		//for (auto& actorA : m_actors) {
+		//	for (auto& actorB : m_actors) {
+		//		if (actorA == actorB || (actorA->destroyed) || (actorB->destroyed)) continue;
 
-				auto colliderA = actorA->GetComponent<ColliderComponent>();
-				auto colliderB = actorB->GetComponent<ColliderComponent>();
+		//		auto colliderA = actorA->GetComponent<ColliderComponent>();
+		//		auto colliderB = actorB->GetComponent<ColliderComponent>();
 
-				// checks if both actors have colliders
-				if (!colliderA || !colliderB) continue;
+		//		// checks if both actors have colliders
+		//		if (!colliderA || !colliderB) continue;
 
-				if (colliderA->CheckCollision(*colliderB)) {
-					actorA->OnCollision(actorB.get()); // Notify actorA of collision with actorB
-					actorB->OnCollision(actorA.get()); // Notify actorB of collision with actorA
-				}
-			}
-		}
+		//		if (colliderA->CheckCollision(*colliderB)) {
+		//			actorA->OnCollision(actorB.get()); // Notify actorA of collision with actorB
+		//			actorB->OnCollision(actorA.get()); // Notify actorB of collision with actorA
+		//		}
+		//	}
+		//}
 	}
 	/// <summary>
 	/// Draws all actors in the scene using the specified renderer.

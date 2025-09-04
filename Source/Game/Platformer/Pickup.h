@@ -7,7 +7,7 @@
 
 #include <memory>
 
-class Pickup : public claw::Component {
+class Pickup : public claw::Component, public claw::ICollidable, public claw::IObserver {
 
 public:
 	Pickup() = default;
@@ -22,5 +22,5 @@ public:
 	void OnCollision(class claw::Actor* other);
 	void Read(const claw::json::value_t& value) override;
 
-
+	void OnNotify(const claw::Event& event) override;
 };

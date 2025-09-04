@@ -120,12 +120,13 @@
           500
         ],
         "rotation": 0,
-        "scale": 0.25,
-        "lifeSpan":  3.00
+        "scale": 0.25
+        
       },
       "components": [
         {
-          "type": "Pickup"
+          "type": "Pickup",
+          "lifeSpan": 6.00
         },
         {
           "type": "SpriteRenderer"

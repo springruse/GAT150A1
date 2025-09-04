@@ -27,7 +27,7 @@ namespace claw {
 		shapeDef.density = def.density;
 		shapeDef.isSensor = def.isSensor;
 
-		shapeDef.enableContactEvents = true;
+		shapeDef.enableSensorEvents = true;
 		shapeDef.enableContactEvents = true;
 
 		// create shape

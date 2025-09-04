@@ -6,7 +6,7 @@
 
 #include <memory>
 
-class EnemyController : public claw::Component {
+class EnemyController : public claw::Component , public claw::ICollidable{
 
 public:
 	EnemyController() = default;

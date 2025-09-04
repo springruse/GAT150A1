@@ -54,6 +54,7 @@ namespace claw {
 		JSON_READ_NAME(value, "density", bodyDef.density);
 		JSON_READ_NAME(value, "isSensor", bodyDef.isSensor);
 
+
 		std::string shapeName;
 		JSON_READ_NAME(value, "shape", shapeName);
 

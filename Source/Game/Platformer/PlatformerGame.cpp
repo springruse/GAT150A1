@@ -1,10 +1,12 @@
 #include "PlatformerGame.h"
 #include "Renderer/Renderer.h"
+#include "EnginePCH.h"
+#include "Engine.h"
 
 bool PlatformerGame::Initialize()
 {
-	OBSERVER_ADD("playerDead");
-	OBSERVER_ADD("addScore");
+	OBSERVER_ADD(playerDead);
+	OBSERVER_ADD(add_points);
 
 	m_scene = std::make_unique<claw::Scene>(this);
 	m_scene->Load("scenes/prototypes.json");
@@ -39,9 +41,6 @@ void PlatformerGame::Update(float dt)
 			m_coinSpawnTimer = 3.0f;
 			SpawnCoin();
 		}
-
-		
-		
 	}
 		break;
 	case PlatformerGame::GameState::PlayerDead:
@@ -51,6 +50,8 @@ void PlatformerGame::Update(float dt)
 	case PlatformerGame::GameState::StartRound:
 		SpawnPlayer();
 		SpawnBat();
+		m_score = 0;
+		m_lives = 0;
 		m_gameState = GameState::Game;
 		break;
 	default:
@@ -67,7 +68,7 @@ void PlatformerGame::Draw(claw::Renderer& renderer)
 	m_scoreText->Draw(renderer, 20.0f, 20.0f);
 
 	m_livesText->Create(renderer, "BOXES FISHED - " + std::to_string(m_lives), { 1, 1, 1 });
-	m_livesText->Draw(renderer, (float)(renderer.getWidth() - 200), 20.0f);
+	m_livesText->Draw(renderer, (float)(renderer.getWidth() - 250), 20.0f);
 
 
 	claw::GetEngine().GetParticleSystem().Draw(renderer);
@@ -79,6 +80,9 @@ void PlatformerGame::OnPlayerDeath()
 
 void PlatformerGame::OnNotify(const claw::Event& event)
 {
+	if (claw::EqualsIgnoreCase(event.id, "add_points")) {
+		addPoints(std::get<int>(event.data));
+	}
 }
 
 void PlatformerGame::SpawnPlayer() {

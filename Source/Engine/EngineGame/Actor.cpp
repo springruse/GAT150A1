@@ -69,9 +69,12 @@ namespace claw {
 	}
 	void Actor::Destroyed()
 	{
+		destroyed = true;
 		for (auto& component : m_components) {
 			component->Destroyed();
+			
 		}
+		
 	}
 	float Actor::getRadius()
 	{

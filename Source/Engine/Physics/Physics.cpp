@@ -18,13 +18,14 @@ namespace claw {
 
 	void Physics::Update(float dt) {
 		b2World_Step(m_worldId, 1.0f / 60.0f, 4);
+		ProcessCollisionEvents();
 	}
 
 	void Physics::ProcessCollisionEvents()
 	{
-		//contact event start
 		b2ContactEvents contactEvents = b2World_GetContactEvents(m_worldId);
 
+		// contact event start
 		for (int i = 0; i < contactEvents.beginCount; i++) {
 			b2ContactBeginTouchEvent* contactEvent = contactEvents.beginEvents + i;
 
@@ -35,48 +36,44 @@ namespace claw {
 
 			Actor* actorA = (Actor*)b2Body_GetUserData(bodyA);
 			if (!actorA || actorA->destroyed || !actorA->active) continue;
-
 			Actor* actorB = (Actor*)b2Body_GetUserData(bodyB);
 			if (!actorB || actorB->destroyed || !actorB->active) continue;
 
 			actorA->OnCollision(actorB);
 			actorB->OnCollision(actorA);
+		}
+		// contact event end
+		for (int i = 0; i < contactEvents.endCount; i++) {
+			b2ContactEndTouchEvent* contactEvent = contactEvents.endEvents + i;
 
-			// contact event end
-			for (int i = 0; i < contactEvents.endCount; i++) {
-				b2ContactEndTouchEvent* contactEvent = contactEvents.endEvents + i;
+			if (!b2Shape_IsValid(contactEvent->shapeIdA) || !b2Shape_IsValid(contactEvent->shapeIdB)) continue;
 
-				b2BodyId bodyA = b2Shape_GetBody(contactEvent->shapeIdA);
-				b2BodyId bodyB = b2Shape_GetBody(contactEvent->shapeIdB);
+			b2BodyId bodyA = b2Shape_GetBody(contactEvent->shapeIdA);
+			b2BodyId bodyB = b2Shape_GetBody(contactEvent->shapeIdB);
 
-				Actor* actorA = (Actor*)b2Body_GetUserData(bodyA);
-				if (!actorA || actorA->destroyed || !actorA->active) continue;
+			Actor* actorA = (Actor*)b2Body_GetUserData(bodyA);
+			if (!actorA || actorA->destroyed || !actorA->active) continue;
+			Actor* actorB = (Actor*)b2Body_GetUserData(bodyB);
+			if (!actorB || actorB->destroyed || !actorB->active) continue;
 
-				Actor* actorB = (Actor*)b2Body_GetUserData(bodyB);
-				if (!actorB || actorB->destroyed || !actorB->active) continue;
+		}
 
-				actorA->OnCollision(actorB);
-				actorB->OnCollision(actorA);
-			}
-
-		//sensor contact
+		// sensor contact
 		b2SensorEvents sensorEvents = b2World_GetSensorEvents(m_worldId);
 
-			for (int i = 0; i < sensorEvents.beginCount; i++) {
-				b2SensorBeginTouchEvent* sensorEvent = sensorEvents.beginEvents + i;
+		for (int i = 0; i < sensorEvents.beginCount; i++) {
+			b2SensorBeginTouchEvent* sensorEvent = sensorEvents.beginEvents + i;
 
-				b2BodyId bodyA = b2Shape_GetBody(sensorEvent->sensorShapeId);
-				b2BodyId bodyB = b2Shape_GetBody(sensorEvent->visitorShapeId);
+			b2BodyId bodyA = b2Shape_GetBody(sensorEvent->sensorShapeId);
+			b2BodyId bodyB = b2Shape_GetBody(sensorEvent->visitorShapeId);
 
-				Actor* actorA = (Actor*)b2Body_GetUserData(bodyA);
-				if (!actorA || actorA->destroyed || !actorA->active) continue;
+			Actor* actorA = (Actor*)b2Body_GetUserData(bodyA);
+			if (!actorA || actorA->destroyed || !actorA->active) continue;
+			Actor* actorB = (Actor*)b2Body_GetUserData(bodyB);
+			if (!actorB || actorB->destroyed || !actorB->active) continue;
 
-				Actor* actorB = (Actor*)b2Body_GetUserData(bodyB);
-				if (!actorB || actorB->destroyed || !actorB->active) continue;
-
-				actorA->OnCollision(actorB);
-				actorB->OnCollision(actorA);
-			}
+			actorA->OnCollision(actorB);
+			actorB->OnCollision(actorA);
 		}
 	}
 }
