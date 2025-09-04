@@ -1,0 +1,9 @@
+{
+  "texture_name": "textures/coin.png",
+  "columns": 6,
+  "rows": 1,
+  "start_frame": 0,
+  "total_frames": 6,
+  "frames_per_second": 10,
+  "loop": true
+}

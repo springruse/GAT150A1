@@ -148,7 +148,7 @@ void SpaceGame::OnNotify(const claw::Event& event)
     else if ( claw::EqualsIgnoreCase(event.id, "addScore")) {
 		addPoints(std::get<int>(event.data));
 	}
-    /*std::cout << event.id << std::endl;*/
+
 }
 
 

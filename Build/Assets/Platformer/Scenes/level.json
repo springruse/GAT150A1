@@ -27,42 +27,17 @@
       "lifespan": 4,
       "transform": {
         "position": [
-          512,
-          600
+          200,
+          300
         ],
         "rotation": 0,
-        "scale": 1
+        "scale": 2
       },
       "components": [
         {
           "type": "TilemapRenderer",
-          "tilemap_name": "Tilemaps/tilemap.json"
-        }
-      ]
-    },
-    {
-      "tag": "ground",
-      "persistent": true,
-      "transform": {
-        "position": [
-          640,
-          800
-        ],
-        "rotation": 0,
-        "scale": 0.2
-      },
-      "components": [
-        {
-          "type": "SpriteRenderer",
-          "texture_name": "Textures/platform.png"
-        },
-        {
-          "type": "RigidBody",
-          "isDynamic": false,
-          "scale": [
-            0.8,
-            0.8
-          ]
+          "tilemap_name": "Tilemaps/tilemap.json",
+          "restitution": 0
         }
       ]
     },
@@ -74,7 +49,7 @@
       "transform": {
         "position": [
           480,
-          520
+          540
         ],
         "rotation": 0,
         "scale": 0.2
@@ -104,7 +79,7 @@
         },
         {
           "type": "RigidBody",
-          "gravityScale": 1.0
+          "gravityScale": 2.0
         }
       ]
     },
@@ -126,7 +101,7 @@
         },
         {
           "type": "RigidBody",
-          "gravityScale": 1.0,
+          "gravityScale": 2.0,
           "restitution": 0.8
         }
       ]

@@ -33,7 +33,7 @@ public:
 
 private:
 	GameState m_gameState = GameState::Init;
-	float m_enemySpawnTimer = 0.0f; // Timer for enemy spawning
+	float m_coinSpawnTimer = 0.0f; // Timer for enemy spawning
 
 	float m_stateTimer = 0.0f; // Timer for state transitions
 
@@ -49,7 +49,9 @@ private:
 	void SpawnEnemy();
 	void SpawnAlly();
 	void SpawnPlayer();
+	void SpawnBox();
 	void SpawnBat();
+	void SpawnCoin();
 
 
 };

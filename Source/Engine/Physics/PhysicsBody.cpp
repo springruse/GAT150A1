@@ -27,8 +27,8 @@ namespace claw {
 		shapeDef.density = def.density;
 		shapeDef.isSensor = def.isSensor;
 
-		if (def.isSensor) shapeDef.enableContactEvents = true;
-		else shapeDef.enableContactEvents = true;
+		shapeDef.enableContactEvents = true;
+		shapeDef.enableContactEvents = true;
 
 		// create shape
 		b2Vec2 hsize = to_b2(Physics::PixelToWorld(size * transform.scale * 0.5f));

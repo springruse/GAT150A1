@@ -122,5 +122,8 @@
     <None Include="..\..\Build\Assets\Platformer\Animations\bat_idle.json">
       <Filter>Assets\Platformer</Filter>
     </None>
+    <None Include="..\..\Build\Assets\Platformer\Animations\coin_idle.json">
+      <Filter>Assets\Platformer</Filter>
+    </None>
   </ItemGroup>
 </Project>

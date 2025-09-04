@@ -9,11 +9,11 @@
     ],
     "fileStates": {
         "tilemap.tmx": {
-            "scale": 4,
+            "scale": 3,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 175.625,
-                "y": 252.875
+                "x": 297.8333333333333,
+                "y": 230.5
             }
         },
         "tilemap.tsx": {

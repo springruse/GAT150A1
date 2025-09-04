@@ -16,6 +16,8 @@ public:
 
 		claw::RigidBody* m_rigidBody = nullptr;
 
+	float lifeSpan = 0;
+
 	void Start() override;
 	void OnCollision(class claw::Actor* other);
 	void Read(const claw::json::value_t& value) override;

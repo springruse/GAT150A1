@@ -24,12 +24,6 @@ int main(int argc, char* argv[]) {
     bool quit = false;
     float rotate = 0;
 
-    // add sounds before the loop begins
-
-    // claw::GetEngine().GetAudio().playSound("Wisteria");
-    
-    //auto texture1 = claw::Resources().Get<claw::Texture>("tristonface.jpg", claw::GetEngine().GetRenderer());
-
 
     //MAIN LOOP
     while (!quit) {
