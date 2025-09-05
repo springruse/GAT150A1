@@ -20,7 +20,7 @@
         },
         {
           "type": "SpriteRenderer",
-          "texture_name": "Textures/box.png"
+          "texture_name": "Textures/box2.png"
         },
         {
           "type": "RigidBody",

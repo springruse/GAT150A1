@@ -48,6 +48,12 @@ void PlatformerGame::Update(float dt)
 			m_coinSpawnTimer = 3.0f;
 			SpawnCoin();
 		}
+
+		m_boxSpawnTimer -= dt;
+		if (m_boxSpawnTimer <= 0.0f) {
+			m_boxSpawnTimer = 5.0f;
+			SpawnBox();
+		}
 	}
 		break;
 	case PlatformerGame::GameState::PlayerDead:
@@ -75,7 +81,7 @@ void PlatformerGame::Draw(claw::Renderer& renderer)
 	m_scoreText->Create(renderer, "MONEY - " + std::to_string(m_score), { 1, 1, 1 });
 	m_scoreText->Draw(renderer, 20.0f, 20.0f);
 
-	m_livesText->Create(renderer, "BOXES FISHED - " + std::to_string(m_lives), { 1, 1, 1 });
+	m_livesText->Create(renderer, "BOXES REKKED - " + std::to_string(m_lives), { 1, 1, 1 });
 	m_livesText->Draw(renderer, (float)(renderer.getWidth() - 250), 20.0f);
 
 
@@ -105,6 +111,7 @@ void PlatformerGame::SpawnPlayer() {
 void PlatformerGame::SpawnBox()
 {
 	auto crate = claw::Instantiate("crate");
+	crate->m_transform.position = claw::vec2{ claw::Random::getReal(10.0f, 1080.f), claw::Random::getReal(0.0f,200.f) };
 	m_scene->AddActor(std::move(crate));
 }
 
@@ -116,7 +123,7 @@ void PlatformerGame::SpawnBat() {
 void PlatformerGame::SpawnCoin()
 {
 	auto pickup = claw::Instantiate("coin_get");
-	pickup->m_transform.position = claw::vec2{ claw::Random::getReal(10.0f, 1080.f), claw::Random::getReal(0.0f,200.f) };
+	pickup->m_transform.position = claw::vec2{ claw::Random::getReal(10.0f, 1060.f), claw::Random::getReal(0.0f,200.f) };
 	m_scene->AddActor(std::move(pickup));
 }
 

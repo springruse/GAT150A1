@@ -34,6 +34,7 @@ public:
 private:
 	GameState m_gameState = GameState::Init;
 	float m_coinSpawnTimer = 0.0f; // Timer for enemy spawning
+	float m_boxSpawnTimer = 0.0f;
 
 	float m_stateTimer = 0.0f; // Timer for state transitions
 
