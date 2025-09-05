@@ -19,10 +19,10 @@ public:
 	float speed = 0.0;
 	float maxSpeed = 0.0;
 	float jump = 0.0f;
-	float fireTime = 3.5f;
-	float fireTimer = 3.0f; // Timer for firing rockets
+	//float fireTime = 3.5f;
+	//float fireTimer = 3.0f; // Timer for firing rockets
 
-	int m_lives = 0;
+	
 
 	void Start() override;
 	void OnCollision(class claw::Actor* other);

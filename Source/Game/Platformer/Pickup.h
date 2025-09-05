@@ -16,7 +16,19 @@ public:
 
 		claw::RigidBody* m_rigidBody = nullptr;
 
+	enum class PickupType 
+	{
+		POINTS,
+		LIVES
+	};
+
 	float lifeSpan = 0;
+	std::string soundEffect = "";
+	PickupType pickupType = PickupType::POINTS;  // Default to points
+	int value = 1;
+	std::string typeString = "";
+
+
 
 	void Start() override;
 	void OnCollision(class claw::Actor* other);

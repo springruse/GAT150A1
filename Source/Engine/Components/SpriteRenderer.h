@@ -18,6 +18,7 @@ namespace claw {
 			void Read(const json::value_t& value);
 			void Update(float deltatime) override;
 			void Draw(Renderer& renderer) override;
+
 		};
 
 }

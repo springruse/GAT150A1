@@ -11,12 +11,12 @@
           512
         ],
         "rotation": 0,
-        "scale": 5
+        "scale": 2
       },
       "components": [
         {
           "type": "SpriteRenderer",
-          "texture_name": "Textures/sky.png"
+          "texture_name": "Textures/moon.png"
         }
       ]
     },
@@ -27,11 +27,11 @@
       "lifespan": 4,
       "transform": {
         "position": [
-          200,
-          300
+          0,
+          120
         ],
         "rotation": 0,
-        "scale": 2
+        "scale": 2.8
       },
       "components": [
         {
@@ -66,13 +66,20 @@
       "persistent": true,
       "transform": {
         "position": [
-          640,
-          600
+          940,
+          800
         ],
         "rotation": 0,
         "scale": 1
       },
       "components": [
+        {
+          "type": "Pickup",
+          "lifeSpan": 100,
+          "soundEffect": "crateBreak",
+          "typeString": "lives",
+          "value": 1
+        },
         {
           "type": "SpriteRenderer",
           "texture_name": "Textures/crate02.png"
@@ -88,13 +95,20 @@
       "persistent": true,
       "transform": {
         "position": [
-          640,
-          700
+          300,
+          650
         ],
         "rotation": 0,
         "scale": 1
       },
       "components": [
+        {
+          "type": "Pickup",
+          "lifeSpan": 100,
+          "soundEffect": "crateBreak",
+          "typeString": "lives",
+          "value": 1
+        },
         {
           "type": "SpriteRenderer",
           "texture_name": "Textures/crate02.png"

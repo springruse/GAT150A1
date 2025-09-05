@@ -5,7 +5,7 @@
 
 bool PlatformerGame::Initialize()
 {
-	OBSERVER_ADD(playerDead);
+	OBSERVER_ADD(add_lives);
 	OBSERVER_ADD(add_points);
 
 	m_scene = std::make_unique<claw::Scene>(this);
@@ -14,6 +14,13 @@ bool PlatformerGame::Initialize()
 
 	m_scoreText = std::make_shared<claw::Text>(claw::Resources().GetWithID<claw::Font>("score", "airstrike.ttf", 24.0f));
 	m_livesText = std::make_shared<claw::Text>(claw::Resources().GetWithID<claw::Font>("lives", "airstrike.ttf", 24.0f));
+	claw::GetEngine().GetAudio().addSound("pickupCoin.wav", "pickupCoin");
+	claw::GetEngine().GetAudio().addSound("fishingrodcast.mp3", "castRod");
+	claw::GetEngine().GetAudio().addSound("wilderness.mp3", "wilderness");
+	claw::GetEngine().GetAudio().addSound("jingleLoss.wav", "jingleLoss");
+	claw::GetEngine().GetAudio().addSound("jingleWin.wav", "jingleWin");
+	claw::GetEngine().GetAudio().addSound("waterSplash.wav", "waterSplash");
+	claw::GetEngine().GetAudio().addSound("crateBreak.wav", "crateBreak");
 
 	return true;
 }
@@ -24,7 +31,7 @@ void PlatformerGame::Shutdown()
 
 void PlatformerGame::Update(float dt)
 {
-
+	
 	switch (m_gameState)
 	{
 	case PlatformerGame::GameState::Init:
@@ -50,6 +57,7 @@ void PlatformerGame::Update(float dt)
 	case PlatformerGame::GameState::StartRound:
 		SpawnPlayer();
 		SpawnBat();
+		claw::GetEngine().GetAudio().playSound("wilderness");
 		m_score = 0;
 		m_lives = 0;
 		m_gameState = GameState::Game;
@@ -83,6 +91,10 @@ void PlatformerGame::OnNotify(const claw::Event& event)
 	if (claw::EqualsIgnoreCase(event.id, "add_points")) {
 		addPoints(std::get<int>(event.data));
 	}
+	if (claw::EqualsIgnoreCase(event.id, "add_lives")) {
+		m_lives++;
+		addLives(std::get<int>(event.data));
+	}
 }
 
 void PlatformerGame::SpawnPlayer() {
@@ -104,7 +116,7 @@ void PlatformerGame::SpawnBat() {
 void PlatformerGame::SpawnCoin()
 {
 	auto pickup = claw::Instantiate("coin_get");
-	pickup->m_transform.position = claw::vec2{ claw::Random::getReal(0.0f, 1280.0f), claw::Random::getReal(0.0f, 1024.0f) };
+	pickup->m_transform.position = claw::vec2{ claw::Random::getReal(10.0f, 1080.f), claw::Random::getReal(0.0f,200.f) };
 	m_scene->AddActor(std::move(pickup));
 }
 

@@ -37,6 +37,9 @@ namespace claw {
 		}
 	}
 
+
+
+
 	void SpriteRenderer::Start()
 	{
 		// get texture resource if texture doesn't exist and there's a texture name

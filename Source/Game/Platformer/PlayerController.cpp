@@ -5,6 +5,8 @@ FACTORY_REGISTER(PlayerController)
 
 void PlayerController::Update(float dt)
 {
+	auto spriteRenderer = owner->GetComponent<claw::SpriteRenderer>();
+
 	float dir = 0;
 	if (claw::GetEngine().GetInput().getKeyDown(SDL_SCANCODE_A))  dir = -1;
 	if (claw::GetEngine().GetInput().getKeyDown(SDL_SCANCODE_D))  dir = +1;
@@ -18,7 +20,10 @@ void PlayerController::Update(float dt)
 		m_rigidBody->ApplyForce(claw::vec2{ 0,-1 } * jump);
 	}
 
-	auto spriteRenderer = owner->GetComponent<claw::SpriteRenderer>();
+	if (claw::GetEngine().GetInput().getKeyPressed(SDL_SCANCODE_E)) {
+
+	}
+
 	if (spriteRenderer) {
 		if (claw::Math::fabs(m_rigidBody->velocity.x) > 0.1f) {
 		spriteRenderer->flipH = (m_rigidBody->velocity.x < 0);
@@ -42,7 +47,7 @@ void PlayerController::Read(const claw::json::value_t& value)
 
 	JSON_READ(value, speed);
 	JSON_READ(value, maxSpeed);
-	JSON_READ(value, fireTime);
 	JSON_READ(value, jump);
+
 
 }

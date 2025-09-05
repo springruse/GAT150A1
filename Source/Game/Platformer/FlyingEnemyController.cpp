@@ -5,7 +5,7 @@ FACTORY_REGISTER(FlyingEnemyController)
 
 void FlyingEnemyController::Update(float dt)
 {
-	float dir = 0;
+	
 
 	// move to player
 	auto player = owner->m_scene->GetActorByName<claw::Actor>("platformPlayer");
@@ -14,13 +14,6 @@ void FlyingEnemyController::Update(float dt)
 		m_rigidBody->ApplyForce(direction.Normalize() * speed);
 	}
 
-	if (dir != 0) {
-		m_rigidBody->ApplyForce(claw::vec2{ 1,0 } *dir * speed);
-	}
-
-	if (claw::GetEngine().GetInput().getKeyPressed(SDL_SCANCODE_SPACE)) {
-		m_rigidBody->ApplyForce(claw::vec2{ 0,-1 } *speed);
-	}
 }
 
 void FlyingEnemyController::Start()

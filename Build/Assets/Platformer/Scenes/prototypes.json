@@ -16,8 +16,7 @@
           "type": "PlayerController",
           "speed": 2000,
           "maxSpeed": 3000,
-          "jump": 90000,
-          "fireTime": 2.0
+          "jump": 90000
         },
         {
           "type": "SpriteRenderer",
@@ -58,7 +57,8 @@
           "type": "RigidBody",
           "gravityScale": 1.0,
           "constrainAngle": true,
-          "shape": "capsule"
+          "shape": "box",
+          "scale": [1,1]
         }
       ]
     },
@@ -75,6 +75,11 @@
       },
       "components": [
         {
+          "type": "FlyingEnemyController",
+          "speed": 100,
+          "maxSpeed":  100
+        },
+        {
           "type": "SpriteRenderer"
         },
         {
@@ -85,6 +90,15 @@
               "texture_animation": "Animations/bat_idle.json"
             }
           ]
+        },
+        {
+          "type": "RigidBody",
+          "gravityScale": 0.0,
+          "isSensor": true,
+          "constrainAngle": true,
+          "shape": "box",
+          "scale": [ 1, 1 ],
+          "size": [ 25, 25 ]
         }
       ]
     },
@@ -101,6 +115,13 @@
         "scale": 1
       },
       "components": [
+        {
+          "type": "Pickup",
+          "lifeSpan": 6.00,
+          "soundEffect": "crateBreak",
+          "typeString": "lives",
+          "value": 1
+        },
         {
           "type": "SpriteRenderer",
           "texture_name": "Textures/crate02.png"
@@ -126,7 +147,10 @@
       "components": [
         {
           "type": "Pickup",
-          "lifeSpan": 6.00
+          "lifeSpan": 6.00,
+          "soundEffect": "pickupCoin",
+          "typeString": "points",
+          "value": 1
         },
         {
           "type": "SpriteRenderer"
